@@ -1,27 +1,30 @@
 div.top-bar
     div.wrapper
         a.logo(href='https://www.baidu.com/')
-            img(src="/images/logo.png", alt="domain")
+            img(src="/images/bilibili.png", alt="domain")
         nav
             ul
                 li
-                    a(href='javascript:;')
+                    a(href='/', class="#{path=='/'?'current':''}")
                         span HOME
                         span 首页
                 li
-                    a(href='javascript:;')
+                    a(href='javascript:;', class="#{path=='second'?'current':''}")
                         span SECOND
                         span 第二页
                 li
-                    a(href='javascript:;')
+                    a(href='javascript:;', class="#{path=='third'?'current':''}")
                         span THIRD
                         span 第三页
                 li
-                    a(href='javascript:;')
+                    a(href='javascript:;', class="#{path=='forth'?'current':''}")
                         span FORTH
                         span 第四页
                 li
-                    a(href='javascript:;')
-                        span FIFTH
-                        span 第五页
-        div.search-input-wrapper
+                    a(href='/about', class="#{path=='about'?'current':''}")
+                        span ABOUT
+                        span 关于我们
+        div.search-wrapper
+            div.search-input-wrapper
+                i.icon-search
+                input.search(type='text', placeholder='厂牌/艺人/单曲')

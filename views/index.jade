@@ -1,6 +1,37 @@
 extends layout
-
+block head
+    link(rel='stylesheet', href='/stylesheets/index.css')
+    link(rel='stylesheet', href='/unslider/css/unslider.css')
+    link(rel='stylesheet', href='/unslider/css/unslider-dots.css')
 block content
-  h1= title
-  p Welcome to #{title}
-  p 中文测试一下
+    div.banner
+        ul
+            li
+                a(href='javascript:;')
+                    img(src='/images/2.jpg')
+            li
+                a(href='javascript:;')
+                    img(src='/images/4.jpg')
+            li
+                a(href='javascript:;')
+                    img(src='/images/5.jpg')
+            li
+                a(href='javascript:;')
+                    img(src='/images/1.jpg')
+            li
+                a(href='javascript:;')
+                    img(src='/images/0.jpg')
+    script(src="/javascripts/jquery-3.1.1.min.js")
+    script(src="/unslider/js/unslider-min.js")
+    script.
+        $(function () {
+            $('.banner').unslider({
+                autoplay: true,
+                speed: 500,
+                delay: 4000,
+                arrows: {
+                    prev: '<div class="unslider-arrow prev"><a></a></div>',
+                    next: '<div class="unslider-arrow next"><a></a></div>'
+                }
+            });
+        });

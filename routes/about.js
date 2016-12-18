@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.render('about', {title: '关于我们'});
+    res.render('about', {path: 'about'});
 });
 
 module.exports = router;
