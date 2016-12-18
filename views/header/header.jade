@@ -1,29 +1,29 @@
 div.top-bar
     div.wrapper
-        a.logo(href='https://www.baidu.com/')
+        a.logo(href='/')
             img(src="/images/bilibili.png", alt="domain")
         nav
             ul
                 li
-                    a(href='/', class="#{path=='/'?'current':''}")
+                    a(href='/home', class="#{path=='home'?'current':''}")
                         span HOME
                         span 首页
                 li
-                    a(href='javascript:;', class="#{path=='second'?'current':''}")
-                        span SECOND
-                        span 第二页
+                    a(href='/labels', class="#{path=='labels'?'current':''}")
+                        span LABELS
+                        span 厂牌
                 li
-                    a(href='javascript:;', class="#{path=='third'?'current':''}")
-                        span THIRD
-                        span 第三页
+                    a(href='/artists', class="#{path=='artists'?'current':''}")
+                        span ARTISTS
+                        span 艺人
                 li
-                    a(href='javascript:;', class="#{path=='forth'?'current':''}")
-                        span FORTH
-                        span 第四页
+                    a(href='/promotion', class="#{path=='promotion'?'current':''}")
+                        span PROMOTION
+                        span 推广/合作
                 li
                     a(href='/about', class="#{path=='about'?'current':''}")
                         span ABOUT
-                        span 关于我们
+                        span 关于
         div.search-wrapper
             div.search-input-wrapper
                 i.icon-search

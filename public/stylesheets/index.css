@@ -21,16 +21,15 @@
 
 .unslider .unslider-arrow {
     position: absolute;
-    /*top: 288px;*/
     top: 50%;
 }
 
 .unslider .unslider-arrow.prev {
-    left: 50px;
+    left: 60px;
 }
 
 .unslider .unslider-arrow.next {
-    right: 50px;
+    right: 60px;
 }
 
 .unslider .unslider-arrow a {
@@ -40,6 +39,7 @@
     height: 64px;
     position: absolute;
     top: -32px;
+    left: -16px;
 }
 
 .unslider .unslider-arrow.next a {

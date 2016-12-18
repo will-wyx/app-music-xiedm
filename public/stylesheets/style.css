@@ -3,7 +3,7 @@
 }
 
 html {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 html, body {
@@ -135,3 +135,20 @@ a {
     right: 50px;
 }
 
+
+
+a.btn {
+    width: 180px;
+    height: 20px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 2px;
+    font-size: 20px;
+    color: #00b9f2;
+    padding: 20px;
+}
+
+a.btn.dark {
+    background-color: #00b9f2;
+    color: #fff;
+}

@@ -1,8 +1,9 @@
 extends layout
 block head
-    link(rel='stylesheet', href='/stylesheets/index.css')
     link(rel='stylesheet', href='/unslider/css/unslider.css')
     link(rel='stylesheet', href='/unslider/css/unslider-dots.css')
+    link(rel='stylesheet', href='/stylesheets/index.css')
+    link(rel='stylesheet', href='/stylesheets/content.css')
 block content
     div.banner
         ul
@@ -21,8 +22,21 @@ block content
             li
                 a(href='javascript:;')
                     img(src='/images/0.jpg')
-    script(src="/javascripts/jquery-3.1.1.min.js")
-    script(src="/unslider/js/unslider-min.js")
+
+    div.container
+        div.content
+            div.content-item(style='background-image:url("/images/content-item-bg.jpg");background-size: 100%;')
+                img.item-img(src='/images/1200-1.png')
+                div.item-link
+                    a.btn(href='javascript:;') ClickMe
+            div.content-item(style='background-image:url("/images/content-item-bg.jpg");background-size: 100%;')
+                img.item-img(src='/images/auto-2.png')
+                div.item-link
+                    a.btn.dark(href='javascript:;') ClickMe
+            div.content-item
+                img.item-img.full(src='/images/auto-1.jpg')
+    script(src='/javascripts/jquery-3.1.1.min.js')
+    script(src='/unslider/js/unslider-min.js')
     script.
         $(function () {
             $('.banner').unslider({

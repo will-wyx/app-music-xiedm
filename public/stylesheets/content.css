@@ -1,0 +1,30 @@
+.container, .container .content {
+    width: 100%;
+    height: auto;
+}
+
+.content .content-item {
+    position: relative;
+}
+
+.content .content-item img.item-img {
+    display: block;
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.content .content-item img.item-img.full {
+    width: 100%;
+}
+
+.content .content-item .item-link {
+    position: absolute;
+    width: 100%;
+    bottom: 12%;
+    text-align: center;
+}
+
+.item-link a.btn {
+    display: inline-block;
+}
