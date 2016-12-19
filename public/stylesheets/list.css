@@ -1,14 +1,67 @@
 .container {
     width: 100%;
     height: auto;
-
+    padding: 40px 0;
 }
 
-.container ul {
+.container .wrapper {
     width: 1200px;
     margin: 0 auto;
 }
 
+.container ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -60px;
+}
+
+.container ul::after {
+    content: "";
+    display: block;
+    clear: both;
+    float: none;
+}
+
 .container ul li {
+    display: block;
     float: left;
+    margin: 0 0 40px 60px;
+}
+
+.container ul li a {
+    color: #000;
+}
+
+.container ul li dl dt {
+    display: block;
+    height: 192px;
+    width: 192px;
+    overflow: hidden;
+}
+
+dl dt img {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.container ul li dl dd {
+    display: block;
+    width: 192px;
+    height: 77px;
+    overflow: hidden;
+}
+
+dl dd h2 {
+    margin: 8px 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+dl dd p {
+    line-height: 21px;
+    text-align: center;
+    word-break: break-all;
+    color: #888;
 }

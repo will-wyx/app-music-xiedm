@@ -8,7 +8,8 @@ html {
 
 html, body {
     width: 100%;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
 }
 
 body {
@@ -36,6 +37,11 @@ a {
     text-decoration: none;
 }
 
+.container {
+    min-height: 100%;
+    position: relative;
+}
+
 .top-bar {
     background-color: #fff;
     box-sizing: border-box;
@@ -54,12 +60,13 @@ a {
 .top-bar a.logo {
     float: left;
     /*padding: 22px 0 26px;*/
-    /*width: 196px;*/
+    width: 168px;
     height: 84px;
 }
 
 .top-bar a.logo img {
-    width: 100%;
+    /*width: 100%;*/
+    height: 100%;
 }
 
 .top-bar nav {
@@ -134,8 +141,6 @@ a {
     top: 0;
     right: 50px;
 }
-
-
 
 a.btn {
     width: 180px;
