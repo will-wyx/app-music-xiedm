@@ -1,0 +1,14 @@
+.container {
+    width: 100%;
+    height: auto;
+
+}
+
+.container ul {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.container ul li {
+    float: left;
+}
