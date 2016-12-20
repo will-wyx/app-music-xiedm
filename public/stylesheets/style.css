@@ -43,11 +43,11 @@ a {
 }
 
 .top-bar {
-    background-color: #fff;
+    background-color: #2c323b;
     box-sizing: border-box;
     height: 88px;
     width: 100%;
-    border-top: 4px solid #509d83;
+    border-top: 4px solid #004b62;
     box-shadow: 0 1px 0 0 #eee;
 }
 
@@ -81,9 +81,11 @@ a {
 }
 
 .top-bar nav a {
-    color: #333;
+    color: #bbb;
     font-size: 14px;
     text-align: center;
+    text-shadow: 1px 1px 1px #000;
+    transition: color 350ms 300ms ease;
 }
 
 .top-bar nav a.current, .top-bar nav a:hover {
