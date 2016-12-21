@@ -1,0 +1,69 @@
+a.logo {
+    position: absolute;
+    left: 20px;
+    top: 30px;
+}
+
+.container {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.container .content {
+    position: relative;
+    top: 84px;
+}
+
+.container .content .info {
+    width: 344px;
+    min-height: 200px;
+    color: #efefef;
+    /*background-color: rgba(0, 0, 0, .4);*/
+    position: fixed;
+    top: 188px;
+    left: 80px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px #000;
+    opacity: 0.9;
+    background: linear-gradient(-15deg, #333 50%, #666 100%);
+    /*transition: opacity 300ms 250ms ease;*/
+    padding: 18px 20px;
+}
+
+.info .head {
+    height: 48px;
+}
+
+.info .head h1 {
+    /*text-align: center;*/
+    font-weight: normal;
+    letter-spacing: 2px;
+    font-size: 36px;
+    height: 48px;
+    float: left;
+}
+
+.info .head a.share {
+    height: 28px;
+    width: 28px;
+    float: right;
+    margin-right: 10px;
+    margin-top: 8px;
+    background-image: url('/images/icons/ic_share_white_48px.svg');
+    background-size: 100%;
+}
+
+
+
+.content .info ul {
+    padding: 15px 0;
+}
+.content .info ul li {
+    padding: 3px 0;
+    line-height: 28px;
+}

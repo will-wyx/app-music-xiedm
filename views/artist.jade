@@ -1,8 +1,20 @@
-extends layout
-block head
-    link(rel='stylesheet', href='/stylesheets/al-style.css')
-block content
-    div.container(style='background-image:url("/images/upload/artist.jpg")')
-        div.content
-            div.info
-                h1 全境封锁
+doctype html
+html
+    head
+        title= 'XIEDM'
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/stylesheets/artist.css')
+    body
+        a.logo(href='/')
+            img(src="/images/local/logo.png", alt="domain")
+        div.container(style='background-image:url("/images/upload/wwz.jpg")')
+            div.content
+                div.info
+                    div.head
+                        h1 王菀之
+                        a.share(href='javascript:;')
+                    ul
+                        li 国籍：加拿大
+                        li 生日：1980年6月18日
+                        li 经纪公司：红馆经理人公司
+                        li 代表作品：《我真的受伤了》《水百合》《留白》《末日》《皇后的餐厅》

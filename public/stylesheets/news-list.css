@@ -1,0 +1,100 @@
+.container {
+    padding: 40px 0;
+}
+
+.container .wrapper {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.container .wrapper ul {
+    margin: 30px 0;
+}
+
+.container ul li {
+    height: 38px;
+    line-height: 38px;
+    padding: 0 40px;
+    border-bottom: 1px solid #eee;
+}
+
+.container ul li:nth-child(odd) {
+    background-color: #fff;
+}
+
+.container ul li a {
+    color: #666;
+}
+
+.container ul li span.date {
+    float: right;
+    margin-right: 80px;
+    color: #aaa;
+}
+
+#pagination {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#pagination ._wPaginate_holder {
+    display: inline-block;
+    box-sizing: border-box;
+    line-height: 19.5px;
+}
+
+._wPaginate_holder::before {
+    display: table;
+    content: "";
+}
+
+._wPaginate_holder::after {
+    display: table;
+    clear: both;
+    content: "";
+}
+
+._wPaginate_holder ._wPaginate_link:first-child, ._wPaginate_holder a:first-child {
+    margin-left: 0;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+._wPaginate_holder ._wPaginate_link:last-child, ._wPaginate_holder a:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+._wPaginate_holder a {
+    position: relative;
+    float: left;
+    padding: 7px 12px;
+    margin-left: -1px;
+    font-size: 13px;
+    font-style: normal;
+    color: #4078c0;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: #fff;
+    border: 1px solid #d5d5d5;
+}
+
+._wPaginate_holder a:hover, ._wPaginate_holder a:focus, ._wPaginate_holder ._wPaginate_link:hover, ._wPaginate_holder ._wPaginate_link:focus {
+    z-index: 2;
+    text-decoration: none;
+    background-color: #e7e7e7;
+    border-color: #e5e5e5;
+}
+
+._wPaginate_holder ._wPaginate_link_active, ._wPaginate_holder ._wPaginate_link_active:hover {
+    z-index: 3;
+    color: #fff;
+    background-color: #4078c0;
+    border-color: #4078c0;
+}
