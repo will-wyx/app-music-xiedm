@@ -7,7 +7,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    res.render('artist', {id: req.params.id});
+    const id = req.params.id;
+    const bkurl = `/images/upload/${id}.jpg`;
+    res.render('artist', {bkurl});
 });
 
 module.exports = router;
