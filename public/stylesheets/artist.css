@@ -9,9 +9,8 @@ body {
 }
 
 .container {
-    background-size: 100%;
-    background-position-x: center;
-    background: no-repeat fixed;
+    /*background-size: 100%;*/
+    background: no-repeat fixed top center;
     position: absolute;
     top: 0;
     left: 0;
@@ -112,7 +111,7 @@ body {
 }
 
 .table-wrapper table tr th, .table-wrapper table tr td {
-    padding: 0 8px;
+    padding: 0 18px;
 }
 
 .table-wrapper table thead tr th {
