@@ -4,9 +4,9 @@ block head
     link(rel='stylesheet', href='/unslider/css/unslider-dots.css')
     link(rel='stylesheet', href='/stylesheets/index.css')
     link(rel='stylesheet', href='/stylesheets/content.css')
-    //link(rel='stylesheet', href='/stylesheets/dialog.css')
+    link(rel='stylesheet', href='/stylesheets/dialog.css')
 block content
-    //include ./dialog.jade
+    include ./dialog.jade
     div.banner
         ul
             li
@@ -30,7 +30,7 @@ block content
             div.content-item(style='background-image:url("/images/upload/content-item-bg.jpg");background-size: 100%;')
                 img.item-img(src='/images/upload/1200-1.png')
                 div.item-link
-                    a.btn(href='javascript:;') ClickMe
+                    a#btn_main.btn(href='javascript:;') ClickMe
             div.content-item(style='background-image:url("/images/upload/content-item-bg.jpg");background-size: 100%;')
                 img.item-img(src='/images/upload/auto-2.png')
                 div.item-link
@@ -52,5 +52,18 @@ block content
                     prev: '<div class="unslider-arrow prev"><a></a></div>',
                     next: '<div class="unslider-arrow next"><a></a></div>'
                 }
+            });
+        });
+    script.
+        $(function () {
+            var $mfp = $('#mfp');
+            var $mfp_close = $mfp.find('.mfp-close');
+            $mfp_close.on('click', function () {
+                $mfp.hide();
+            });
+
+            var $btn_main = $('#btn_main');
+            $btn_main.on('click', function () {
+                $mfp.show();
             });
         });

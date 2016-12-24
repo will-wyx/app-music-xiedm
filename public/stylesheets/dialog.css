@@ -1,3 +1,6 @@
+#mfp {
+    display: none;
+}
 .mfp-bg {
     top: 0;
     left: 0;
@@ -60,6 +63,31 @@
     max-width: 600px;
 }
 
+.dialog-window form {
+    padding-top: 18px;
+    text-align: center;
+}
+
+.dialog-window form input[type="text"] {
+    border: 1px solid #ccc;
+    line-height: 38px;
+    padding: 0 12px;
+    margin-bottom: 18px;
+    display: block;
+    width: 280px;
+}
+
+.dialog-window form button {
+    width: 280px;
+    line-height: 38px;
+    border: 1px solid #000;
+    background-color: #2c323b;
+    color: #fff;
+    letter-spacing: 1em;
+    font-size: 16px;
+    font-family: "Microsoft YaHei UI";
+}
+
 button.mfp-close {
     color: #333;
     overflow: visible;
@@ -87,3 +115,4 @@ button.mfp-close {
     font-family: Arial, Baskerville, monospace;
     user-select: none;
 }
+
