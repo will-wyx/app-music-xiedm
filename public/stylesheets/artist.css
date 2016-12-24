@@ -195,11 +195,6 @@ body {
 
 }
 
-.video-list ul li:hover a::after {
-    opacity: 0;
-    transition: all 100ms 100ms ease;
-}
-
 .video-list ul li a img {
     width: 100%;
 }
