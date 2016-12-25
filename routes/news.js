@@ -3,14 +3,17 @@
  */
 const express = require('express');
 const router = express.Router();
+const dbserver = require('../dbserver');
 
 router.get('/', (req, res) => {
-    res.render('news-list');
+    dbserver.news(['id', 'title', 'date'], (news) => {
+        res.render('news-list', {news});
+    });
 });
 
 router.get('/:id', (req, res) => {
     const article =
-`
+        `
 <div class="article annArticle">
 <style>
 

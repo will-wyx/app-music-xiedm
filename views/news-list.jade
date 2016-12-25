@@ -6,51 +6,52 @@ block content
         div.wrapper
             h1 官方新闻
             ul
-                li
-                    span.date 2016-12-21
-                    a.title(href='/news/1') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
-                li
-                    span.date 2016-12-21
-                    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                each item in news
+                    li
+                        span.date= new Date(item.date)
+                        a.title(href='/news/' + item.id)= item.title
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
+                //li
+                //    span.date 2016-12-21
+                //    a.title(href='javascript:;') XIEDM 官方网站正式上线
             div#pagination
     script(src='/javascripts/jquery-3.1.1.min.js')
     script(src='/wPaginate/wPaginate.js')

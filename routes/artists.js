@@ -33,7 +33,7 @@ const artists = [
         code: 'xaq'
     },
     {
-        title: '不知名',
+        title: '邓紫棋',
         description: '华纳音乐集团是21世纪世界三大唱片公司之一，原隶属于拥有华纳兄弟影片公司、时代杂志、财富杂志、CNN有线电视新闻网等传媒巨子的时代华纳集团，在众多行业有着卓越的成就。',
         icon: '/images/artists/6.jpg',
         code: 'xaq'
