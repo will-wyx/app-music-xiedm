@@ -9,21 +9,37 @@ div.top-bar
                         span HOME
                         span 首页
                 li
-                    a(href='/labels', class="#{path=='labels'?'current':''}")
-                        span LABELS
-                        span 厂牌
+                    a(href='/news', class="#{path=='news'?'current':''}")
+                        span NEWS
+                        span 新闻
+                //li
+                //    a(href='/labels', class="#{path=='labels'?'current':''}")
+                //        span LABELS
+                //        span 厂牌
                 li
                     a(href='/artists', class="#{path=='artists'?'current':''}")
                         span ARTISTS
-                        span 艺人
+                        span 展示
                 li
-                    a(href='/promotion', class="#{path=='promotion'?'current':''}")
-                        span PROMOTION
+                    a(href='/service', class="#{path=='service'?'current':''}")
+                        span SERVICE
+                        span 专业服务
+                //li
+                //    a(href='/promotion', class="#{path=='promotion'?'current':''}")
+                //        span PROMOTION
+                //        span 推广/合作
+                li
+                    a(href='/reserve', class="#{path=='reserve'?'current':''}")
+                        span RESERVE
                         span 推广/合作
+                //li
+                //    a(href='/about', class="#{path=='about'?'current':''}")
+                //        span ABOUT
+                //        span 关于
                 li
-                    a(href='/about', class="#{path=='about'?'current':''}")
-                        span ABOUT
-                        span 关于
+                    a(href='/contact', class="#{path=='contact'?'current':''}")
+                        span CONTACT
+                        span 联系我们
         div.search-wrapper
             div.search-input-wrapper
                 i.icon-search

@@ -1,5 +1,6 @@
 .top-bar {
     background-color: #2c323b;
+    /*background-color: #0F0F0F;*/
     box-sizing: border-box;
     height: 88px;
     width: 100%;
@@ -34,7 +35,7 @@
 .top-bar nav li {
     display: inline-block;
     padding: 22px 0;
-    margin-left: 66px;
+    margin-left: 56px;
 }
 
 .top-bar nav a {

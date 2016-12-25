@@ -7,7 +7,7 @@ const dbserver = require('../dbserver');
 
 router.get('/', (req, res) => {
     dbserver.news(['id', 'title', 'date'], (news) => {
-        res.render('news-list', {news});
+        res.render('news-list', {path: 'news', news});
     });
 });
 
