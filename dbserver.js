@@ -13,12 +13,21 @@ const dbserver = {
                 callback(res);
             });
         })
+    },
+    artists: (operation, callback) => {
+        const fields = operation2fields(operation);
+        const sql = `SELECT ${fields} FROM "artist"`;
+        db.serialize(() => {
+            db.all(sql, (err, res) => {
+                callback(res);
+            });
+        });
     }
 };
 
 function operation2fields(operation) {
     let fields = '*';
-    if (operation instanceof Array){
+    if (operation instanceof Array) {
         fields = operation.join(',');
     }
     return fields;
