@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../dbserver');
 
 router.get('/', (req, res) => {
-    db.artists(['id', 'name', 'description', 'icon'], (result) => {
+    db.artists((result) => {
         res.render('list', {path: 'artists', list: result});
     });
 });

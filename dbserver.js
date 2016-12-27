@@ -2,11 +2,7 @@
  * Created by WYX on 2016/12/25.
  */
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017/xirecord';
-
-
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('sqlite3.db');
+const url = 'mongodb://xirecord:71906312@ds145178.mlab.com:45178/xirecord';
 const dbserver = {
     news: (callback) => {
         MongoClient.connect(url, (err, db) => {
@@ -16,31 +12,14 @@ const dbserver = {
             });
         });
     },
-    // news: (operation, callback) => {
-    //     const fields = operation2fields(operation);
-    //     const sql = `SELECT ${fields} FROM "news"`;
-    //     db.serialize(() => {
-    //         db.all(sql, (err, res) => {
-    //             callback(res);
-    //         });
-    //     })
-    // },
-    artists: (operation, callback) => {
-        const fields = operation2fields(operation);
-        const sql = `SELECT ${fields} FROM "artist"`;
-        db.serialize(() => {
-            db.all(sql, (err, res) => {
-                callback(res);
+    artists: (callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('artist');
+            collection.find({}).toArray((err, docs) => {
+                callback(docs);
             });
         });
     }
 };
 
-function operation2fields(operation) {
-    let fields = '*';
-    if (operation instanceof Array) {
-        fields = operation.join(',');
-    }
-    return fields;
-}
 module.exports = dbserver;
