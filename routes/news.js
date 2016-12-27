@@ -6,7 +6,11 @@ const router = express.Router();
 const dbserver = require('../dbserver');
 
 router.get('/', (req, res) => {
-    dbserver.news(['id', 'title', 'date'], (news) => {
+    // res.send(global.db);
+    // dbserver.news(['id', 'title', 'date'], (news) => {
+    //     res.render('news-list', {path: 'news', news});
+    // });
+    dbserver.news((news) => {
         res.render('news-list', {path: 'news', news});
     });
 });

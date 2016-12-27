@@ -8,8 +8,8 @@ block content
             ul
                 each item in news
                     li
-                        span.date= new Date(item.date)
-                        a.title(href='/news/' + item.id)= item.title
+                        span.date= item.date
+                        a.title(href='/news/' + item._id)= item.title
             div#pagination
     script(src='/javascripts/jquery-3.1.1.min.js')
     script(src='/wPaginate/wPaginate.js')

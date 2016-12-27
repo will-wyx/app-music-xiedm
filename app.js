@@ -13,6 +13,8 @@ const labels = require('./routes/labels');
 const news = require('./routes/news');
 const reserve = require('./routes/reserve');
 
+const management = require('./routes/management/management');
+
 const app = express();
 
 // view engine setup
@@ -34,6 +36,8 @@ app.use('/artists', artists);
 app.use('/labels', labels);
 app.use('/news', news);
 app.use('/reserve', reserve);
+
+app.use('/management', management);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
