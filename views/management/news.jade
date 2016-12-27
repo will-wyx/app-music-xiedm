@@ -1,0 +1,44 @@
+extends layout
+block head
+block content
+    div.container
+        table.table.table-striped
+            thead
+                tr
+                    th #
+                    th 新闻标题
+                    th 发布时间
+                    th 内容
+            tbody
+                tr
+                    td 1
+                    td Mark
+                    td Otto
+                    td @mdo
+                tr
+                    td 2
+                    td Jacob
+                    td Thornton
+                    td @fat
+                tr
+                    td 3
+                    td Larry
+                    td the Bird
+                    td @twitter
+        nav
+            ul.pagination
+                li
+                    a(href='#') «
+                li.active
+                    a(href='#') 1
+                li
+                    a(href='#') 2
+                li
+                    a(href='#') 3
+                li
+                    a(href='#') 4
+                li
+                    a(href='#') 5
+                li
+                    a(href='#') »
+block footer
