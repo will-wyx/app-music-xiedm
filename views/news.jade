@@ -5,7 +5,7 @@ block head
 block content
     div.container
         div.wrapper
-            h1 XIEDM 今天正式上线
-            p.date 2016-12-21
+            h1= news.title
+            p.date= news.date
             article
-                != article
+                != news.content

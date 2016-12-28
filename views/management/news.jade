@@ -8,23 +8,13 @@ block content
                     th #
                     th 新闻标题
                     th 发布时间
-                    th 内容
             tbody
-                tr
-                    td 1
-                    td Mark
-                    td Otto
-                    td @mdo
-                tr
-                    td 2
-                    td Jacob
-                    td Thornton
-                    td @fat
-                tr
-                    td 3
-                    td Larry
-                    td the Bird
-                    td @twitter
+                each item in news
+                    tr
+                        td= item._id
+                        td
+                            a(href='/management/news/' + item._id)= item.title
+                        td= item.date
         nav
             ul.pagination
                 li

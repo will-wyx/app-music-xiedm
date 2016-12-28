@@ -6,11 +6,12 @@ block head
     link(href='/stylesheets/management/news-edit.css', rel='stylesheet')
 block content
     div.container
+        input#input_id(type='hidden', value= news._id)
         form.form-horizontal(role='form')
             .form-group
                 label.col-sm-2.control-label(for='input_title') 文章标题
                 .col-sm-10
-                    input#input_title.form-control(type='text', placeholder='标题')
+                    input#input_title.form-control(type='text', placeholder='标题', value= news.title)
             .form-group
                 .col-sm.col-sm-12
                     .hero-unit
@@ -73,10 +74,10 @@ block content
                                     i.icon-undo
                                 a.btn(data-edit='redo', title='Redo (Ctrl/Cmd+Y)')
                                     i.icon-repeat
-                        #editor Go ahead…
+                        #editor!= news.content
             .form-group
                 .col-sm-offset-2.col-sm-10
-                    button.btn.btn-default(type='submit') Sign in
+                    button#btn_submit.btn.btn-default(type='button') Submit
 
 block footer
     script(src='/bootstrap-wysiwyg/jquery.hotkeys.js')
@@ -112,6 +113,26 @@ block footer
                     '<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
             };
             initToolbarBootstrapBindings();
-            $('#editor').wysiwyg({fileUploadError: showErrorAlert});
+            var $editor = $('#editor');
+            $editor.wysiwyg({fileUploadError: showErrorAlert});
             window.prettyPrint && prettyPrint();
+
+            var $input_id = $('#input_id');
+            var $input_title = $('#input_title');
+            $('#btn_submit').on('click', function () {
+                var title = $input_title.val();
+                var content = $editor.html();
+                $.ajax({
+                    url: '/management/news-submit',
+                    data: {
+                        id: $input_id.val(),
+                        title: title,
+                        content: content
+                    },
+                    type: 'POST',
+                    success: function (res) {
+                        console.log(res);
+                    }
+                });
+            });
         });

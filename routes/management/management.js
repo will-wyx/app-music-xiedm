@@ -3,6 +3,8 @@
  */
 const express = require('express');
 const router = express.Router();
+const db = require('../../dbserver');
+
 router.get('/', (req, res) => {
     res.render('management/index');
 });
@@ -11,10 +13,28 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/news', (req, res) => {
-    res.render('management/news', {path: req.url});
+    db.news({}, (news) => {
+        // res.render('news-list', {path: 'news', news});
+        res.render('management/news', {path: req.url, news});
+    });
 });
 router.get('/news/:id', (req, res) => {
-    res.render('management/news-edit', {path: req.url});
+    const _id = db.ObjectId(req.params.id);
+    db.newsOne({_id}, (news) => {
+        res.render('management/news-edit', {path: req.url, news});
+    });
+});
+
+router.post('/news-submit', (req, res) => {
+    const id = req.body.id;
+    if (id.length > 0)
+        db.newsModify(req.body, (r) => {
+            res.send('ok');
+        });
+    else
+        db.newsAdd(req.body, () => {
+            res.send('ok');
+        });
 });
 
 router.get('/artist', (req, res) => {

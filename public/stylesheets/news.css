@@ -1,5 +1,6 @@
 .container {
     padding: 40px 0;
+    background: #fff;
 }
 
 .container .wrapper {
@@ -9,4 +10,10 @@
 
 .container .wrapper .date {
     padding: 5px 0;
+}
+
+p {
+    font-size: 18px;
+    line-height: 30px;
+    margin-bottom: 10px;
 }
