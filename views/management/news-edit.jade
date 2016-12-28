@@ -1,10 +1,9 @@
 extends layout
 block head
-    link(rel='stylesheet', type='text/css', href='/jwysiwyg/lib/blueprint/screen.css', media='screen, projection')
-    link(rel='stylesheet', type='text/css', href='/jwysiwyg/lib/blueprint/print.css', media='print')
-    link(rel='stylesheet', href='/jwysiwyg/jquery.wysiwyg.css', type='text/css')
-    link(rel='stylesheet', href='/jwysiwyg/jquery.wysiwyg.modal.css', type='text/css')
-    link(rel='stylesheet', href='/jwysiwyg/lib/jquery.simplemodal.css', type='text/css')
+    link(href='/bootstrap-wysiwyg/bootstrap-combined.no-icons.min.css', rel='stylesheet')
+    link(href='/bootstrap-wysiwyg/bootstrap-responsive.min.css', rel='stylesheet')
+    link(href='/bootstrap-wysiwyg/font-awesome/css/font-awesome.css', rel='stylesheet')
+    link(href='/stylesheets/management/news-edit.css', rel='stylesheet')
 block content
     div.container
         form.form-horizontal(role='form')
@@ -14,95 +13,105 @@ block content
                     input#input_title.form-control(type='text', placeholder='标题')
             .form-group
                 .col-sm.col-sm-12
-                    textarea#wysiwyg(rows='5', cols='103')
+                    .hero-unit
+                        .btn-toolbar(data-role='editor-toolbar', data-target='#editor')
+                            .btn-group
+                                a.btn.dropdown-toggle(data-toggle='dropdown', title='Font Size')
+                                    i.icon-text-height
+                                    b.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(data-edit='fontSize 5')
+                                            span(style='font-size: large; ') Huge
+                                    li
+                                        a(data-edit='fontSize 3')
+                                            span(style='font-size: small; ') Normal
+                                    li
+                                        a(data-edit='fontSize 1')
+                                            span(style='font-size: xx-small; ') Small
+                            .btn-group
+                                a.btn(data-edit='bold', title='Bold (Ctrl/Cmd+B)')
+                                    i.icon-bold
+                                a.btn(data-edit='italic', title='Italic (Ctrl/Cmd+I)')
+                                    i.icon-italic
+                                a.btn(data-edit='strikethrough', title='Strikethrough')
+                                    i.icon-strikethrough
+                                a.btn(data-edit='underline', title='Underline (Ctrl/Cmd+U)')
+                                    i.icon-underline
+                            .btn-group
+                                a.btn(data-edit='insertunorderedlist', title='Bullet list')
+                                    i.icon-list-ul
+                                a.btn(data-edit='insertorderedlist', title='Number list')
+                                    i.icon-list-ol
+                                a.btn(data-edit='outdent', title='Reduce indent (Shift+Tab)')
+                                    i.icon-indent-left
+                                a.btn(data-edit='indent', title='Indent (Tab)')
+                                    i.icon-indent-right
+                            .btn-group
+                                a.btn(data-edit='justifyleft', title='Align Left (Ctrl/Cmd+L)')
+                                    i.icon-align-left
+                                a.btn(data-edit='justifycenter', title='Center (Ctrl/Cmd+E)')
+                                    i.icon-align-center
+                                a.btn(data-edit='justifyright', title='Align Right (Ctrl/Cmd+R)')
+                                    i.icon-align-right
+                                a.btn(data-edit='justifyfull', title='Justify (Ctrl/Cmd+J)')
+                                    i.icon-align-justify
+                            .btn-group
+                                a.btn.dropdown-toggle(data-toggle='dropdown', title='Hyperlink')
+                                    i.icon-link
+                                .dropdown-menu.input-append
+                                    input.span2(placeholder='URL', type='text', data-edit='createLink')
+                                    button.btn(type='button') Add
+                                a.btn(data-edit='unlink', title='Remove Hyperlink')
+                                    i.icon-cut
+                            .btn-group
+                                a#pictureBtn.btn(title='Insert picture (or just drag & drop)')
+                                    i.icon-picture
+                                input(type='file', data-role='magic-overlay', data-target='#pictureBtn', data-edit='insertImage')
+                            .btn-group
+                                a.btn(data-edit='undo', title='Undo (Ctrl/Cmd+Z)')
+                                    i.icon-undo
+                                a.btn(data-edit='redo', title='Redo (Ctrl/Cmd+Y)')
+                                    i.icon-repeat
+                        #editor Go ahead…
             .form-group
                 .col-sm-offset-2.col-sm-10
                     button.btn.btn-default(type='submit') Sign in
 
 block footer
-    script.
-        $.browser = {};
-        $.browser.msie = false;
-    script(type='text/javascript', src='/jwysiwyg/jquery.wysiwyg.js')
-    script(type='text/javascript', src='/jwysiwyg/lib/jquery.simplemodal.js')
-    script(type='text/javascript', src='/jwysiwyg/controls/wysiwyg.image.js')
-    script(type='text/javascript', src='/jwysiwyg/controls/wysiwyg.link.js')
-    script(type='text/javascript', src='/jwysiwyg/controls/wysiwyg.table.js')
+    script(src='/bootstrap-wysiwyg/jquery.hotkeys.js')
+    script(src='/bootstrap-wysiwyg/bootstrap-wysiwyg.js')
     script.
         $(function () {
-            $('#wysiwyg').wysiwyg({
-                controls: {
-                    bold: {visible: true},
-                    italic: {visible: true},
-                    underline: {visible: true},
-                    strikeThrough: {visible: true},
-
-                    justifyLeft: {visible: true},
-                    justifyCenter: {visible: true},
-                    justifyRight: {visible: true},
-                    justifyFull: {visible: true},
-
-                    indent: {visible: true},
-                    outdent: {visible: true},
-
-                    subscript: {visible: true},
-                    superscript: {visible: true},
-
-                    undo: {visible: true},
-                    redo: {visible: true},
-
-                    insertOrderedList: {visible: true},
-                    insertUnorderedList: {visible: true},
-                    insertHorizontalRule: {visible: true},
-
-                    h4: {
-                        visible: true,
-                        className: 'h4',
-                        command: ($.browser.msie || $.browser.safari) ? 'formatBlock' : 'heading',
-                        arguments: ($.browser.msie || $.browser.safari) ? '<h4>' : 'h4',
-                        tags: ['h4'],
-                        tooltip: 'Header 4'
-                    },
-                    h5: {
-                        visible: true,
-                        className: 'h5',
-                        command: ($.browser.msie || $.browser.safari) ? 'formatBlock' : 'heading',
-                        arguments: ($.browser.msie || $.browser.safari) ? '<h5>' : 'h5',
-                        tags: ['h5'],
-                        tooltip: 'Header 5'
-                    },
-                    h6: {
-                        visible: true,
-                        className: 'h6',
-                        command: ($.browser.msie || $.browser.safari) ? 'formatBlock' : 'heading',
-                        arguments: ($.browser.msie || $.browser.safari) ? '<h6>' : 'h6',
-                        tags: ['h6'],
-                        tooltip: 'Header 6'
-                    },
-
-                    cut: {visible: true},
-                    copy: {visible: true},
-                    paste: {visible: true},
-                    html: {visible: true},
-                    increaseFontSize: {visible: true},
-                    decreaseFontSize: {visible: true},
-                    exam_html: {
-                        exec: function () {
-                            this.insertHtml('<abbr title="exam">Jam</abbr>');
-                            return true;
-                        },
-                        visible: true
-                    }
-                },
-                events: {
-                    click: function (event) {
-                        if ($("#click-inform:checked").length > 0) {
-                            event.preventDefault();
-                            alert("You have clicked jWysiwyg content!");
-                        }
-                    }
+            function initToolbarBootstrapBindings() {
+                $('a[title]').tooltip({container: 'body'});
+                $('.dropdown-menu input').click(function () {
+                    return false;
+                })
+                    .change(function () {
+                        $(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');
+                    })
+                    .keydown('esc', function () {
+                        this.value = '';
+                        $(this).change();
+                    });
+                $('[data-role=magic-overlay]').each(function () {
+                    var overlay = $(this), target = $(overlay.data('target'));
+                    overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+                });
+            };
+            function showErrorAlert(reason, detail) {
+                var msg = '';
+                if (reason === 'unsupported-file-type') {
+                    msg = "Unsupported format " + detail;
                 }
-            });
-
-            $('#wysiwyg').wysiwyg("insertHtml", "Sample code");
+                else {
+                    console.log("error uploading file", reason, detail);
+                }
+                $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                    '<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
+            };
+            initToolbarBootstrapBindings();
+            $('#editor').wysiwyg({fileUploadError: showErrorAlert});
+            window.prettyPrint && prettyPrint();
         });

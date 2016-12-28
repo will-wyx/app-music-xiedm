@@ -1,0 +1,37 @@
+#editor {
+    max-height: 250px;
+    height: 250px;
+    background-color: white;
+    border-collapse: separate;
+    border: 1px solid rgb(204, 204, 204);
+    padding: 4px;
+    box-sizing: content-box;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0 1px 1px 0 inset;
+    box-shadow: rgba(0, 0, 0, 0.0745098) 0 1px 1px 0 inset;
+    border-radius: 3px;
+    overflow: scroll;
+    outline: none;
+}
+
+div[data-role="editor-toolbar"] {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.dropdown-menu a {
+    cursor: pointer;
+}
+
+.form-horizontal .input-append.dropdown-menu {
+    display: none;
+}
+
+.form-horizontal .open>.dropdown-menu {
+    display: block;
+}
+
+input[type="text"].form-control {
+    height: 34px;
+}
