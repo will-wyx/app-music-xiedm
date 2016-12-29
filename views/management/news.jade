@@ -8,27 +8,24 @@ block content
                     th #
                     th 新闻标题
                     th 发布时间
-            tbody
+                    th 操作
+            tbody#news_list
                 each item in news
+                    - item.date = new Date(item.date)
                     tr
                         td= item._id
                         td
                             a(href='/management/news/' + item._id)= item.title
-                        td= item.date
+                        td= item.date.toLocaleDateString() + ' ' + item.date.toLocaleTimeString()
+                        td
+                            a(href='javascript:;', data-id= item._id) 删除
         nav
             ul.pagination
                 li
                     a(href='#') «
-                li.active
-                    a(href='#') 1
-                li
-                    a(href='#') 2
-                li
-                    a(href='#') 3
-                li
-                    a(href='#') 4
-                li
-                    a(href='#') 5
+                - for(var i = 0; i < pagecount; ++i)
+                    li.item
+                        a(href='#' + (i + 1))= (i + 1)
                 li
                     a(href='#') »
 block footer
@@ -38,16 +35,47 @@ block footer
                 var index = location.hash.substr(1);
                 loadNews(index);
             }
-            window.addEventListener('hashchange', function(e) {
+            window.addEventListener('hashchange', function () {
                 var index = location.hash.substr(1);
                 loadNews(index);
             });
+            var $pagination_item = $('.pagination .item');
+            var $news_list = $('#news_list');
+
             function loadNews(index) {
+                index = +index;
                 $.ajax({
                     url: '/api/management/news',
-                    data: {index: index, pagesize: 10},
+                    data: {index: index, pagesize: 15},
                     success: function (res) {
-                        console.log(res);
+                        $pagination_item.removeClass('active');
+                        $($pagination_item[index - 1]).addClass('active');
+                        var list = [];
+                        for (var i in res) {
+                            var item = res[i];
+                            item.date = new Date(item.date)
+                            var listItem = [];
+                            listItem.push('<tr>');
+                            listItem.push('<td>');
+                            listItem.push(item._id);
+                            listItem.push('</td>');
+                            listItem.push('<td>');
+                            listItem.push('<a href="/management/news/' + item._id + '">');
+                            listItem.push(item.title);
+                            listItem.push('</a>')
+                            listItem.push('</td>');
+                            listItem.push('<td>');
+                            listItem.push(item.date.toLocaleDateString() + ' ' + item.date.toLocaleTimeString());
+                            listItem.push('</td>');
+                            listItem.push('<td>');
+                            listItem.push('<a href="javascript:;" data-id="' + item._id + '">');
+                            listItem.push('删除');
+                            listItem.push('</a>')
+                            listItem.push('</td>');
+                            listItem.push('</tr>');
+                            list.push(listItem.join(''));
+                        }
+                        $news_list.html(list.join(''));
                     }
                 })
             }

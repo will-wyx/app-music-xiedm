@@ -11,10 +11,12 @@ const dbserver = {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('news');
             const {index, pagesize} = options;
-            collection.find({}, {content: false}).sort({date: -1}).skip((index - 1) * pagesize).limit(pagesize).toArray((err, docs) => {
-                console.log(docs);
-                callback(docs);
+            collection.count((countErr, count) => {
+                collection.find({}, {content: false}).sort({date: -1}).skip((index - 1) * pagesize).limit(pagesize).toArray((err, docs) => {
+                    callback(docs, count);
+                });
             });
+
         });
     },
     news: (condition, callback) => {

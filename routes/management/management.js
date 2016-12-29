@@ -13,8 +13,10 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/news', (req, res) => {
-    db.newsPaging({index: 1, pagesize: 15}, (news) => {
-        res.render('management/news', {path: req.url, news});
+    const pagesize = 15;
+    db.newsPaging({index: 1, pagesize}, (news, count) => {
+        const pagecount = Math.ceil(count / pagesize);
+        res.render('management/news', {path: req.url, news, pagecount});
     });
 });
 

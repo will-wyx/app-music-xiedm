@@ -1,28 +1,62 @@
 extends layout
 block head
     link(rel='stylesheet', href='/stylesheets/news-list.css')
+    script(src='/javascripts/util.js')
 block content
     div.container
         div.wrapper
             h1 官方新闻
-            ul
-                each item in news
-                    li
-                        span.date= item.date
-                        a.title(href='/news/' + item._id)= item.title
+            ul#news_list
+
             div#pagination
     script(src='/javascripts/jquery-3.1.1.min.js')
     script(src='/wPaginate/wPaginate.js')
+    script(src='/javascripts/hashchange.js')
     script.
         $(function () {
+            var index = 1;
+            if (location.hash) {
+                index = location.hash.substr(1);
+            }
+            loadNews(index);
+            window.addEventListener('hashchange', function () {
+                index = location.hash.substr(1);
+                loadNews(index);
+            });
+            var $news_list = $('#news_list');
+
+            function loadNews(index) {
+                $.ajax({
+                    url: '/api/management/news',
+                    data: {index: index, pagesize: 15},
+                    success: function (res) {
+                        var list = [];
+                        for (var i in res) {
+                            var item = res[i];
+                            var listItem = [];
+                            listItem.push('<li>')
+                            listItem.push('<span class="date">');
+                            listItem.push(new Date(item.date).Format('yyyy-MM-dd hh:mm:ss'));
+                            listItem.push('</span>');
+                            listItem.push('<a class="title" href="/news/' + item._id + '">');
+                            listItem.push(item.title);
+                            listItem.push('</a>')
+                            listItem.push('</li>');
+                            list.push(listItem.join(''));
+                        }
+                        $news_list.html(list.join(''));
+                    }
+                })
+            }
+
             $('#pagination').wPaginate({
-                total: 25,
-                index: 1,
-                limit: 15,
+                total: #{count},
+                index: ((+index - 1) * 15),
+                limit: #{pagesize},
                 first: '第一页', last: '最后一页',
                 prev: '上一页', next: '下一页',
                 url: function (i) {
-                    console.log(i, this.settings.limit);
+                    location.hash = '#' + (i + 1);
                 },
                 ajax: true
             });
