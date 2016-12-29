@@ -122,14 +122,16 @@ block footer
             $('#btn_submit').on('click', function () {
                 var title = $input_title.val();
                 var content = $editor.html();
+                var id = $input_id.val();
+                var method = id.length > 0 ? 'PUT' : 'POST';
                 $.ajax({
-                    url: '/management/news-submit',
+                    url: '/api/management/news',
                     data: {
-                        id: $input_id.val(),
+                        id: id,
                         title: title,
                         content: content
                     },
-                    type: 'POST',
+                    type: method,
                     success: function (res) {
                         console.log(res);
                     }

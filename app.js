@@ -14,6 +14,7 @@ const news = require('./routes/news');
 const reserve = require('./routes/reserve');
 
 const management = require('./routes/management/management');
+const managementapi = require('./routes/api/management');
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use('/news', news);
 app.use('/reserve', reserve);
 
 app.use('/management', management);
+app.use('/api/management', managementapi);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

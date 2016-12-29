@@ -32,3 +32,23 @@ block content
                 li
                     a(href='#') »
 block footer
+    script.
+        $(function () {
+            if (location.hash) {
+                var index = location.hash.substr(1);
+                loadNews(index);
+            }
+            window.addEventListener('hashchange', function(e) {
+                var index = location.hash.substr(1);
+                loadNews(index);
+            });
+            function loadNews(index) {
+                $.ajax({
+                    url: '/api/management/news',
+                    data: {index: index, pagesize: 10},
+                    success: function (res) {
+                        console.log(res);
+                    }
+                })
+            }
+        })

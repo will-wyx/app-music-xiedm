@@ -3,13 +3,24 @@
  */
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
-const url = 'mongodb://xirecord:71906312@ds145178.mlab.com:45178/xirecord';
+// const url = 'mongodb://xirecord:71906312@ds145178.mlab.com:45178/xirecord';
+const url = 'mongodb://localhost:27017/xirecord';
 const dbserver = {
     ObjectId,
+    newsPaging: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('news');
+            const {index, pagesize} = options;
+            collection.find({}, {content: false}).sort({date: -1}).skip((index - 1) * pagesize).limit(pagesize).toArray((err, docs) => {
+                console.log(docs);
+                callback(docs);
+            });
+        });
+    },
     news: (condition, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('news');
-            collection.find(condition).toArray((err, docs) => {
+            collection.find(condition, {content: false}).toArray((err, docs) => {
                 callback(docs);
             });
         });
