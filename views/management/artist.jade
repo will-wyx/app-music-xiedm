@@ -2,5 +2,27 @@ extends layout
 block head
 block content
     div.container
-        h1 Artist
+        .panel.panel-default
+            .panel-heading 艺人/厂牌管理
+            .panel-body
+                .col-sm-offset-11.col-sm-1
+                    a.btn.btn-default(href='/management/artist/add') 新增
+                table.table.table-striped
+                    thead
+                        tr
+                            th #
+                            th 名称
+                            th 详细
+                            th 发布时间
+                            th 操作
+                    tbody#news_list
+                        each item in [{_id: 1, name:'王', description: 'A', date: new Date()}, {_id: 2, name:'张', description: 'B', date: new Date()}, {_id: 3, name:'李', description: 'C', date: new Date()}]
+                            tr
+                                td= item._id
+                                td
+                                    a(href='/management/artist/' + item._id)= item.name
+                                td= item.description
+                                td= item.date.toLocaleDateString() + ' ' + item.date.toLocaleTimeString()
+                                td
+                                    a(href='javascript:;', data-id= '' + item._id, data-operation='remove') 删除
 block footer

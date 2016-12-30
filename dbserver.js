@@ -35,8 +35,15 @@ const dbserver = {
             });
         });
     },
-    newsAdd: () => {
-
+    newsAdd: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('news');
+            delete options.id;
+            options.date = new Date();
+            collection.insertOne(options, (err, r) => {
+                callback(r);
+            });
+        });
     },
     newsModify: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
@@ -44,6 +51,15 @@ const dbserver = {
             const _id = ObjectId(options.id);
             delete options.id;
             collection.updateOne({_id}, {$set: options}, (err, r) => {
+                callback(r);
+            });
+        });
+    },
+    newsDelete: (id, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('news');
+            const _id = ObjectId(id);
+            collection.deleteOne({_id}, (err, r) => {
                 callback(r);
             });
         });

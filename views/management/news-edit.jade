@@ -76,8 +76,8 @@ block content
                                     i.icon-repeat
                         #editor!= news.content
             .form-group
-                .col-sm-offset-2.col-sm-10
-                    button#btn_submit.btn.btn-default(type='button') Submit
+                .col-sm-offset-10.col-sm-2
+                    button#btn_submit.btn.btn-default(type='button').btn-block 提交
 
 block footer
     script(src='/bootstrap-wysiwyg/jquery.hotkeys.js')
@@ -133,7 +133,7 @@ block footer
                     },
                     type: method,
                     success: function (res) {
-                        console.log(res);
+                        location.href = '/management/news/';
                     }
                 });
             });

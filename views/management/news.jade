@@ -2,44 +2,63 @@ extends layout
 block head
 block content
     div.container
-        table.table.table-striped
-            thead
-                tr
-                    th #
-                    th 新闻标题
-                    th 发布时间
-                    th 操作
-            tbody#news_list
-                each item in news
-                    - item.date = new Date(item.date)
-                    tr
-                        td= item._id
-                        td
-                            a(href='/management/news/' + item._id)= item.title
-                        td= item.date.toLocaleDateString() + ' ' + item.date.toLocaleTimeString()
-                        td
-                            a(href='javascript:;', data-id= item._id) 删除
-        nav
-            ul.pagination
-                li
-                    a(href='#') «
-                - for(var i = 0; i < pagecount; ++i)
-                    li.item
-                        a(href='#' + (i + 1))= (i + 1)
-                li
-                    a(href='#') »
+        .panel.panel-default
+            .panel-heading 新闻管理
+            .panel-body
+                .col-sm-offset-11.col-sm-1
+                    a.btn.btn-default(href='/management/news/add') 新增
+                table.table.table-striped
+                    thead
+                        tr
+                            th #
+                            th 新闻标题
+                            th 发布时间
+                            th 操作
+                    tbody#news_list
+                        each item in news
+                            - item.date = new Date(item.date)
+                            tr
+                                td= item._id
+                                td
+                                    a(href='/management/news/' + item._id)= item.title
+                                td= item.date.toLocaleDateString() + ' ' + item.date.toLocaleTimeString()
+                                td
+                                    a(href='javascript:;', data-id= '' + item._id, data-operation='remove') 删除
+                nav
+                    ul.pagination
+                        - for(var i = 0; i < pagecount; ++i)
+                            li.item
+                                a(href='#' + (i + 1))= (i + 1)
+
+                #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+                    .modal-dialog.modal-sm
+                        .modal-content
+                            .modal-header
+                                button.close(type='button', data-dismiss='modal')
+                                    span(aria-hidden='true') ×
+                                    span.sr-only Close
+                                h4#myModalLabel.modal-title 提示
+                            .modal-body
+                                p 确定删除
+                                    span#modal_id
+                                    | 吗
+                            .modal-footer
+                                button#btn_ok.btn.btn-primary(type='button') 确定
+                                button.btn.btn-default(type='button', data-dismiss='modal') 取消
 block footer
     script.
         $(function () {
+            var $pagination_item = $('.pagination .item');
             if (location.hash) {
                 var index = location.hash.substr(1);
                 loadNews(index);
+            } else {
+                $($pagination_item[0]).addClass('active');
             }
             window.addEventListener('hashchange', function () {
                 var index = location.hash.substr(1);
                 loadNews(index);
             });
-            var $pagination_item = $('.pagination .item');
             var $news_list = $('#news_list');
 
             function loadNews(index) {
@@ -68,7 +87,7 @@ block footer
                             listItem.push(item.date.toLocaleDateString() + ' ' + item.date.toLocaleTimeString());
                             listItem.push('</td>');
                             listItem.push('<td>');
-                            listItem.push('<a href="javascript:;" data-id="' + item._id + '">');
+                            listItem.push('<a href="javascript:;" data-id="' + item._id + '" data-operation="remove">');
                             listItem.push('删除');
                             listItem.push('</a>')
                             listItem.push('</td>');
@@ -79,4 +98,33 @@ block footer
                     }
                 })
             }
+
+            var $myModal = $('#myModal');
+            var $modal_id = $('#modal_id');
+
+            $news_list.on('click', function (e, r, t) {
+                var $target = $(e.target);
+                var operation = $target.attr('data-operation');
+                if (operation === 'remove') {
+                    var _id = $target.attr('data-id');
+                    $modal_id.text(_id);
+                    $myModal._id = _id;
+                    $myModal.modal('show');
+                }
+            });
+
+            var $btn_ok = $('#btn_ok');
+            $btn_ok.on('click', function () {
+                var _id = $myModal._id;
+                console.log(_id);
+                $.ajax({
+                    url: '/api/management/news',
+                    type: 'DELETE',
+                    data: {id: _id},
+                    success: function (res) {
+                        location.reload();
+                    }
+                });
+                $myModal.modal('hide');
+            });
         })

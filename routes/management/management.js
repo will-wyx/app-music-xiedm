@@ -21,15 +21,31 @@ router.get('/news', (req, res) => {
 });
 
 router.get('/news/:id', (req, res) => {
-    const _id = db.ObjectId(req.params.id);
-    db.newsOne({_id}, (news) => {
-        res.render('management/news-edit', {path: req.url, news});
-    });
+    if (req.params.id !== 'add') {
+        const _id = db.ObjectId(req.params.id);
+        db.newsOne({_id}, (news) => {
+            res.render('management/news-edit', {path: req.url, news});
+        });
+    } else {
+        res.render('management/news-edit', {path: req.url, news: {}});
+    }
 });
 
 router.get('/artist', (req, res) => {
     res.render('management/artist', {path: req.url});
 });
+
+router.get('/artist/:id', (req, res) => {
+    // if (req.params.id !== 'add') {
+    //     const _id = db.ObjectId(req.params.id);
+    //     db.artistOne({_id}, (list) => {
+    //         res.render('management/artist-edit', {path: req.url, list});
+    //     });
+    // } else {
+        res.render('management/artist-edit', {path: req.url, list: {}});
+    // }
+});
+
 router.get('/media', (req, res) => {
     res.render('management/media', {path: req.url});
 });

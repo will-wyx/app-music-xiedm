@@ -1,0 +1,33 @@
+extends layout
+block content
+    .container
+        .panel.panel-default
+            .panel-heading 编辑艺人/厂牌
+            .panel-body
+                form.form-horizontal(role='form')
+                    .form-group
+                        label.col-sm-2.control-label(for='inputEmail3') 名称
+                        .col-sm-10
+                            input#inputEmail3.form-control(type='text', placeholder='名称')
+                    .form-group
+                        label.col-sm-2.control-label 类型
+                        .col-sm-10
+                            label.radio-inline
+                                input(type='radio', value='label', checked='checked', name='type')
+                                |  厂牌
+                            label.radio-inline
+                                input(type='radio', value='artist', name='type')
+                                |  艺人
+                    .form-group
+                        label.col-sm-2.control-label(for='inputPassword3') pw
+                        .col-sm-10
+                            input#inputPassword3.form-control(type='password', placeholder='Password')
+                    .form-group
+                        .col-sm-offset-2.col-sm-10
+                            .checkbox
+                                label
+                                    input(type='checkbox')
+                                    |  Remember me
+                    .form-group
+                        .col-sm-offset-2.col-sm-10
+                            button.btn.btn-default(type='submit') Sign in

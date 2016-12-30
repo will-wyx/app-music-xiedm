@@ -26,13 +26,18 @@ router.post('/news-submit', (req, res) => {
 });
 
 router.post('/news', (req, res) => {
-    db.newsAdd(req.body, () => {
+    db.newsAdd(req.body, (r) => {
         res.send('ok');
     });
 });
 router.put('/news', (req, res) => {
     db.newsModify(req.body, (r) => {
         res.send('ok');
+    });
+});
+router.delete('/news', (req, res) => {
+    db.newsDelete(req.body.id, (r) => {
+        res.send(r);
     });
 });
 
