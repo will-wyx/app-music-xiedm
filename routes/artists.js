@@ -9,10 +9,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    res.send('建设中...');
-    // const id = req.params.id;
-    // const bkurl = `/images/upload/${id}.jpg`;
-    // res.render('artist', {bkurl});
+    // res.send('建设中...');
+    const id = req.params.id;
+    const bkurl = `/images/upload/${id}.jpg`;
+    res.render('artist', {bkurl});
 });
 
 module.exports = router;

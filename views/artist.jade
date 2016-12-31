@@ -1,119 +1,466 @@
 doctype html
 html
     head
-        title= 'XIEDM'
-        link(rel='stylesheet', href='/stylesheets/style.css')
         link(rel='stylesheet', href='/stylesheets/artist.css')
-        link(rel='stylesheet', href='/jplayer/jplayer.blue.monday.css')
     body
-        a.logo(href='/')
-            img(src='/images/local/logo.png', alt='domain')
-        div.container(style='background-image:url("' + bkurl + '")')
-            div.content
-                div.info
-                    div.head
-                        h1 王菀之
-                        a.share(href='javascript:;')
-                    ul
-                        li 国籍：加拿大
-                        li 生日：1980年6月18日
-                        li 经纪公司：红馆经理人公司
-                        li 代表作品：《我真的受伤了》《水百合》《留白》《末日》《皇后的餐厅》
-                div.media-player
-                    div#jp_jplayer.jp-jplayer
-                    div#jp_container_1.jp-audio(role='application', aria-label='media player')
-                        div.jp-type-single
-                            div.jp-gui.jp-interface
-                                div.jp-controls
-                                    button.jp-play play
-                                    button.jp-stop stop
-                                div.jp-progress
-                                    div.jp-seek-bar
-                                        div.jp-play-bar
-                                div.jp-volume-controls
-                                    button.jp-mute mute
-                                    button.jp-volume-max max volume
-                                    div.jp-volume-bar
-                                        div.jp-volume-bar-value
-                                div.jp-time-holder
-                                    div.jp-current-time(aria-label='time')
-                                    div.jp-duration(aria-label='duration')
-                div.media-list
-                    h1 AUDIO音乐
-                    div.table-wrapper
-                        table
-                            thead
-                                tr
-                                    th.play
-                                    th.title 歌曲
-                                    th.time 时长
-                                    th.share 分享
-                            tbody
-                                tr
-                                    td 1 p
-                                    td 气球
-                                    td 04:13
-                                    td share
-                                tr
-                                    td 1 p
-                                    td 气球
-                                    td 04:13
-                                    td share
-                div.video-list
-                    h1 VIDEO视频
-                    ul
-                        li
-                            a(href='javascript:;')
-                                img(src='http://i0.hdslb.com/bfs/archive/194ad261abb19abc1ed76239e44ef97d92e08971.jpg_320x200.jpg')
-                        li
-                            a(href='javascript:;')
-                                img(src='http://i0.hdslb.com/bfs/archive/ce9ca7699ebf5f865fef299115002dab9c9a3106.jpg_320x200.jpg')
-                        li
-                            a(href='javascript:;')
-                                img(src='http://i2.hdslb.com/320_200/video/c0/c00d0817fbb8ce0afac6cd62f98f201d.jpg')
-                        li
-                            a(href='javascript:;')
-                                img(src='http://i0.hdslb.com/bfs/archive/5ea6b0d4d36ca2d435aad66c908864bbdc47c0df.jpg_320x200.jpg')
-                div.activity-list
-                    h1 ACTIVITY活动
-                    div.table-wrapper
-                        table
-                            thead
-                                tr
-                                    th 时间
-                                    th 名称
-                                    th 总场次
-                            tbody
-                                tr
-                                    td 2006年7月18日
-                                    td 王菀之 X 张敬轩 903 拉阔音乐会
-                                    td 1
-                                tr
-                                    td(colspan="3")
-                                        ul
-                                            li 2006年7月18日    香港    拉阔演奏厅
-                div.reservation-list
-                    h1 RESERVE预订
-
-        script(src='/javascripts/jquery-3.1.1.min.js')
-        script(src='/jplayer/jquery.jplayer.min.js')
-        script.
-            $(function () {
-                $('#jp_jplayer').jPlayer({
-                    ready: function(event) {
-                        $(this).jPlayer('setMedia', {
-                            title: '气球',
-                            mp3: '/medias/王菀之,张敬轩,冯翰铭 - 气球 - Live.mp3'
-                        })
-                    },
-                    swfPath: "/jplayer",
-                    supplied: "mp3",
-                    wmode: "window",
-                    useStateClassSkin: true,
-                    autoBlur: false,
-                    smoothPlayBar: true,
-                    keyEnabled: true,
-                    remainingDuration: true,
-                    toggleDuration: true
-                });
-            });
+        .main
+            .mod_data
+                span.data__cover
+                    a.js_goto_tab.js_none_index(data-stat='y_new.singer.thistab.singer_pic', data-tab='index', href='#')
+                        img.data__photo(src='//y.gtimg.cn/music/photo_new/T001R300x300M000003HxGOW0RjaSR.jpg?max_age=2592000', alt='王菀之')
+                .data__cont
+                    .data__name
+                        h1.data__name_txt
+                            a(data-stat='y_new.singer.thistab.singer_name', title='王菀之', data-tab='index', href='#') 王菀之
+                    #singer_desc.data__desc
+                        #short_desc.data__desc_txt
+                            | 外文名：Ivana
+                            | 出生地：香港
+                            | 职业：歌手，创作人、演员
+                            | 代表作品：《我真的受伤了》、《水百合》、《留白》
+                            | 简介：王菀之，香港著名创作女歌手，籍贯广东潮州，原名王爱之。2000年参加第12届CASH流行曲创作大赛，凭一首《是一个误会没什么可悲》夺得冠军，之后为多位歌手创作音乐作品，包括张学友《我真的受伤了》、蔡依林《许愿池的希腊少女》、薛凯琪的《小黑与我》等，2005年获唱片公司赏识由幕后转向幕前，凭借着不落俗套的创作才华以及质朴清新的风格大受好评，2011年10月底更首次登上香港红馆举行两场《水．百合》演唱会。2012年推出的单曲《留白》因为风格独特而广受乐迷欢迎，横扫香港乐坛四大颁奖礼的多项金曲奖。2013年领衔主演的个人第一部最新TVB剧集《老表，你好嘢！》中的出色表现与音乐才华更加受到了肯定。
+                            | 从艺历程：2000年参加第12届CASH流行曲创作大赛，凭一首《是一个误会没什么可悲》夺得冠军，该作品由王菀之一人包办作曲、作词及演绎。其后有唱片公司找她，但她放弃签约，选择返回加拿大继续经济学位。 >至CASH比赛得奖后，她重拾对音乐的兴趣，在加拿大学习多种乐器及唱歌，因而导至其中一科不合格未能毕业，考虑到再留加一年完成课程所需生活费及学费不便宜，不想加重父母的负担，决定回港从事音乐幕后工作。作品有薛凯琪的《小黑与我》、郑秀文的《恋上你的床》、张学友的《我真的受伤了》等等。后来她被看中出唱片，成为2005年香港乐坛女新人。 >2005年首次发行个人广东EP《Ivana》，专辑《I Love My Name》大获好评，《Ivana》曾经夺得HMV销量榜连继3星期冠军，《I Love My Name》更推出短短2日第一批火速售罄。 >2006年发行第3张广东专辑《诗情·画意》，其中一曲《画意》大获好评。 >2007年加盟种子音乐，并于台湾首次发行个人国语专辑《Ivana王菀之》。由于作曲、作词及唱歌三方面大获好评，所以有“唱作女王”之美誉。
+                            | 荣誉记录：2000年 >CASH流行曲创作大赛冠军 >2005年 >新城国语力颁奖礼“新城国语力热播新声音” >劲歌金曲优秀选第二回 “新人荐场飙星奖” >儿歌金曲颁奖典礼“十大儿歌金曲”：《快乐小博士》 >新城十强新星?第二回“夺目女新星” >学势力 X Friday大专生热爱歌手选“大专生最热爱唱作新人” >PM乐坛新人颁奖礼“PM强势唱作女新人” >TVB8金曲榜颁奖典礼“最佳女新人银奖” >广州电台/电视台05金曲金榜颁奖礼“年度最佳女新人（港台海外）金奖” >新城劲爆颁奖礼“唱好新希望奖” >新城劲爆颁奖礼“i-Tech劲爆新人王” >新城劲爆颁奖礼“劲爆新一代创作歌手” >四台联颁音乐大奖“卓越表现大奖铜奖” >叱吒乐坛流行榜颁奖典礼“叱吒乐坛新力军女歌手银奖” >叱吒乐坛流行榜颁奖典礼“叱吒乐坛唱作人铜奖” >十大劲歌金曲颁奖典礼“最受欢迎唱作歌手银奖” >十大劲歌金曲颁奖典礼“最受欢迎女新人银奖” >加拿大至HIT中文歌曲排行榜（粤语组）“全国推崇女新人” >第二十八届十大中文金曲颁奖音乐会“最有前途女新人银奖” >SINA Music乐坛民意指数颁奖礼“最佳现场演绎大奖”：《手望（守望版）》 >SINA MUSIC乐坛民意指数颁奖礼“我最喜爱女新人金奖” >广州9+2音乐先锋榜颁奖典礼“港台最受欢迎新人奖” >广州9+2音乐先锋榜颁奖典礼“乐坛生力军女歌手” >广州9+2音乐先锋榜颁奖典礼“最佳对唱歌曲奖”：《手望（守望版）》 >2006年 >广州第六届华语音乐传媒大奖 "最佳女新人奖" >新城国语力颁奖典礼 "新城国语力新势力歌手奖" >第六届全球华语歌曲排行榜颁奖典礼 "最受欢迎对唱金曲奖" 《手望（守望版）》 > >  王菀之 >CASH金帆音乐奖颁奖典礼 "最佳旋律" - 《手望》 >CASH金帆音乐奖颁奖典礼 "最佳合唱演绎奖" 《手望（守望版）》 >金曲金榜颁奖典礼 "最受欢迎创作歌手（港台海外）" >新城劲爆颁奖典礼 "新城劲爆创作歌手" >新城劲爆颁奖典礼 "新城劲爆专辑奖" 《诗情.画意》 >叱吒乐坛流行榜颁奖典礼 "叱吒乐坛唱作人铜奖" >第29届十大中文金曲颁奖典礼 "CASH最佳唱作歌手奖" >2007年 >第7届北京音乐风云榜颁奖盛典 "最佳女歌手（粤语）"《诗情.画意》 >2007 劲歌金曲优秀选第1回 - 歌曲奖《画意》 >2007 劲歌金曲优秀选第2回 - 歌曲奖《面具》 >2007 新城劲爆颁奖礼 - 劲爆原创歌曲 《幸福》 >2007 新城劲爆颁奖礼 - 新城劲爆创作歌手 >2007 年度叱吒乐坛流行榜颁奖典礼“叱吒乐坛唱作人 金奖” >RoadShow至尊音乐颁奖礼2007 - 至尊歌曲 《真心话》 >RoadShow至尊音乐颁奖礼2007 - 至尊飞跃歌手 >2007十大劲歌金曲颁奖典礼“最受欢迎唱作歌手金奖” >第三十届十大中文金曲 “CASH最佳创作歌手” >2008年 >新城国语力颁奖礼2008「新城国语力歌曲」《怎麼会寂寞》 >新城国语力颁奖礼2008「新城国语力创作专辑」《王菀之Ivana首张国语创作专辑》 >2008 劲歌金曲优秀选第二回「歌曲奖」《我来自火星》 >2008 劲歌金曲优秀选第三回「歌曲奖」《永远几远》 >2008 TVB8金曲榜颁奖典礼「TVB8金曲榜金曲奖」《你是我最爱的人》 >广州9+2音乐先锋榜2008年度颁奖典礼「乐坛进步奖」 >广州9+2音乐先锋榜2008年度颁奖典礼「先锋创作歌手」 >广州9+2音乐先锋榜2008年度颁奖典礼「17家电台联颁最佳专辑」《Infinity Journey》 >新城劲爆颁奖礼 2008「新城劲爆创作专辑」《nfinity Journey》 >新城劲爆颁奖礼 2008「新城劲爆创作歌手」 >新城劲爆颁奖礼 2008「新城劲爆歌曲」《我来自火星》 >叱咤乐坛流行榜颁奖典礼 2008 「叱咤乐坛唱作人银奖」 >叱咤乐坛流行榜颁奖典礼 2008 「叱咤乐坛女歌手铜奖」 >2008年度十大劲歌金曲颁奖典礼「最受欢迎唱作歌星金奖」 >第三十一届十大中文金曲颁奖典礼「优秀流行歌手大奖」 >  王菀之 >SINA Music乐坛民意指数颁奖礼2008「SINA Music最高收听率二十大歌曲」《我来自火星》 >IFPI香港唱片销量大奖2008 「十大销量国语唱片」《王菀之国语创作专辑》 >IFPI香港唱片销量大奖2008 「十大销量本地歌手」 >2009年 >2009年劲歌金曲优秀选第二回获奖歌曲《大笨锺》 >2009年劲歌金曲优秀选第三回获奖歌曲《月亮说》 >2009新城劲爆颁奖礼 - 新城劲爆歌曲《月亮说》 >2009新城劲爆颁奖礼 - 新城劲爆创作歌手 >2009年度叱吒乐坛流行榜颁奖典礼“叱吒乐坛唱作人 金奖” >2009十大劲歌金曲颁奖典礼“最受欢迎唱作歌手金奖” >第三十二届十大中文金曲“优秀流行歌手大奖” >第三十二届十大中文金曲“十大金曲奖《月亮说》” >2009年度加拿大至HiT中文歌曲排行榜 - 全国推崇十大歌曲（粤语）《月亮说》 >2009年度加拿大至HiT中文歌曲排行榜 - 全国推崇唱作人（粤语） >2010年 >2010年蒙牛酸酸乳音乐风云榜十年盛典- 音乐新势力女歌手（香港） >第10届华语音乐传媒大奖 百家传媒年度最受瞩目专辑——王菀之《On Wings Of Time》 >华语金曲奖2010十大华语唱片粤语十大——王菀之《On Wings Of Time》 >2010 CASH金帆音乐奖——最佳合唱演绎《高八度》王菀之/张敬轩 >2010 CASH金帆音乐奖——最佳女歌手演绎《小团圆》王菀之 >2011年 >2011 劲歌金曲优秀选第一回 - 得奖歌曲《最好的...》 >2011 劲歌金曲优秀选第二回 - 得奖歌曲《末日》 >2011 劲歌金曲优秀选第三回 - 得奖歌曲《水百合》 >2011 TVB8金曲榜颁奖典礼“TVB8金曲榜金曲奖”《错过了地址》 >2011 TVB8金曲榜颁奖典礼“全球观众最爱粤语歌曲奖”《末日》 >2011 TVB8金曲榜颁奖典礼“TVB8金曲榜最佳唱作歌手奖” >Yahoo! 搜寻人气大奖2011“搜寻十大人气歌曲2011”《末日》 >Yahoo! 搜寻人气大奖2011“搜寻人气演唱会2011”《水百合演唱会》 >新城劲爆颁奖礼2011 - 新城劲爆歌曲《末日》 >新城劲爆颁奖礼2011 - 新城劲爆亚洲创作歌手大奖 >2011年度叱咤乐坛流行榜颁奖典礼 - 专业推介叱咤十大 《末日》 >2011年度叱咤乐坛流行榜颁奖典礼 - 叱咤乐坛唱作人 铜奖 >SINA Music乐坛民意指数颁奖礼2011 - SINA Music 最高收听率二十大歌曲《末日》 >SINA Music乐坛民意指数颁奖礼2011 - SINA MUSIC 创作歌手大奖 >SINA Music乐坛民意指数颁奖礼2011 - 我最喜爱演唱会《水．百合王菀之2011演唱会》 >第三十四届十大中文金曲颁奖典礼 - 十大中文金曲《末日》 >2011年度十大劲歌金曲颁奖典礼 - 十大劲歌金曲《水百合》 >2011年度十大劲歌金曲颁奖典礼 - 最受欢迎唱作歌星 银奖 >2011年度十大劲歌金曲颁奖典礼 - 亚太区最受欢迎香港女歌星 >IFPI香港唱片销量大奖2011 - “十大销量广东唱片”《The Songbird Anthology》 >2011年度雪碧榜音乐颁奖典礼 - 最受欢迎女歌手(香港区) >2011年度雪碧榜音乐颁奖典礼 - 最优秀创作歌手大奖(香港区) >2012年 >2012 劲歌金曲优秀选第一回 - 得奖歌曲《下次爱你》 >2012 劲歌金曲优秀选第三回 - 得奖歌曲《留白》 >新城劲爆颁奖礼2012 - 新城劲爆歌曲《留白》 >新城劲爆颁奖礼2012 - 新城劲爆亚洲创作歌手大奖 >全港民意流行音乐颁奖礼2012 - 最受欢迎唱作歌手 银奖 >2012年度叱咤乐坛流行榜颁奖典礼 - 叱咤十大 第三位《留白》 >2012年度十大劲歌金曲颁奖典礼 - 十大劲歌金曲《留白》 >2012年度十大劲歌金曲颁奖典礼 - 最受欢迎合唱歌曲奖 金奖《生命之花》 >2012年度十大劲歌金曲颁奖典礼 - 金曲金奖《留白》 >2013年 >第35届十大中文金曲 - 优秀流行歌手大奖 >第35届十大中文金曲 - 十大中文金曲《留白》
+                        a.js_desc(href='javascript:;', data-left='0', data-stat='y_new.singer.header.more_info', data-top='0', data-target='popup_data_detail', style='') [更多]
+                    ul.mod_data_statistic
+                        li.data_statistic__item
+                            a.js_goto_tab(href='#tab=song', data-stat='y_new.singer.header.song_tab', data-tab='song')
+                                span.data_statistic__tit 单曲
+                                strong.data_statistic__number 262
+                        li.data_statistic__item
+                            a.js_goto_tab(href='#tab=album', data-stat='y_new.singer.header.album_tab', data-tab='album')
+                                span.data_statistic__tit 专辑
+                                strong.data_statistic__number 33
+                        li.data_statistic__item.data_statistic__item--last
+                            a.js_goto_tab(href='#tab=mv', data-stat='y_new.singer.header.mv_tab', data-tab='mv')
+                                span.data_statistic__tit MV
+                                strong.data_statistic__number 193
+                    .data__actions(role='toolbar')
+                        a.mod_btn_green.js_singer_radio(href='#')
+                            i.mod_btn_green__icon_play
+                            | 播放歌手热门歌曲
+            // 首页 begin
+            #index_tab.js_tab
+                .mod_part
+                    .part__hd
+                        h2.part__tit 热门歌曲
+                        a.part__more.js_goto_tab(href='#tab=song', data-stat='y_new.singer.index.song_all', data-tab='song')
+                            | 全部
+                            i.icon_part_arrow.sprite
+                    .mod_songlist
+                        ul.songlist__header
+                            li.songlist__edit.songlist__edit--check
+                                input.songlist__checkbox(type='checkbox')
+                            li.songlist__header_name 歌曲
+                            li.songlist__header_album 专辑
+                            li.songlist__header_time 时长
+                        ul.songlist__list
+                            li(mid='1092300', ix='0')
+                                .songlist__item(onmouseover="this.className=(this.className+' songlist__item--hover')", onmouseout="this.className=this.className.replace(/ songlist__item--hover/, '')")
+                                    .songlist__edit.songlist__edit--check
+                                        input.songlist__checkbox(type='checkbox')
+                                    .songlist__number 1
+                                    .songlist__songname
+                                        span.songlist__songname_txt
+                                            a.js_song(href='#', title='我真的受伤了') 我真的受伤了
+                                        .mod_list_menu
+                                            a.list_menu__item.list_menu__play.js_play(href='javascript:;', title='播放')
+                                                i.list_menu__icon_play
+                                                span.icon_txt 播放
+                                            a.list_menu__item.list_menu__add.js_fav(href='javascript:;', title='添加到歌单', aria-haspopup='true', data-target='menu_add')
+                                                i.list_menu__icon_add
+                                                span.icon_txt 添加到歌单
+                                            a.list_menu__item.list_menu__down.js_down(href='javascript:;', title='下载', aria-haspopup='true', data-target='menu_down')
+                                                i.list_menu__icon_down
+                                                span.icon_txt 下载
+                                            a.list_menu__item.list_menu__share.js_share(href='javascript:;', title='分享', aria-haspopup='true', data-aria='menu_share')
+                                                i.list_menu__icon_share
+                                                span.icon_txt 分享
+                                    .songlist__album
+                                        a.album_name(href='https://y.qq.com/portal/album/001S1YEk32Kboj.html', data-albummid='001S1YEk32Kboj', data-albumid='92798', title='Love Mandarin') Love Mandarin
+                                    .songlist__time 03:33
+                                    .songlist__other
+                            li(mid='5023445', ix='1')
+                                .songlist__item.songlist__item--even(onmouseover="this.className=(this.className+' songlist__item--hover')", onmouseout="this.className=this.className.replace(/ songlist__item--hover/, '')")
+                                    .songlist__edit.songlist__edit--check
+                                        input.songlist__checkbox(type='checkbox')
+                                    .songlist__number 2
+                                    .songlist__songname
+                                        span.songlist__songname_txt
+                                            a.js_song(href='https://y.qq.com/portal/song/003DjpLv1EKmhF.html', title='三个人的错') 三个人的错
+                                        .mod_list_menu
+                                            a.list_menu__item.list_menu__play.js_play(href='javascript:;', title='播放')
+                                                i.list_menu__icon_play
+                                                span.icon_txt 播放
+                                            a.list_menu__item.list_menu__add.js_fav(href='javascript:;', title='添加到歌单', aria-haspopup='true', data-target='menu_add')
+                                                i.list_menu__icon_add
+                                                span.icon_txt 添加到歌单
+                                            a.list_menu__item.list_menu__down.js_down(href='javascript:;', title='下载', aria-haspopup='true', data-target='menu_down')
+                                                i.list_menu__icon_down
+                                                span.icon_txt 下载
+                                            a.list_menu__item.list_menu__share.js_share(href='javascript:;', title='分享', aria-haspopup='true', data-aria='menu_share')
+                                                i.list_menu__icon_share
+                                                span.icon_txt 分享
+                                    .songlist__album
+                                        a.album_name(href='https://y.qq.com/portal/album/002vOX3Y2uFkcB.html', data-albummid='002vOX3Y2uFkcB', data-albumid='438987', title='因为爱情有多美 电视剧原声带') 因为爱情有多美 电视剧原声带
+                                    .songlist__time 04:55
+                                    .songlist__other
+                                        a.icon_sosomusic(href='javascript:;') 无版权
+                            li(mid='108664381', ix='6')
+                                .songlist__item(onmouseover="this.className=(this.className+' songlist__item--hover')", onmouseout="this.className=this.className.replace(/ songlist__item--hover/, '')")
+                                    .songlist__edit.songlist__edit--check
+                                        input.songlist__checkbox(type='checkbox')
+                                    .songlist__number 7
+                                    .songlist__songname
+                                        span.songlist__songname_txt
+                                            a.js_song(href='https://y.qq.com/portal/song/003DwanM2DdGFS.html', title='友谊的小船') 友谊的小船
+                                        i.songlist__icon.songlist__icon_exclusive(title='独家')
+                                        a.songlist__icon.songlist__icon_mv(href='//y.qq.com/portal/mv/v/w0022pou9fq.html', target='_blank', title='MV')
+                                            span.icon_txt MV
+                                        .mod_list_menu
+                                            a.list_menu__item.list_menu__play.js_play(href='javascript:;', title='播放')
+                                                i.list_menu__icon_play
+                                                span.icon_txt 播放
+                                            a.list_menu__item.list_menu__add.js_fav(href='javascript:;', title='添加到歌单', aria-haspopup='true', data-target='menu_add')
+                                                i.list_menu__icon_add
+                                                span.icon_txt 添加到歌单
+                                            a.list_menu__item.list_menu__down.js_down(href='javascript:;', title='下载', aria-haspopup='true', data-target='menu_down')
+                                                i.list_menu__icon_down
+                                                span.icon_txt 下载
+                                            a.list_menu__item.list_menu__share.js_share(href='javascript:;', title='分享', aria-haspopup='true', data-aria='menu_share')
+                                                i.list_menu__icon_share
+                                                span.icon_txt 分享
+                                    .songlist__album
+                                        a.album_name(href='https://y.qq.com/portal/album/003eYhAU2Rmvc5.html', data-albummid='003eYhAU2Rmvc5', data-albumid='1619808', title='友谊的小船') 友谊的小船
+                                    .songlist__time 03:18
+                                    .songlist__other
+                .mod_part
+                    .part__hd
+                        h2.part__tit 专辑
+                        a.part__more.js_goto_tab(href='//y.qq.com/portal/singer/003HxGOW0RjaSR.html#tab=album&', data-stat='y_new.singer.index.album_all', data-tab='album')
+                            | 全部
+                            i.icon_part_arrow.sprite
+                    .mod_playlist
+                        ul#albumlist.playlist__list
+                            li.playlist__item(onmouseover="this.className=(this.className+' playlist__item--hover')", onmouseout="this.className=this.className.replace(/ playlist__item--hover/, '')", data-albummid='001nL53j3m9W84', data-albumid='1677295')
+                                .playlist__item_box
+                                    .playlist__cover.mod_cover
+                                        a.js_album(href='https://y.qq.com/portal/album/001nL53j3m9W84.html', data-stat='y_new.singer.index.album_pic', data-albummid='001nL53j3m9W84', data-albumid='1677295')
+                                            img.playlist__pic(src='//y.gtimg.cn/music/photo_new/T002R300x300M000001nL53j3m9W84.jpg?max_age=2592000', alt='相牵', onerror="this.src='//y.gtimg.cn/mediastyle/global/img/album_300.png?max_age=31536000';this.onerror=null;")
+                                            i.mod_cover__icon_play.js_play(data-stat='y_new.singer.index.album_play')
+                                    h4.playlist__title
+                                        span.playlist__title_txt
+                                            a.js_album(href='https://y.qq.com/portal/album/001nL53j3m9W84.html', title='相牵', data-stat='y_new.singer.index.album_name', data-albummid='001nL53j3m9W84', data-albumid='1677295') 相牵
+                                    .playlist__other
+                                        | 2016-11-07
+                                    a.btn_operate_menu.js_albumlist_more(href='javascript:;', data-type='2', data-mid='001nL53j3m9W84')
+                                        span.icon_txt 更多
+                            li.playlist__item(onmouseover="this.className=(this.className+' playlist__item--hover')", onmouseout="this.className=this.className.replace(/ playlist__item--hover/, '')", data-albummid='003eYhAU2Rmvc5', data-albumid='1619808')
+                                .playlist__item_box
+                                    .playlist__cover.mod_cover
+                                        a.js_album(href='https://y.qq.com/portal/album/003eYhAU2Rmvc5.html', data-stat='y_new.singer.index.album_pic', data-albummid='003eYhAU2Rmvc5', data-albumid='1619808')
+                                            img.playlist__pic(src='//y.gtimg.cn/music/photo_new/T002R300x300M000003eYhAU2Rmvc5.jpg?max_age=2592000', alt='友谊的小船', onerror="this.src='//y.gtimg.cn/mediastyle/global/img/album_300.png?max_age=31536000';this.onerror=null;")
+                                            i.mod_cover__icon_play.js_play(data-stat='y_new.singer.index.album_play')
+                                    h4.playlist__title
+                                        span.playlist__title_txt
+                                            a.js_album(href='https://y.qq.com/portal/album/003eYhAU2Rmvc5.html', title='友谊的小船', data-stat='y_new.singer.index.album_name', data-albummid='003eYhAU2Rmvc5', data-albumid='1619808') 友谊的小船
+                                    .playlist__other
+                                        | 2016-09-26
+                                    a.btn_operate_menu.js_albumlist_more(href='javascript:;', data-type='2', data-mid='003eYhAU2Rmvc5')
+                                        span.icon_txt 更多
+                            li.playlist__item(onmouseover="this.className=(this.className+' playlist__item--hover')", onmouseout="this.className=this.className.replace(/ playlist__item--hover/, '')", data-albummid='003fSkp44P2CIs', data-albumid='1517327')
+                                .playlist__item_box
+                                    .playlist__cover.mod_cover
+                                        a.js_album(href='https://y.qq.com/portal/album/003fSkp44P2CIs.html', data-stat='y_new.singer.index.album_pic', data-albummid='003fSkp44P2CIs', data-albumid='1517327')
+                                            img.playlist__pic(src='//y.gtimg.cn/music/photo_new/T002R300x300M000003fSkp44P2CIs.jpg?max_age=2592000', alt='该死的快乐', onerror="this.src='//y.gtimg.cn/mediastyle/global/img/album_300.png?max_age=31536000';this.onerror=null;")
+                                            i.mod_cover__icon_play.js_play(data-stat='y_new.singer.index.album_play')
+                                    h4.playlist__title
+                                        span.playlist__title_txt
+                                            a.js_album(href='https://y.qq.com/portal/album/003fSkp44P2CIs.html', title='该死的快乐', data-stat='y_new.singer.index.album_name', data-albummid='003fSkp44P2CIs', data-albumid='1517327') 该死的快乐
+                                    .playlist__other
+                                        | 2016-07-18
+                                    a.btn_operate_menu.js_albumlist_more(href='javascript:;', data-type='2', data-mid='003fSkp44P2CIs')
+                                        span.icon_txt 更多
+                            li.playlist__item(onmouseover="this.className=(this.className+' playlist__item--hover')", onmouseout="this.className=this.className.replace(/ playlist__item--hover/, '')", data-albummid='002ycVqy2bTTme', data-albumid='1474786')
+                                .playlist__item_box
+                                    .playlist__cover.mod_cover
+                                        a.js_album(href='https://y.qq.com/portal/album/002ycVqy2bTTme.html', data-stat='y_new.singer.index.album_pic', data-albummid='002ycVqy2bTTme', data-albumid='1474786')
+                                            img.playlist__pic(src='//y.gtimg.cn/music/photo_new/T002R300x300M000002ycVqy2bTTme.jpg?max_age=2592000', alt='之乎者也', onerror="this.src='//y.gtimg.cn/mediastyle/global/img/album_300.png?max_age=31536000';this.onerror=null;")
+                                            i.mod_cover__icon_play.js_play(data-stat='y_new.singer.index.album_play')
+                                    h4.playlist__title
+                                        span.playlist__title_txt
+                                            a.js_album(href='https://y.qq.com/portal/album/002ycVqy2bTTme.html', title='之乎者也', data-stat='y_new.singer.index.album_name', data-albummid='002ycVqy2bTTme', data-albumid='1474786') 之乎者也
+                                    .playlist__other
+                                        | 2016-06-13
+                                    a.btn_operate_menu.js_albumlist_more(href='javascript:;', data-type='2', data-mid='002ycVqy2bTTme')
+                                        span.icon_txt 更多
+                            li.playlist__item(onmouseover="this.className=(this.className+' playlist__item--hover')", onmouseout="this.className=this.className.replace(/ playlist__item--hover/, '')", data-albummid='002BHbAj4PAJt6', data-albumid='1281508')
+                                .playlist__item_box
+                                    .playlist__cover.mod_cover
+                                        a.js_album(href='https://y.qq.com/portal/album/002BHbAj4PAJt6.html', data-stat='y_new.singer.index.album_pic', data-albummid='002BHbAj4PAJt6', data-albumid='1281508')
+                                            img.playlist__pic(src='//y.gtimg.cn/music/photo_new/T002R300x300M000002BHbAj4PAJt6.jpg?max_age=2592000', alt='Ivana Wong Fragrance of Music with Alex Fung & Hong Kong Philharmonic Orchestra Live', onerror="this.src='//y.gtimg.cn/mediastyle/global/img/album_300.png?max_age=31536000';this.onerror=null;")
+                                            i.mod_cover__icon_play.js_play(data-stat='y_new.singer.index.album_play')
+                                    h4.playlist__title
+                                        span.playlist__title_txt
+                                            a.js_album(href='https://y.qq.com/portal/album/002BHbAj4PAJt6.html', title='Ivana Wong Fragrance of Music with Alex Fung & Hong Kong Philharmonic Orchestra Live', data-stat='y_new.singer.index.album_name', data-albummid='002BHbAj4PAJt6', data-albumid='1281508')
+                                                | Ivana Wong Fragrance of Music with Alex Fung & Hong Kong Philharmonic Orchestra Live
+                                    .playlist__other
+                                        | 2016-02-05
+                                    a.btn_operate_menu.js_albumlist_more(href='javascript:;', data-type='2', data-mid='002BHbAj4PAJt6')
+                                        span.icon_txt 更多
+                .mod_part
+                    .part__hd
+                        h2.part__tit MV
+                        a.part__more.js_goto_tab(href='//y.qq.com/portal/singer/003HxGOW0RjaSR.html#tab=mv&', data-stat='y_new.singer.index.mv_all', data-tab='mv')
+                            | 全部
+                            i.icon_part_arrow.sprite
+                    .mod_mv
+                        ul#mvlist.mv_list__list
+                            li.mv_list__item(data-vid='X0090t4LYWd', data-id='66991')
+                                .mv_list__item_box
+                                    a.mv_list__cover.mod_cover.js_mv(href='//y.qq.com/portal/mv/v/X0090t4LYWd.html#stat=y_new.singer.index.mv_play', data-stat='y_new.singer.index.mv_play', data-vid='X0090t4LYWd', data-id='66991', hidefocus='true')
+                                        img.mv_list__pic(src='//shp.qpic.cn/qqvideo_ori/0/X0090t4LYWd_360_204/0', onerror="this.src='//y.gtimg.cn/mediastyle/global/img/mv_300.png?max_age=31536000';this.onerror=null;", alt='错过了地址')
+                                        i.mod_cover__icon_play
+                                    h3.mv_list__title
+                                        a.js_mv(href='//y.qq.com/portal/mv/v/X0090t4LYWd.html#stat=y_new.singer.index.mv_name', data-stat='y_new.singer.index.mv_name', data-vid='X0090t4LYWd', data-id='66991', title='错过了地址') 错过了地址
+                                    .mv_list__info
+                                        span.mv_list__listen
+                                            i.mv_list__listen_icon.sprite
+                                            | 70.8万
+                            li.mv_list__item(data-vid='O0010JTSLZu', data-id='119623')
+                                .mv_list__item_box
+                                    a.mv_list__cover.mod_cover.js_mv(href='//y.qq.com/portal/mv/v/O0010JTSLZu.html#stat=y_new.singer.index.mv_play', data-stat='y_new.singer.index.mv_play', data-vid='O0010JTSLZu', data-id='119623', hidefocus='true')
+                                        img.mv_list__pic(src='//shp.qpic.cn/qqvideo_ori/0/O0010JTSLZu_360_204/0', onerror="this.src='//y.gtimg.cn/mediastyle/global/img/mv_300.png?max_age=31536000';this.onerror=null;", alt='我真的受伤了（上海草莓音乐节）')
+                                        i.mod_cover__icon_play
+                                    h3.mv_list__title
+                                        a.js_mv(href='//y.qq.com/portal/mv/v/O0010JTSLZu.html#stat=y_new.singer.index.mv_name', data-stat='y_new.singer.index.mv_name', data-vid='O0010JTSLZu', data-id='119623', title='我真的受伤了（上海草莓音乐节）') 我真的受伤了（上海草莓音乐节）
+                                    .mv_list__info
+                                        span.mv_list__listen
+                                            i.mv_list__listen_icon.sprite
+                                            | 21.3万
+                            li.mv_list__item(data-vid='u0013pfm04w', data-id='253581')
+                                .mv_list__item_box
+                                    a.mv_list__cover.mod_cover.js_mv(href='//y.qq.com/portal/mv/v/u0013pfm04w.html#stat=y_new.singer.index.mv_play', data-stat='y_new.singer.index.mv_play', data-vid='u0013pfm04w', data-id='253581', hidefocus='true')
+                                        img.mv_list__pic(src='//shp.qpic.cn/qqvideo_ori/0/u0013pfm04w_360_204/0', onerror="this.src='//y.gtimg.cn/mediastyle/global/img/mv_300.png?max_age=31536000';this.onerror=null;", alt='我真的受伤了(LIVE)(feat.张学友)')
+                                        i.mod_cover__icon_play
+                                    h3.mv_list__title
+                                        a.js_mv(href='//y.qq.com/portal/mv/v/u0013pfm04w.html#stat=y_new.singer.index.mv_name', data-stat='y_new.singer.index.mv_name', data-vid='u0013pfm04w', data-id='253581', title='我真的受伤了(LIVE)(feat.张学友)') 我真的受伤了(LIVE)(feat.张学友)
+                                    .mv_list__info
+                                        span.mv_list__listen
+                                            i.mv_list__listen_icon.sprite
+                                            | 13.7万
+                            li.mv_list__item(data-vid='x001249yjsk', data-id='216033')
+                                .mv_list__item_box
+                                    a.mv_list__cover.mod_cover.js_mv(href='//y.qq.com/portal/mv/v/x001249yjsk.html#stat=y_new.singer.index.mv_play', data-stat='y_new.singer.index.mv_play', data-vid='x001249yjsk', data-id='216033', hidefocus='true')
+                                        img.mv_list__pic(src='//shp.qpic.cn/qqvideo_ori/0/x001249yjsk_360_204/0', onerror="this.src='//y.gtimg.cn/mediastyle/global/img/mv_300.png?max_age=31536000';this.onerror=null;", alt='迷失表参道 (翻唱版)')
+                                        i.mod_cover__icon_play
+                                    h3.mv_list__title
+                                        a.js_mv(href='//y.qq.com/portal/mv/v/x001249yjsk.html#stat=y_new.singer.index.mv_name', data-stat='y_new.singer.index.mv_name', data-vid='x001249yjsk', data-id='216033', title='迷失表参道 (翻唱版)') 迷失表参道 (翻唱版)
+                                    .mv_list__info
+                                        span.mv_list__listen
+                                            i.mv_list__listen_icon.sprite
+                                            | 12.7万
+                            li.mv_list__item(data-vid='q0011altnf7', data-id='150548')
+                                .mv_list__item_box
+                                    a.mv_list__cover.mod_cover.js_mv(href='//y.qq.com/portal/mv/v/q0011altnf7.html#stat=y_new.singer.index.mv_play', data-stat='y_new.singer.index.mv_play', data-vid='q0011altnf7', data-id='150548', hidefocus='true')
+                                        img.mv_list__pic(src='//shp.qpic.cn/qqvideo_ori/0/q0011altnf7_360_204/0', onerror="this.src='//y.gtimg.cn/mediastyle/global/img/mv_300.png?max_age=31536000';this.onerror=null;", alt='留白')
+                                        i.mod_cover__icon_play
+                                    h3.mv_list__title
+                                        a.js_mv(href='//y.qq.com/portal/mv/v/q0011altnf7.html#stat=y_new.singer.index.mv_name', data-stat='y_new.singer.index.mv_name', data-vid='q0011altnf7', data-id='150548', title='留白') 留白
+                                    .mv_list__info
+                                        span.mv_list__listen
+                                            i.mv_list__listen_icon.sprite
+                                            | 12.1万
+            // 首页 end
+            // 单曲tab begin
+            #song_tab.mod_part_detail.js_tab(style='display:none;')
+                .part_detail__hd
+                    h2.part_detail__tit 单曲 262
+                .none_txt(style='display:none;')
+                    i.none_txt__symbol
+                    p 该歌手还没有发表过单曲
+                .js_content
+                    .mod_songlist_toolbar
+                        a.mod_btn.js_all_play(href='//y.qq.com/portal/player.html', data-stat='y_new.singer.song.playall')
+                            i.mod_btn__icon_play
+                            | 播放全部
+                        a.mod_btn.js_all_fav(href='javascript:;', data-stat='y_new.singer.song.addall')
+                            i.mod_btn__icon_add
+                            | 添加到
+                        a.mod_btn.js_all_down(href='javascript:;', data-stat='y_new.singer.song.downloadall')
+                            i.mod_btn__icon_down
+                            | 下载
+                        a.mod_btn.js_batch(href='javascript:;', data-stat='y_new.singer.song.batch')
+                            i.mod_btn__icon_batch
+                            | 批量操作
+                    .mod_songlist
+                        ul.songlist__header
+                            li.songlist__edit.songlist__edit--check
+                                input.songlist__checkbox.js_check_all(type='checkbox')
+                            li.songlist__header_name 歌曲
+                            li.songlist__header_album 专辑
+                            li.songlist__header_time 时长
+                        ul#song_box.songlist__list
+            // 单曲tab end
+            // 专辑tab begin
+            #album_tab.mod_part_detail.js_tab(style='display:none;')
+                .part_detail__hd
+                    h2.part_detail__tit 专辑 33
+                .none_txt(style='display:none;')
+                    i.none_txt__symbol
+                    p 该歌手还没有发表过专辑
+                .mod_playlist.js_content
+                    ul#album_box.playlist__list
+            // 专辑tab end
+            // MV tab begin
+            #mv_tab.mod_part_detail.js_tab(style='display:none;')
+                .part_detail__hd
+                    h2.part_detail__tit MV 193
+                .none_txt(style='display:none;')
+                    i.none_txt__symbol
+                    p 该歌手还没有发表过MV
+                .mod_mv.js_content
+                    ul#mv_box.mv_list__list
+            // MV tab end
+            // 专辑简介
+            #popup_data_detail.popup_data_detail(data-aria='popup', style='display:none;z-index:10000000000;')
+                .popup_data_detail__cont
+                    h3.popup_data_detail__tit 歌手简介
+                    p 外文名：Ivana
+                    p 出生地：香港
+                    p 职业：歌手，创作人、演员
+                    p 代表作品：《我真的受伤了》、《水百合》、《留白》
+                    p
+                        | 简介：王菀之，香港著名创作女歌手，籍贯广东潮州，原名王爱之。2000年参加第12届CASH流行曲创作大赛，凭一首《是一个误会没什么可悲》夺得冠军，之后为多位歌手创作音乐作品，包括张学友《我真的受伤了》、蔡依林《许愿池的希腊少女》、薛凯琪的《小黑与我》等，2005年获唱片公司赏识由幕后转向幕前，凭借着不落俗套的创作才华以及质朴清新的风格大受好评，2011年10月底更首次登上香港红馆举行两场《水．百合》演唱会。2012年推出的单曲《留白》因为风格独特而广受乐迷欢迎，横扫香港乐坛四大颁奖礼的多项金曲奖。2013年领衔主演的个人第一部最新TVB剧集《老表，你好嘢！》中的出色表现与音乐才华更加受到了肯定。
+                    p
+                        | 从艺历程：2000年参加第12届CASH流行曲创作大赛，凭一首《是一个误会没什么可悲》夺得冠军，该作品由王菀之一人包办作曲、作词及演绎。其后有唱片公司找她，但她放弃签约，选择返回加拿大继续经济学位。
+                    p
+                        | 至CASH比赛得奖后，她重拾对音乐的兴趣，在加拿大学习多种乐器及唱歌，因而导至其中一科不合格未能毕业，考虑到再留加一年完成课程所需生活费及学费不便宜，不想加重父母的负担，决定回港从事音乐幕后工作。作品有薛凯琪的《小黑与我》、郑秀文的《恋上你的床》、张学友的《我真的受伤了》等等。后来她被看中出唱片，成为2005年香港乐坛女新人。
+                    p
+                        | 2005年首次发行个人广东EP《Ivana》，专辑《I Love My Name》大获好评，《Ivana》曾经夺得HMV销量榜连继3星期冠军，《I Love My Name》更推出短短2日第一批火速售罄。
+                    p 2006年发行第3张广东专辑《诗情·画意》，其中一曲《画意》大获好评。
+                    p 2007年加盟种子音乐，并于台湾首次发行个人国语专辑《Ivana王菀之》。由于作曲、作词及唱歌三方面大获好评，所以有“唱作女王”之美誉。
+                    p 荣誉记录：2000年
+                    p CASH流行曲创作大赛冠军
+                    p 2005年
+                    p 新城国语力颁奖礼“新城国语力热播新声音”
+                    p 劲歌金曲优秀选第二回 “新人荐场飙星奖”
+                    p 儿歌金曲颁奖典礼“十大儿歌金曲”：《快乐小博士》
+                    p 新城十强新星?第二回“夺目女新星”
+                    p 学势力 X Friday大专生热爱歌手选“大专生最热爱唱作新人”
+                    p PM乐坛新人颁奖礼“PM强势唱作女新人”
+                    p TVB8金曲榜颁奖典礼“最佳女新人银奖”
+                    p 广州电台/电视台05金曲金榜颁奖礼“年度最佳女新人（港台海外）金奖”
+                    p 新城劲爆颁奖礼“唱好新希望奖”
+                    p 新城劲爆颁奖礼“i-Tech劲爆新人王”
+                    p 新城劲爆颁奖礼“劲爆新一代创作歌手”
+                    p 四台联颁音乐大奖“卓越表现大奖铜奖”
+                    p 叱吒乐坛流行榜颁奖典礼“叱吒乐坛新力军女歌手银奖”
+                    p 叱吒乐坛流行榜颁奖典礼“叱吒乐坛唱作人铜奖”
+                    p 十大劲歌金曲颁奖典礼“最受欢迎唱作歌手银奖”
+                    p 十大劲歌金曲颁奖典礼“最受欢迎女新人银奖”
+                    p 加拿大至HIT中文歌曲排行榜（粤语组）“全国推崇女新人”
+                    p 第二十八届十大中文金曲颁奖音乐会“最有前途女新人银奖”
+                    p SINA Music乐坛民意指数颁奖礼“最佳现场演绎大奖”：《手望（守望版）》
+                    p SINA MUSIC乐坛民意指数颁奖礼“我最喜爱女新人金奖”
+                    p 广州9+2音乐先锋榜颁奖典礼“港台最受欢迎新人奖”
+                    p 广州9+2音乐先锋榜颁奖典礼“乐坛生力军女歌手”
+                    p 广州9+2音乐先锋榜颁奖典礼“最佳对唱歌曲奖”：《手望（守望版）》
+                    p 2006年
+                    p 广州第六届华语音乐传媒大奖 "最佳女新人奖"
+                    p 新城国语力颁奖典礼 "新城国语力新势力歌手奖"
+                    p 第六届全球华语歌曲排行榜颁奖典礼 "最受欢迎对唱金曲奖" 《手望（守望版）》
+                    p
+                    p   王菀之
+                    p CASH金帆音乐奖颁奖典礼 "最佳旋律" - 《手望》
+                    p CASH金帆音乐奖颁奖典礼 "最佳合唱演绎奖" 《手望（守望版）》
+                    p 金曲金榜颁奖典礼 "最受欢迎创作歌手（港台海外）"
+                    p 新城劲爆颁奖典礼 "新城劲爆创作歌手"
+                    p 新城劲爆颁奖典礼 "新城劲爆专辑奖" 《诗情.画意》
+                    p 叱吒乐坛流行榜颁奖典礼 "叱吒乐坛唱作人铜奖"
+                    p 第29届十大中文金曲颁奖典礼 "CASH最佳唱作歌手奖"
+                    p 2007年
+                    p 第7届北京音乐风云榜颁奖盛典 "最佳女歌手（粤语）"《诗情.画意》
+                    p 2007 劲歌金曲优秀选第1回 - 歌曲奖《画意》
+                    p 2007 劲歌金曲优秀选第2回 - 歌曲奖《面具》
+                    p 2007 新城劲爆颁奖礼 - 劲爆原创歌曲 《幸福》
+                    p 2007 新城劲爆颁奖礼 - 新城劲爆创作歌手
+                    p 2007 年度叱吒乐坛流行榜颁奖典礼“叱吒乐坛唱作人 金奖”
+                    p RoadShow至尊音乐颁奖礼2007 - 至尊歌曲 《真心话》
+                    p RoadShow至尊音乐颁奖礼2007 - 至尊飞跃歌手
+                    p 2007十大劲歌金曲颁奖典礼“最受欢迎唱作歌手金奖”
+                    p 第三十届十大中文金曲 “CASH最佳创作歌手”
+                    p 2008年
+                    p 新城国语力颁奖礼2008「新城国语力歌曲」《怎麼会寂寞》
+                    p 新城国语力颁奖礼2008「新城国语力创作专辑」《王菀之Ivana首张国语创作专辑》
+                    p 2008 劲歌金曲优秀选第二回「歌曲奖」《我来自火星》
+                    p 2008 劲歌金曲优秀选第三回「歌曲奖」《永远几远》
+                    p 2008 TVB8金曲榜颁奖典礼「TVB8金曲榜金曲奖」《你是我最爱的人》
+                    p 广州9+2音乐先锋榜2008年度颁奖典礼「乐坛进步奖」
+                    p 广州9+2音乐先锋榜2008年度颁奖典礼「先锋创作歌手」
+                    p 广州9+2音乐先锋榜2008年度颁奖典礼「17家电台联颁最佳专辑」《Infinity Journey》
+                    p 新城劲爆颁奖礼 2008「新城劲爆创作专辑」《nfinity Journey》
+                    p 新城劲爆颁奖礼 2008「新城劲爆创作歌手」
+                    p 新城劲爆颁奖礼 2008「新城劲爆歌曲」《我来自火星》
+                    p 叱咤乐坛流行榜颁奖典礼 2008 「叱咤乐坛唱作人银奖」
+                    p 叱咤乐坛流行榜颁奖典礼 2008 「叱咤乐坛女歌手铜奖」
+                    p 2008年度十大劲歌金曲颁奖典礼「最受欢迎唱作歌星金奖」
+                    p 第三十一届十大中文金曲颁奖典礼「优秀流行歌手大奖」
+                    p   王菀之
+                    p SINA Music乐坛民意指数颁奖礼2008「SINA Music最高收听率二十大歌曲」《我来自火星》
+                    p IFPI香港唱片销量大奖2008 「十大销量国语唱片」《王菀之国语创作专辑》
+                    p IFPI香港唱片销量大奖2008 「十大销量本地歌手」
+                    p 2009年
+                    p 2009年劲歌金曲优秀选第二回获奖歌曲《大笨锺》
+                    p 2009年劲歌金曲优秀选第三回获奖歌曲《月亮说》
+                    p 2009新城劲爆颁奖礼 - 新城劲爆歌曲《月亮说》
+                    p 2009新城劲爆颁奖礼 - 新城劲爆创作歌手
+                    p 2009年度叱吒乐坛流行榜颁奖典礼“叱吒乐坛唱作人 金奖”
+                    p 2009十大劲歌金曲颁奖典礼“最受欢迎唱作歌手金奖”
+                    p 第三十二届十大中文金曲“优秀流行歌手大奖”
+                    p 第三十二届十大中文金曲“十大金曲奖《月亮说》”
+                    p 2009年度加拿大至HiT中文歌曲排行榜 - 全国推崇十大歌曲（粤语）《月亮说》
+                    p 2009年度加拿大至HiT中文歌曲排行榜 - 全国推崇唱作人（粤语）
+                    p 2010年
+                    p 2010年蒙牛酸酸乳音乐风云榜十年盛典- 音乐新势力女歌手（香港）
+                    p 第10届华语音乐传媒大奖 百家传媒年度最受瞩目专辑——王菀之《On Wings Of Time》
+                    p 华语金曲奖2010十大华语唱片粤语十大——王菀之《On Wings Of Time》
+                    p 2010 CASH金帆音乐奖——最佳合唱演绎《高八度》王菀之/张敬轩
+                    p 2010 CASH金帆音乐奖——最佳女歌手演绎《小团圆》王菀之
+                    p 2011年
+                    p 2011 劲歌金曲优秀选第一回 - 得奖歌曲《最好的...》
+                    p 2011 劲歌金曲优秀选第二回 - 得奖歌曲《末日》
+                    p 2011 劲歌金曲优秀选第三回 - 得奖歌曲《水百合》
+                    p 2011 TVB8金曲榜颁奖典礼“TVB8金曲榜金曲奖”《错过了地址》
+                    p 2011 TVB8金曲榜颁奖典礼“全球观众最爱粤语歌曲奖”《末日》
+                    p 2011 TVB8金曲榜颁奖典礼“TVB8金曲榜最佳唱作歌手奖”
+                    p Yahoo! 搜寻人气大奖2011“搜寻十大人气歌曲2011”《末日》
+                    p Yahoo! 搜寻人气大奖2011“搜寻人气演唱会2011”《水百合演唱会》
+                    p 新城劲爆颁奖礼2011 - 新城劲爆歌曲《末日》
+                    p 新城劲爆颁奖礼2011 - 新城劲爆亚洲创作歌手大奖
+                    p 2011年度叱咤乐坛流行榜颁奖典礼 - 专业推介叱咤十大 《末日》
+                    p 2011年度叱咤乐坛流行榜颁奖典礼 - 叱咤乐坛唱作人 铜奖
+                    p SINA Music乐坛民意指数颁奖礼2011 - SINA Music 最高收听率二十大歌曲《末日》
+                    p SINA Music乐坛民意指数颁奖礼2011 - SINA MUSIC 创作歌手大奖
+                    p SINA Music乐坛民意指数颁奖礼2011 - 我最喜爱演唱会《水．百合王菀之2011演唱会》
+                    p 第三十四届十大中文金曲颁奖典礼 - 十大中文金曲《末日》
+                    p 2011年度十大劲歌金曲颁奖典礼 - 十大劲歌金曲《水百合》
+                    p 2011年度十大劲歌金曲颁奖典礼 - 最受欢迎唱作歌星 银奖
+                    p 2011年度十大劲歌金曲颁奖典礼 - 亚太区最受欢迎香港女歌星
+                    p IFPI香港唱片销量大奖2011 - “十大销量广东唱片”《The Songbird Anthology》
+                    p 2011年度雪碧榜音乐颁奖典礼 - 最受欢迎女歌手(香港区)
+                    p 2011年度雪碧榜音乐颁奖典礼 - 最优秀创作歌手大奖(香港区)
+                    p 2012年
+                    p 2012 劲歌金曲优秀选第一回 - 得奖歌曲《下次爱你》
+                    p 2012 劲歌金曲优秀选第三回 - 得奖歌曲《留白》
+                    p 新城劲爆颁奖礼2012 - 新城劲爆歌曲《留白》
+                    p 新城劲爆颁奖礼2012 - 新城劲爆亚洲创作歌手大奖
+                    p 全港民意流行音乐颁奖礼2012 - 最受欢迎唱作歌手 银奖
+                    p 2012年度叱咤乐坛流行榜颁奖典礼 - 叱咤十大 第三位《留白》
+                    p 2012年度十大劲歌金曲颁奖典礼 - 十大劲歌金曲《留白》
+                    p 2012年度十大劲歌金曲颁奖典礼 - 最受欢迎合唱歌曲奖 金奖《生命之花》
+                    p 2012年度十大劲歌金曲颁奖典礼 - 金曲金奖《留白》
+                    p 2013年
+                    p 第35届十大中文金曲 - 优秀流行歌手大奖
+                    p 第35届十大中文金曲 - 十大中文金曲《留白》
+                i.popup_data_detail__arrow
