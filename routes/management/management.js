@@ -32,7 +32,11 @@ router.get('/news/:id', (req, res) => {
 });
 
 router.get('/artist', (req, res) => {
-    res.render('management/artist', {path: req.url});
+    const pagesize = 15;
+    db.artistPaging({index: 1, pagesize}, (artists, count) => {
+        const pagecount = Math.ceil(count/pagesize);
+        res.render('management/artist', {path: req.url, artists, pagecount});
+    });
 });
 
 router.get('/artist/:id', (req, res) => {

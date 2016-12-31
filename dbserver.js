@@ -64,12 +64,39 @@ const dbserver = {
             });
         });
     },
-    artists: (callback) => {
+    artistDelete: (id, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('artist');
+            const _id = ObjectId(id);
+            collection.deleteOne({_id}, (err, r) => {
+                callback(r);
+            });
+        });
+    },
+    artist: (callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('artist');
             collection.find({}).toArray((err, docs) => {
                 callback(docs);
             });
+        });
+    },
+    artistPaging: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('artist');
+            const {index, pagesize} = options;
+            collection.count((countErr, count) => {
+                collection.find({}, {
+                    _id: true,
+                    name: true,
+                    date: true,
+                    description: true,
+                    icon: true
+                }).sort({date: -1}).skip((index - 1) * pagesize).limit(pagesize).toArray((err, docs) => {
+                    callback(docs, count);
+                });
+            });
+
         });
     }
 };

@@ -10,15 +10,18 @@ block content
                 table.table.table-striped
                     thead
                         tr
-                            th #
-                            th 新闻标题
-                            th 发布时间
-                            th 操作
+                            th.col-md-2 #
+                            th.col-md-5 新闻标题
+                            th.col-md-4 发布时间
+                            th.col-md-1 操作
                     tbody#news_list
                         each item in news
-                            - item.date = new Date(item.date)
+                            -
+                                item.date = item.date ? new Date(item.date) : new Date()
+                                var tmp = '' + item._id
+                                tmp = tmp.substring(16)
                             tr
-                                td= item._id
+                                td= tmp
                                 td
                                     a(href='/management/news/' + item._id)= item.title
                                 td= item.date.toLocaleDateString() + ' ' + item.date.toLocaleTimeString()
@@ -72,11 +75,11 @@ block footer
                         var list = [];
                         for (var i in res) {
                             var item = res[i];
-                            item.date = new Date(item.date)
+                            item.date = item.date ? new Date(item.date) : new Date()
                             var listItem = [];
                             listItem.push('<tr>');
                             listItem.push('<td>');
-                            listItem.push(item._id);
+                            listItem.push(item._id.substring(16));
                             listItem.push('</td>');
                             listItem.push('<td>');
                             listItem.push('<a href="/management/news/' + item._id + '">');
@@ -107,7 +110,7 @@ block footer
                 var operation = $target.attr('data-operation');
                 if (operation === 'remove') {
                     var _id = $target.attr('data-id');
-                    $modal_id.text(_id);
+                    $modal_id.text(_id.substring(16));
                     $myModal._id = _id;
                     $myModal.modal('show');
                 }
