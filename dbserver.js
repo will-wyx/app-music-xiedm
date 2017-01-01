@@ -35,6 +35,15 @@ const dbserver = {
             });
         });
     },
+    artistOne: (id, callback) => {
+        const _id = ObjectId(id);
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('artist');
+            collection.findOne({_id}, (err, docs) => {
+                callback(docs);
+            });
+        });
+    },
     newsAdd: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('news');

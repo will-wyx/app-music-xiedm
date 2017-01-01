@@ -11,8 +11,10 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     // res.send('建设中...');
     const id = req.params.id;
-    const bkurl = `/images/upload/${id}.jpg`;
-    res.render('artist', {bkurl});
+    db.artistOne(id, (artist) => {
+        console.log(artist);
+        res.render('artist', {path: 'artists', artist});
+    });
 });
 
 module.exports = router;

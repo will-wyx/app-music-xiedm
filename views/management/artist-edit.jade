@@ -1,4 +1,6 @@
 extends layout
+block head
+    link(rel='stylesheet', href='/bootstrap-fileinput/css/fileinput.min.css')
 block content
     .container
         .panel.panel-default
@@ -6,9 +8,9 @@ block content
             .panel-body
                 form.form-horizontal(role='form')
                     .form-group
-                        label.col-sm-2.control-label(for='inputEmail3') 名称
+                        label.col-sm-2.control-label(for='inputName') 名称
                         .col-sm-10
-                            input#inputEmail3.form-control(type='text', placeholder='名称')
+                            input#inputName.form-control(type='text', placeholder='名称')
                     .form-group
                         label.col-sm-2.control-label 类型
                         .col-sm-10
@@ -19,9 +21,72 @@ block content
                                 input(type='radio', value='artist', name='type')
                                 |  艺人
                     .form-group
-                        label.col-sm-2.control-label(for='inputPassword3') pw
+                        label.col-sm-2.control-label(for='inputInfo') 基本信息
                         .col-sm-10
-                            input#inputPassword3.form-control(type='password', placeholder='Password')
+                            textarea#inputInfo.form-control(rows='3')
+                    .form-group
+                        label.col-sm-2.control-label(for='inputDescription') 简介
+                        .col-sm-10
+                            textarea#inputDescription.form-control(rows='3')
+                    .form-group
+                        label.col-sm-2.control-label(for='inputIcon') 肖像
+                        .col-sm-10
+                            input#inputIcon.file(type='file', data-preview-file-type='text', data-allowed-file-extensions='["jpg", "png"]')
+                    .form-group
+                        label.col-sm-2.control-label 音乐
+                        .col-sm-10
+                            .panel.panel-default
+                                table.table.table-striped
+                                    thead
+                                        tr
+                                            th #
+                                            th A
+                                            th B
+                                            th C
+                                    tbody
+                                        tr
+                                            td 0
+                                            td 1
+                                            td 2
+                                            td 3
+                                        tr
+                                            td 0
+                                            td 1
+                                            td 2
+                                            td 3
+                                        tr
+                                            td 0
+                                            td 1
+                                            td 2
+                                            td 3
+                    .form-group
+                        label.col-sm-2.control-label 视频
+                        .col-sm-10
+                            .panel.panel-default
+                                table.table.table-striped
+                                    thead
+                                        tr
+                                            th #
+                                            th A
+                                            th B
+                                            th C
+                                    tbody
+                                        tr
+                                            td 0
+                                            td 1
+                                            td 2
+                                            td 3
+                                        tr
+                                            td 0
+                                            td 1
+                                            td 2
+                                            td 3
+                                        tr
+                                            td 0
+                                            td 1
+                                            td 2
+                                            td 3
+
                     .form-group
                         .col-sm-offset-2.col-sm-10
                             .checkbox
@@ -31,3 +96,13 @@ block content
                     .form-group
                         .col-sm-offset-2.col-sm-10
                             button.btn.btn-default(type='submit') Sign in
+block footer
+    script(src='/bootstrap-fileinput/js/plugins/canvas-to-blob.js')
+    script(src='/bootstrap-fileinput/js/plugins/sortable.js')
+    script(src='/bootstrap-fileinput/js/plugins/purify.js')
+    script(src='/bootstrap-fileinput/js/fileinput.js')
+    script(src='/bootstrap-fileinput/js/locales/zh.js')
+    script.
+        $(function () {
+            $('#inputIcon').fileinput({language: 'zh'});
+        });

@@ -6,12 +6,12 @@ html
         .main
             .mod_data
                 span.data__cover
-                    a.js_goto_tab.js_none_index(data-stat='y_new.singer.thistab.singer_pic', data-tab='index', href='#')
-                        img.data__photo(src='//y.gtimg.cn/music/photo_new/T001R300x300M000003HxGOW0RjaSR.jpg?max_age=2592000', alt='王菀之')
+                    a(href='#')
+                        img.data__photo(src=artist.icon, alt=artist.name)
                 .data__cont
                     .data__name
                         h1.data__name_txt
-                            a(data-stat='y_new.singer.thistab.singer_name', title='王菀之', data-tab='index', href='#') 王菀之
+                            a(title=artist.name, href='#')= artist.name
                     #singer_desc.data__desc
                         #short_desc.data__desc_txt
                             | 外文名：Ivana

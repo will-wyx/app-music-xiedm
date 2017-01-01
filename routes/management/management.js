@@ -46,7 +46,7 @@ router.get('/artist/:id', (req, res) => {
     //         res.render('management/artist-edit', {path: req.url, list});
     //     });
     // } else {
-        res.render('management/artist-edit', {path: req.url, list: {}});
+        res.render('management/artist-edit', {path: '/artist', list: {}});
     // }
 });
 
