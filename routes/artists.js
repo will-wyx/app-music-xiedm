@@ -9,10 +9,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    // res.send('建设中...');
-    const id = req.params.id;
-    db.artistOne(id, (artist) => {
-        console.log(artist);
+    const _id = db.ObjectId(req.params.id);
+    db.artistOne(_id, (artist) => {
         res.render('artist', {path: 'artists', artist});
     });
 });

@@ -35,8 +35,7 @@ const dbserver = {
             });
         });
     },
-    artistOne: (id, callback) => {
-        const _id = ObjectId(id);
+    artistOne: (_id, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('artist');
             collection.findOne({_id}, (err, docs) => {
@@ -44,6 +43,15 @@ const dbserver = {
             });
         });
     },
+    mediaOne: (_id, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('media');
+            collection.findOne({_id}, (err, docs) => {
+                callback(docs);
+            });
+        });
+    },
+
     newsAdd: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('news');
@@ -54,6 +62,27 @@ const dbserver = {
             });
         });
     },
+    artistAdd: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('artist');
+            delete options.id;
+            options.date = new Date();
+            collection.insertOne(options, (err, r) => {
+                callback(r);
+            });
+        });
+    },
+    mediaAdd: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('media');
+            delete options.id;
+            options.date = new Date();
+            collection.insertOne(options, (err, r) => {
+                callback(r);
+            });
+        });
+    },
+
     newsModify: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('news');
@@ -101,6 +130,24 @@ const dbserver = {
                     date: true,
                     description: true,
                     icon: true
+                }).sort({date: -1}).skip((index - 1) * pagesize).limit(pagesize).toArray((err, docs) => {
+                    callback(docs, count);
+                });
+            });
+
+        });
+    },
+    mediaPaging: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('media');
+            const {index, pagesize} = options;
+            collection.count((countErr, count) => {
+                collection.find({}, {
+                    _id: true,
+                    title: true,
+                    date: true,
+                    timeLength: true,
+                    path: true
                 }).sort({date: -1}).skip((index - 1) * pagesize).limit(pagesize).toArray((err, docs) => {
                     callback(docs, count);
                 });

@@ -10,27 +10,20 @@ block content
                     .form-group
                         label.col-sm-2.control-label(for='inputName') 名称
                         .col-sm-10
-                            input#inputName.form-control(type='text', placeholder='名称')
-                    .form-group
-                        label.col-sm-2.control-label 类型
-                        .col-sm-10
-                            label.radio-inline
-                                input(type='radio', value='label', checked='checked', name='type')
-                                |  厂牌
-                            label.radio-inline
-                                input(type='radio', value='artist', name='type')
-                                |  艺人
+                            input#inputName.form-control(type='text', placeholder='名称', value= artist.name)
                     .form-group
                         label.col-sm-2.control-label(for='inputInfo') 基本信息
                         .col-sm-10
-                            textarea#inputInfo.form-control(rows='3')
+                            textarea#inputInfo.form-control(rows='3')= artist.description
                     .form-group
                         label.col-sm-2.control-label(for='inputDescription') 简介
                         .col-sm-10
-                            textarea#inputDescription.form-control(rows='3')
+                            - artist.infos = artist.infos ? artist.infos.join('\n') : []
+                            textarea#inputDescription.form-control(rows='5')= artist.infos
                     .form-group
                         label.col-sm-2.control-label(for='inputIcon') 肖像
                         .col-sm-10
+                            img(src= artist.icon)
                             input#inputIcon.file(type='file', data-preview-file-type='text', data-allowed-file-extensions='["jpg", "png"]')
                     .form-group
                         label.col-sm-2.control-label 音乐
@@ -86,16 +79,9 @@ block content
                                             td 1
                                             td 2
                                             td 3
-
                     .form-group
-                        .col-sm-offset-2.col-sm-10
-                            .checkbox
-                                label
-                                    input(type='checkbox')
-                                    |  Remember me
-                    .form-group
-                        .col-sm-offset-2.col-sm-10
-                            button.btn.btn-default(type='submit') Sign in
+                        .col-sm-offset-10.col-sm-2
+                            button#btn_submit.btn.btn-default(type='button').btn-block 提交
 block footer
     script(src='/bootstrap-fileinput/js/plugins/canvas-to-blob.js')
     script(src='/bootstrap-fileinput/js/plugins/sortable.js')

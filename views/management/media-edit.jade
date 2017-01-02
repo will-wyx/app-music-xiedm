@@ -1,0 +1,36 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/bootstrap-fileinput/css/fileinput.min.css')
+block content
+    .container
+        .panel.panel-default
+            .panel-heading 编辑媒体文件
+            .panel-body
+                form.form-horizontal(role='form')
+                    .form-group
+                        label.col-sm-2.control-label(for='inputName') 名称
+                        .col-sm-10
+                            input#inputName.form-control(type='text', placeholder='名称', value= media.title)
+                    .form-group
+                        label.col-sm-2.control-label(for='inputInfo') 时长
+                        .col-sm-10
+                            input#inputInfo.form-control(type='text', value= media.timeLength)
+                    .form-group
+                        label.col-sm-2.control-label(for='inputIcon') 路径
+                        .col-sm-10
+                            - if (media.path)
+                                label.control-label= media.path
+                            input#inputIcon.file(type='file', data-preview-file-type='text', data-allowed-file-extensions='["mp3"]')
+                    .form-group
+                        .col-sm-offset-10.col-sm-2
+                            button#btn_submit.btn.btn-default(type='button').btn-block 提交
+block footer
+    script(src='/bootstrap-fileinput/js/plugins/canvas-to-blob.js')
+    script(src='/bootstrap-fileinput/js/plugins/sortable.js')
+    script(src='/bootstrap-fileinput/js/plugins/purify.js')
+    script(src='/bootstrap-fileinput/js/fileinput.js')
+    script(src='/bootstrap-fileinput/js/locales/zh.js')
+    script.
+        $(function () {
+            $('#inputIcon').fileinput({language: 'zh'});
+        });

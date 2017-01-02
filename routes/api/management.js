@@ -19,20 +19,13 @@ router.get('/artist', (req, res) => {
     });
 });
 
-router.post('/news-submit', (req, res) => {
-    const id = req.body.id;
-    if (id.length > 0)
-        db.newsModify(req.body, (r) => {
-            res.send('ok');
-        });
-    else
-        db.newsAdd(req.body, () => {
-            res.send('ok');
-        });
-});
-
 router.post('/news', (req, res) => {
     db.newsAdd(req.body, (r) => {
+        res.send('ok');
+    });
+});
+router.post('/artist', (req, res) => {
+    db.artistAdd(req.body, (r) => {
         res.send('ok');
     });
 });

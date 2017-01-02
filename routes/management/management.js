@@ -20,6 +20,22 @@ router.get('/news', (req, res) => {
     });
 });
 
+router.get('/artist', (req, res) => {
+    const pagesize = 15;
+    db.artistPaging({index: 1, pagesize}, (artists, count) => {
+        const pagecount = Math.ceil(count/pagesize);
+        res.render('management/artist', {path: req.url, artists, pagecount});
+    });
+});
+
+router.get('/media', (req, res) => {
+    const pagesize = 15;
+    db.mediaPaging({index: 1, pagesize}, (medias, count) => {
+        const pagecount = Math.ceil(count/pagesize);
+        res.render('management/media', {path: req.url, medias, pagecount});
+    });
+});
+
 router.get('/news/:id', (req, res) => {
     if (req.params.id !== 'add') {
         const _id = db.ObjectId(req.params.id);
@@ -31,27 +47,26 @@ router.get('/news/:id', (req, res) => {
     }
 });
 
-router.get('/artist', (req, res) => {
-    const pagesize = 15;
-    db.artistPaging({index: 1, pagesize}, (artists, count) => {
-        const pagecount = Math.ceil(count/pagesize);
-        res.render('management/artist', {path: req.url, artists, pagecount});
-    });
-});
-
 router.get('/artist/:id', (req, res) => {
-    // if (req.params.id !== 'add') {
-    //     const _id = db.ObjectId(req.params.id);
-    //     db.artistOne({_id}, (list) => {
-    //         res.render('management/artist-edit', {path: req.url, list});
-    //     });
-    // } else {
-        res.render('management/artist-edit', {path: '/artist', list: {}});
-    // }
+    if (req.params.id !== 'add') {
+        const _id = db.ObjectId(req.params.id);
+        db.artistOne(_id, (artist) => {
+            res.render('management/artist-edit', {path: '/artist', artist});
+        });
+    } else {
+        res.render('management/artist-edit', {path: '/artist', artist: {}});
+    }
 });
 
-router.get('/media', (req, res) => {
-    res.render('management/media', {path: req.url});
+router.get('/media/:id', (req, res) => {
+    if (req.params.id !== 'add') {
+        const _id = db.ObjectId(req.params.id);
+        db.mediaOne(_id, (media) => {
+            res.render('management/media-edit', {path: '/media', media});
+        });
+    } else {
+        res.render('management/media-edit', {path: '/media', media: {}});
+    }
 });
 router.get('/statistics', (req, res) => {
     res.render('management/news', {path: req.url});

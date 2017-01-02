@@ -2,5 +2,35 @@ extends layout
 block head
 block content
     div.container
-        h1 Media
+        .panel.panel-default
+            .panel-heading 艺人/厂牌管理
+            .panel-body
+                .col-sm-offset-11.col-sm-1
+                    a.btn.btn-default(href='/management/media/add') 新增
+                table.table.table-striped
+                    thead
+                        tr
+                            th.col-md-1 #
+                            th.col-md-2 名称
+                            th.col-md-2 时长
+                            th.col-md-3 路径
+                            th.col-md-1 操作
+                    tbody#artist_list
+                        each item in medias
+                            -
+                                var tmp = '' + item._id
+                                tmp = tmp.substring(16)
+                            tr
+                                td= tmp
+                                td
+                                    a(href='/management/media/' + item._id)= item.title
+                                td= item.timeLength
+                                td= item.path
+                                td
+                                    a(href='javascript:;', data-id= '' + item._id, data-operation='remove') 删除
+                nav
+                    ul.pagination
+                        - for(var i = 0; i < pagecount; ++i)
+                        li.item
+                            a(href='#' + (i + 1))= (i + 1)
 block footer
