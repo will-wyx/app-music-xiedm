@@ -11,6 +11,9 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const _id = db.ObjectId(req.params.id);
     db.artistOne(_id, (artist) => {
+        artist.infos = artist.infos || [];
+        artist.audios = artist.audios || [];
+        artist.videos = artist.videos || [];
         res.render('artist', {path: 'artists', artist});
     });
 });

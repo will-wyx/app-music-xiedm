@@ -2076,7 +2076,7 @@ body:last-child .popup_data_detail__arrow {
 
 .songlist__header_name, .songlist__songname {
     float: left;
-    width: 47.685185%;
+    width: 35%;
     position: relative
 }
 
