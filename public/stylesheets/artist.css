@@ -108,7 +108,8 @@ body ::-webkit-scrollbar-thumb {
 
 .mod_btn {
     border: 1px solid #c9c9c9;
-    color: #333
+    color: #333;
+    cursor: pointer;
 }
 
 .mod_btn--hover, .mod_btn:hover {
@@ -161,6 +162,13 @@ body ::-webkit-scrollbar-thumb {
     width: 14px;
     height: 14px;
     background-position: -40px -80px;
+    vertical-align: -2px
+}
+
+.mod_btn__icon_share {
+    width: 16px;
+    height: 16px;
+    background-position: -100px -180px;
     vertical-align: -2px
 }
 
@@ -343,7 +351,7 @@ body ::-webkit-scrollbar-thumb {
     border-color: #279c63
 }
 
-.mod_btn__icon_add, .mod_btn__icon_batch, .mod_btn__icon_copy, .mod_btn__icon_delete, .mod_btn__icon_down, .mod_btn__icon_input, .mod_btn__icon_less, .mod_btn__icon_like, .mod_btn__icon_manage, .mod_btn__icon_menu, .mod_btn__icon_more, .mod_btn__icon_new, .mod_btn__icon_no, .mod_btn__icon_play, .mod_btn__icon_qr, .mod_btn__icon_upload, .mod_btn__icon_yes, .mod_btn_green__icon_add, .mod_btn_green__icon_clear, .mod_btn_green__icon_delete, .mod_btn_green__icon_down, .mod_btn_green__icon_like, .mod_btn_green__icon_more, .mod_btn_green__icon_play, .mod_btn_green__icon_radio {
+.mod_btn__icon_add, .mod_btn__icon_batch, .mod_btn__icon_copy, .mod_btn__icon_delete, .mod_btn__icon_down, .mod_btn__icon_input, .mod_btn__icon_less, .mod_btn__icon_like, .mod_btn__icon_manage, .mod_btn__icon_menu, .mod_btn__icon_more, .mod_btn__icon_new, .mod_btn__icon_no, .mod_btn__icon_play, .mod_btn__icon_qr, .mod_btn__icon_upload, .mod_btn__icon_yes, .mod_btn_green__icon_add, .mod_btn_green__icon_clear, .mod_btn_green__icon_delete, .mod_btn_green__icon_down, .mod_btn_green__icon_like, .mod_btn_green__icon_more, .mod_btn_green__icon_play, .mod_btn_green__icon_radio, .mod_btn__icon_share {
     display: inline-block;
     margin-right: 6px;
     background-image: url(/images/icon_sprite.png);
@@ -691,7 +699,8 @@ body {
 }
 
 .main {
-    z-index: 2
+    z-index: 2;
+    margin-bottom: 120px
 }
 
 .mod_header {
@@ -2058,7 +2067,7 @@ body:last-child .popup_data_detail__arrow {
     background-color: #fbfbfd
 }
 
-.songlist__album, .songlist__artist, .songlist__number, .songlist__other, .songlist__songname, .songlist__time {
+.songlist__album, .songlist__artist, .songlist__number, .songlist__other, .songlist__songname, .songlist__time, .songlist__addr, .songlist__date {
     line-height: 50px;
     height: 50px;
     overflow: hidden;
@@ -2091,6 +2100,11 @@ body:last-child .popup_data_detail__arrow {
     top: 0;
     right: 38px;
     width: 50px
+}
+
+.songlist__header_addr, .songlist__addr {
+    float: left;
+    width: 23.611111%
 }
 
 .songlist__header_other, .songlist__other {
@@ -2128,11 +2142,11 @@ body:last-child .popup_data_detail__arrow {
 .songlist__item .mod_list_menu {
     position: absolute;
     right: -10px;
-    right: -9999px \9;
     top: 50%;
     overflow: hidden;
-    opacity: 0;
-    pointer-events: none
+    opacity: 1;
+    pointer-events: inherit;
+    margin-top: -18px;
 }
 
 .songlist__item--current .mod_list_menu, .songlist__item:hover .mod_list_menu {
@@ -2847,4 +2861,32 @@ body:last-child .popup_data_detail__arrow {
 
 .mod_part_detail .mod_songlist {
     padding-bottom: 40px
+}
+
+.media-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.media-player .jp-audio {
+    width: 100%;
+    border: none;
+    /*background-color: #000;*/
+}
+
+.media-player .jp-interface {
+    width: 980px;
+    margin: 0 auto;
+}
+
+.media-player .jp-audio .jp-type-single .jp-progress {
+    width: 680px;
+}
+
+.media-player .jp-volume-controls {
+    width: 92px;
+    right: 0;
+    left: auto;
 }
