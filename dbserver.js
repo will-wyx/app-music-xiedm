@@ -154,6 +154,31 @@ const dbserver = {
             });
 
         });
+    },
+    audioOne: (_id, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('media');
+            collection.findOne({_id, type: 'audio'}, (err, docs) => {
+                callback(docs);
+            });
+        });
+    },
+    // layout
+    home: (callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('layout');
+            collection.findOne({title: 'home'}, (err, docs) => {
+                callback(docs);
+            });
+        });
+    },
+    generic: (title, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('layout');
+            collection.findOne({title}, (err, docs) => {
+                callback(docs);
+            });
+        });
     }
 };
 

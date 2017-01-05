@@ -1329,9 +1329,9 @@ body {
     background-position: 0 0
 }
 
-.list_menu__icon_pause {
-    background-position: 0 -200px
-}
+/*li.active .list_menu__icon_play {*/
+    /*background-position: 0 -200px*/
+/*}*/
 
 .list_menu__icon_share {
     background-position: 0 -40px
@@ -1349,9 +1349,9 @@ body {
     background-position: -40px 0
 }
 
-.list_menu__item:hover .list_menu__icon_pause {
-    background-position: -40px -200px
-}
+/*li.active .list_menu__item:hover .list_menu__icon_play {*/
+    /*background-position: -40px -200px*/
+/*}*/
 
 .list_menu__item:hover .list_menu__icon_share {
     background-position: -40px -40px
@@ -2164,6 +2164,10 @@ body:last-child .popup_data_detail__arrow {
     .songlist__item--current .songlist__songname_txt, .songlist__item:hover .songlist__songname_txt {
         max-width: 36%
     }
+}
+
+li.active .songlist__songname_txt {
+    color: #31c27c;
 }
 
 .songlist__item--disable .songlist__songname_txt a {

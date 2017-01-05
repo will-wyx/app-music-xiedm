@@ -6,15 +6,18 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 const index = require('./routes/index');
-const contact = require('./routes/contact');
-const service = require('./routes/service');
+// const contact = require('./routes/contact');
+// const service = require('./routes/service');
+const generic = require('./routes/generic');
+
 const artists = require('./routes/artists');
 const labels = require('./routes/labels');
 const news = require('./routes/news');
-const reserve = require('./routes/reserve');
+// const reserve = require('./routes/reserve');
 
 const management = require('./routes/management/management');
 const managementapi = require('./routes/api/management');
+const audio = require('./routes/api/audio');
 
 const app = express();
 
@@ -31,15 +34,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/service', service);
-app.use('/contact', contact);
+app.use('/news', news);
 app.use('/artists', artists);
 app.use('/labels', labels);
-app.use('/news', news);
-app.use('/reserve', reserve);
+app.use('/service', generic);
+app.use('/reserve', generic);
+app.use('/contact', generic);
 
 app.use('/management', management);
 app.use('/api/management', managementapi);
+app.use('/api/audio', audio);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

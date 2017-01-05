@@ -9,34 +9,16 @@ block content
     include ./dialog.jade
     div.banner
         ul
-            li
-                a(href='/news')
-                    img(src='/images/upload/2.jpg')
-            li
-                a(href='/news')
-                    img(src='/images/upload/4.jpg')
-            li
-                a(href='/news')
-                    img(src='/images/upload/5.jpg')
-            li
-                a(href='/news')
-                    img(src='/images/upload/1.jpg')
-            li
-                a(href='/news')
-                    img(src='/images/upload/0.jpg')
-
+            each item in home.slider
+                li
+                    a(href= item.href)
+                        img(src= item.src)
     div.container
         div.content
-            div.content-item(style='background-image:url("/images/upload/content-item-bg.jpg");background-size: 100%;')
-                img.item-img(src='/images/upload/1200-1.png')
-                div.item-link
-                    a#btn_main.btn(href='javascript:;') ClickMe
-            div.content-item(style='background-image:url("/images/upload/content-item-bg.jpg");background-size: 100%;')
-                img.item-img(src='/images/upload/auto-2.png')
-                div.item-link
-                    a.btn.dark(href='javascript:;') ClickMe
-            div.content-item
-                img.item-img.full(src='/images/upload/auto-1.jpg')
+            each item in home.banners
+                div.content-item
+                    a(href= item.href)
+                        img.item-img.full(src= item.src)
     <!--[if lt IE 9]>
     script(src="/javascripts/css3-mediaqueries.js")
     <![endif]-->

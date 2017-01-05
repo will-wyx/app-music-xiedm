@@ -1,0 +1,11 @@
+extends layout
+
+block head
+    link(rel='stylesheet', href='/stylesheets/content.css')
+block content
+    div.container
+        div.content
+            each item in generic.banners
+                div.content-item
+                    a(href= item.href)
+                        img.item-img.full(src= item.src)

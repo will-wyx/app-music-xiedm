@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const db = require('../dbserver');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -7,7 +8,11 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/home', (req, res) => {
-    res.render('index', {path: 'home'});
+    db.home((home) => {
+        home.slider = home.slider || [];
+        home.banners = home.banners || [];
+        res.render('index', {path: 'home', home});
+    });
 });
 
 module.exports = router;

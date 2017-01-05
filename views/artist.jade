@@ -20,11 +20,11 @@ html
                         li.data_statistic__item
                             a(href='#')
                                 span.data_statistic__tit 单曲
-                                strong.data_statistic__number 2
+                                strong.data_statistic__number= artist.audios.length
                         li.data_statistic__item.data_statistic__item--last
                             a(href='#')
                                 span.data_statistic__tit 视频
-                                strong.data_statistic__number 3
+                                strong.data_statistic__number= artist.videos.length
                     .data__actions(role='toolbar')
                         a.mod_btn_green.js_singer_radio(href='#')
                             i.mod_btn_green__icon_play
@@ -41,16 +41,15 @@ html
                         ul.songlist__header
                             li.songlist__header_name 歌曲
                             li.songlist__header_time 时长
-                        ul.songlist__list
+                        ul.songlist__list#song_list
                             -
                                 var index = 1;
                             each item in artist.audios
-                                li
+                                li(data-id= '' + item.id)
                                     .songlist__item
                                         .songlist__number= index++
                                         .songlist__songname
-                                            span.songlist__songname_txt
-                                                a.js_song(href='#', title= item.title)= item.title
+                                            span.songlist__songname_txt= item.title
                                             i.songlist__icon.songlist__icon_exclusive
                                             .mod_list_menu
                                                 a.list_menu__item.list_menu__play.js_play(href='javascript:;', title='播放')
@@ -129,14 +128,8 @@ html
                         $popup.hide();
                     }
                 });
-
-                $('#jp_jplayer').jPlayer({
-                    ready: function (event) {
-                        $(this).jPlayer('setMedia', {
-                            title: '气球',
-                            mp3: '/medias/5868e3fee6fb40ce9010e65e.mp3'
-                        })
-                    },
+                var $jplayer = $('#jp_jplayer');
+                $jplayer.jPlayer({
                     swfPath: "/jplayer",
                     supplied: "mp3",
                     wmode: "window",
@@ -146,5 +139,36 @@ html
                     keyEnabled: true,
                     remainingDuration: true,
                     toggleDuration: true
+                });
+
+                var $song_list = $('#song_list');
+                $song_list.on('click', function(e) {
+                    var $target = $(e.target);
+                    var $play = $target.parents('a.js_play');
+                    if($play.length) {
+                        var $li = $play.parents('li[data-id]');
+                        if($li.hasClass('active')) {
+                            //$jplayer.jPlayer('pause');
+                            //$li.removeClass('active');
+                        } else {
+                            var id = $li.attr('data-id');
+                            $.ajax({
+                                url: '/api/audio/' + id,
+                                success: function(r) {
+                                    if(r) {
+                                        $jplayer.jPlayer('setMedia', {title: r.title, mp3: r.path}).jPlayer('play');
+                                        $li.addClass('active').siblings().removeClass('active')
+                                    }
+                                }
+                            })
+                        }
+                    }
+                });
+
+                $('.js_singer_radio').on('click', function() {
+
+                    if(!$song_list.find('.active')) {
+
+                    }
                 });
             })
