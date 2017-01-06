@@ -28,9 +28,7 @@ html
                             a(href='/management/artist') 艺人/厂牌
                         li(class="#{path=='/media'?'active':''}")
                             a(href='/management/media') 音乐/视频
-                        li(class="#{path=='/statistics'?'active':''}")
-                            a(href='/management/statistics') 统计查询
-                        li.dropdown
+                        li(class="dropdown #{path=='/layout'?'active':''}")
                             a.dropdown-toggle(href='#', data-toggle='dropdown')
                                 | 版面管理
                                 span.caret

@@ -1,0 +1,77 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/bootstrap-fileinput/css/fileinput.min.css')
+block content
+    #photoModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='photoModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4.modal-title 上传
+                .modal-body
+                    input#inputPhoto.file(type='file', data-preview-file-type='text', data-allowed-file-extensions='["jpg", "png"]')
+    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog.modal-sm
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4#myModalLabel.modal-title 提示
+                .modal-body
+                    p 确定删除
+                        span#modal_id
+                        | 吗
+                .modal-footer
+                    button#btn_ok.btn.btn-primary(type='button') 确定
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
+    .container#container
+        .panel.panel-default
+            .panel-heading 布局
+                a.pull-right.btn.btn-link.btn-xs 新增
+            table.table.table-striped
+                thead
+                    tr
+                        th.col-md-2 #
+                        th.col-md-4 图片
+                        th.col-md-4 链接
+                        th.col-md-2 编辑
+                tbody
+                    each item in generic.banners
+                        tr
+                            td
+                                a.btn.btn-link.btn-lg(href='javascript:;')
+                                    span.glyphicon.glyphicon-circle-arrow-up
+                                a.btn.btn-link.btn-lg(href='javascript:;')
+                                    span.glyphicon.glyphicon-circle-arrow-down
+                            td
+                                .row
+                                    .col-md-12
+                                        a.js-img.thumbnail(href='javascript:;')
+                                            img(style='width: 100%; display: block;', src=item.src, data-holder-rendered='true')
+                            td
+                                input.form-control(type='url', value=item.href)
+                            td
+                                a.js-remove.btn.btn-link.btn-xs(href='javascript:;') 删除
+block footer
+    script(src='/bootstrap-fileinput/js/plugins/canvas-to-blob.js')
+    script(src='/bootstrap-fileinput/js/plugins/sortable.js')
+    script(src='/bootstrap-fileinput/js/plugins/purify.js')
+    script(src='/bootstrap-fileinput/js/fileinput.js')
+    script(src='/bootstrap-fileinput/js/locales/zh.js')
+    script.
+        $(function () {
+            var $photoModal = $('#photoModal');
+            var $myModal = $('#myModal');
+            var $container = $('#container');
+            $container.on('click', function (e) {
+                var $target = $(e.target);
+                if ($target.parents('.js-img').length) {
+                    $photoModal.modal('show');
+                } else if($target.filter('.js-remove')) {
+                    $myModal.modal('show');
+                }
+            });
+        });

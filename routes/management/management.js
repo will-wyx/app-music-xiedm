@@ -69,9 +69,20 @@ router.get('/media/:id', (req, res) => {
     }
 });
 router.get('/statistics', (req, res) => {
-    res.render('management/news', {path: req.url});
+    res.render('management/lay', {path: req.url});
+});
+router.get('/layout/index', (req, res) => {
+    db.home((home) => {
+        home.slider = home.slider || [];
+        home.banners = home.banners || [];
+        res.render('management/layhome', {path: '/layout', home});
+    });
 });
 router.get('/layout/:path', (req, res) => {
-    res.send(req.url);
+    const title = req.params.path;
+    db.generic(title, (generic) => {
+        generic.banners = generic.banners || [];
+        res.render('management/laygeneric', {path: '/layout', generic});
+    });
 });
 module.exports = router;
