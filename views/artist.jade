@@ -3,7 +3,9 @@ html
     head
         link(rel='stylesheet', href='/stylesheets/artist.css')
         link(rel='stylesheet', href='/jplayer/jplayer.blue.monday.css')
+        link(rel='stylesheet', href='/stylesheets/header.css')
     body
+        include ./header/header.jade
         .main
             .mod_data
                 span.data__cover
@@ -21,9 +23,13 @@ html
                             a(href='#')
                                 span.data_statistic__tit 单曲
                                 strong.data_statistic__number= artist.audios.length
+                        li.data_statistic__item
+                            a(href='#')
+                                span.data_statistic__tit 专辑
+                                strong.data_statistic__number 0
                         li.data_statistic__item.data_statistic__item--last
                             a(href='#')
-                                span.data_statistic__tit 视频
+                                span.data_statistic__tit MV
                                 strong.data_statistic__number= artist.videos.length
                     .data__actions(role='toolbar')
                         a.mod_btn_green.js_singer_radio(href='#')
@@ -40,6 +46,7 @@ html
                     .mod_songlist
                         ul.songlist__header
                             li.songlist__header_name 歌曲
+                            li.songlist__header_album 专辑
                             li.songlist__header_time 时长
                         ul.songlist__list#song_list
                             -
@@ -58,10 +65,11 @@ html
                                                 a.list_menu__item.list_menu__share.js_share(href='javascript:;', title='分享', aria-haspopup='true', data-aria='menu_share')
                                                     i.list_menu__icon_share
                                                     span.icon_txt 分享
+                                        .songlist__album 未知
                                         .songlist__time= item.timeLength
                 .mod_part
                     .part__hd
-                        h2.part__tit 视频
+                        h2.part__tit MV
                     .mod_mv
                         ul#mvlist.mv_list__list
                             each item in artist.videos

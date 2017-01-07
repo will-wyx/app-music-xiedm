@@ -14,6 +14,7 @@ router.get('/:id', (req, res) => {
         artist.infos = artist.infos || [];
         artist.audios = artist.audios || [];
         artist.videos = artist.videos || [];
+        artist.schedule = artist.schedule || [];
         res.render('artist', {path: 'artists', artist});
     });
 });
