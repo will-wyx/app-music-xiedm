@@ -45,4 +45,8 @@ router.delete('/artist', (req, res) => {
     });
 });
 
+router.post('/file', (req, res) => {
+    res.json({res: 'ok'});
+});
+
 module.exports = router;

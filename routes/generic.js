@@ -8,6 +8,7 @@ const db = require('../dbserver');
 router.get('/', (req, res) => {
     const title = req.baseUrl.substring(1);
     db.generic(title, (generic) => {
+        generic = generic || {};
         generic.banners = generic.banners || [];
         res.render('generic', {path: title, generic});
     });

@@ -73,6 +73,7 @@ router.get('/statistics', (req, res) => {
 });
 router.get('/layout/index', (req, res) => {
     db.home((home) => {
+        home = home || {};
         home.slider = home.slider || [];
         home.banners = home.banners || [];
         res.render('management/layhome', {path: '/layout', home});
@@ -81,6 +82,7 @@ router.get('/layout/index', (req, res) => {
 router.get('/layout/:path', (req, res) => {
     const title = req.params.path;
     db.generic(title, (generic) => {
+        generic = generic || {};
         generic.banners = generic.banners || [];
         res.render('management/laygeneric', {path: '/layout', generic});
     });

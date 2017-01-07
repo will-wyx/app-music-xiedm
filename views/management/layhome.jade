@@ -1,6 +1,6 @@
 extends layout
 block head
-    link(rel='stylesheet', href='/bootstrap-fileinput/css/fileinput.min.css')
+    link(rel='stylesheet', href='/bootstrap-fileinput-4.3.6/css/fileinput.min.css')
 block content
     #photoModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='photoModalLabel', aria-hidden='true')
         .modal-dialog
@@ -11,7 +11,8 @@ block content
                         span.sr-only Close
                     h4.modal-title 上传
                 .modal-body
-                    input#inputPhoto.file(type='file', data-preview-file-type='text', data-allowed-file-extensions='["jpg", "png"]')
+                    form#formPhoto(enctype='multipart/form-data')
+                        input#inputPhoto.file(type='file')
     #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
         .modal-dialog.modal-sm
             .modal-content
@@ -30,7 +31,7 @@ block content
     .container#container
         .panel.panel-default
             .panel-heading 图片轮播
-                a.pull-right.btn.btn-link.btn-xs(href='javascript:;') 新增
+                a.js-slider-new.pull-right.btn.btn-link.btn-xs(href='javascript:;') 新增
             table.table.table-striped
                 thead
                     tr
@@ -38,7 +39,7 @@ block content
                         th.col-md-4 图片
                         th.col-md-4 链接
                         th.col-md-2 操作
-                tbody
+                tbody#slider
                     each item in home.slider
                         tr
                             td
@@ -54,10 +55,10 @@ block content
                             td
                                 input.form-control(type='url', value=item.href)
                             td
-                                a.js-remove.btn.btn-link.btn-xs(href='javascript:;') 删除
+                                a.js-operation.btn.btn-link.btn-xs(href='javascript:;') 删除
         .panel.panel-default
             .panel-heading 首页布局
-                a.pull-right.btn.btn-link.btn-xs 新增
+                a.js-banner-new.pull-right.btn.btn-link.btn-xs(href='javascript:;') 新增
             table.table.table-striped
                 thead
                     tr
@@ -65,7 +66,7 @@ block content
                         th.col-md-4 图片
                         th.col-md-4 链接
                         th.col-md-2 编辑
-                tbody
+                tbody#banner
                     each item in home.banners
                         tr
                             td
@@ -81,24 +82,54 @@ block content
                             td
                                 input.form-control(type='url', value=item.href)
                             td
-                                a.js-remove.btn.btn-link.btn-xs(href='javascript:;') 删除
+                                a.js-operation.btn.btn-link.btn-xs(href='javascript:;') 删除
 block footer
-    script(src='/bootstrap-fileinput/js/plugins/canvas-to-blob.js')
-    script(src='/bootstrap-fileinput/js/plugins/sortable.js')
-    script(src='/bootstrap-fileinput/js/plugins/purify.js')
-    script(src='/bootstrap-fileinput/js/fileinput.js')
-    script(src='/bootstrap-fileinput/js/locales/zh.js')
+    script(src='/bootstrap-fileinput-4.3.6/js/plugins/canvas-to-blob.js')
+    script(src='/bootstrap-fileinput-4.3.6/js/plugins/sortable.js')
+    script(src='/bootstrap-fileinput-4.3.6/js/plugins/purify.js')
+    script(src='/bootstrap-fileinput-4.3.6/js/fileinput.js')
+    script(src='/bootstrap-fileinput-4.3.6/js/locales/zh.js')
     script.
         $(function () {
             var $photoModal = $('#photoModal');
             var $myModal = $('#myModal');
             var $container = $('#container');
+            var $slider = $('#slider');
+            var $banner = $('#banner');
             $container.on('click', function (e) {
                 var $target = $(e.target);
                 if ($target.parents('.js-img').length) {
                     $photoModal.modal('show');
-                } else if ($target.filter('.js-remove')) {
+                } else if ($target.filter('.js-operation').length) {
                     $myModal.modal('show');
+                } else if ($target.filter('.js-slider-new').length) {
+                    $slider.append(tr);
+                } else if ($target.filter('.js-banner-new').length) {
+                    $banner.append(tr);
                 }
+            });
+
+            var row = [], col1 = [], col2 = [], col3 = [], col4 = [];
+            col1.push('<a class="btn btn-link btn-lg" href="javascript:;"><span class="glyphicon glyphicon-circle-arrow-up"></span></a>');
+            col1.push('<a class="btn btn-link btn-lg" href="javascript:;"><span class="glyphicon glyphicon-circle-arrow-down"></span></a>');
+            col2.push('<div class="row"><a class="js-img thumbnail" href="javascript:;"><img style="width: 100%; display: block;" src="/images/placeholder.png" data-holder-rendered="true" /></a></div>')
+            col3.push('<input class="form-control" type="url"/>');
+            col4.push('<a class="js-operation btn btn-link btn-xs" href="javascript:;">保存</a>')
+            row.push('<td>' + col1.join('') + '</td>');
+            row.push('<td>' + col2.join('') + '</td>');
+            row.push('<td>' + col3.join('') + '</td>');
+            row.push('<td>' + col4.join('') + '</td>');
+            var tr = '<tr>' + row.join('') + '</tr>';
+
+            var $inputPhoto = $('#inputPhoto');
+            $inputPhoto.fileinput({
+                uploadUrl: '/api/management/file',
+                showPreview: false
+            });
+
+            var $formPhoto = $('#formPhoto');
+            $formPhoto.on('submit', function(){
+                $inputPhoto.fileinput('upload');
+                return false;
             });
         });

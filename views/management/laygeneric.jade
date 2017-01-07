@@ -54,7 +54,7 @@ block content
                             td
                                 input.form-control(type='url', value=item.href)
                             td
-                                a.js-remove.btn.btn-link.btn-xs(href='javascript:;') 删除
+                                a.js-operation.btn.btn-link.btn-xs(href='javascript:;') 删除
 block footer
     script(src='/bootstrap-fileinput/js/plugins/canvas-to-blob.js')
     script(src='/bootstrap-fileinput/js/plugins/sortable.js')
@@ -70,7 +70,7 @@ block footer
                 var $target = $(e.target);
                 if ($target.parents('.js-img').length) {
                     $photoModal.modal('show');
-                } else if($target.filter('.js-remove')) {
+                } else if($target.filter('.js-operation').length) {
                     $myModal.modal('show');
                 }
             });

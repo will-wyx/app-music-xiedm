@@ -9,6 +9,7 @@ router.get('/home', home);
 
 function home(req, res) {
     db.home((home) => {
+        home = home || {};
         home.slider = home.slider || [];
         home.banners = home.banners || [];
         res.render('index', {path: 'home', home});
