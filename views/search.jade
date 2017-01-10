@@ -1,10 +1,56 @@
 extends layout
 block head
+    link(rel='stylesheet', href='/stylesheets/list.css')
 block content
     div.container
-        ul.nav-tabs
-            li#artist.active 艺人/厂牌
-            li#music 音乐
-        div.tab-content
-            div.tab-pane.active#tab1
-            div.tab-pane#tab2
+        div.wrapper
+            div.search-wrapper
+                form#form_search_main(action='/search')
+                    div.search-input-wrapper
+                        i.icon-search
+                        input#input_search_main.search(type='text', placeholder='厂牌/艺人', name='query', value= data.query)
+                    div.search-tab-wrapper
+                        input#input_letter(type='hidden', name='letter')
+                        ul#artist_letter.letter
+                            li
+                                a(href='javascript:;', data-type='all') 全部
+                            - for(var i = 65; i < 89; ++i)
+                                li
+                                    a(href='javascript:;', data-type=String.fromCharCode(i))= String.fromCharCode(i)
+                            li
+                                a(href='javascript:;', data-type='#') #
+            ul.artist
+                each item in list
+                    li
+                        a(href='/artists/' + item._id)
+                            dl
+                                dt
+                                    img(src=item.icon)
+                                dd
+                                    h2= item.name
+                                    p= item.description
+block footer
+    script.
+        (function () {
+            var $artist_letter = $('#artist_letter');
+            var $input_letter = $('#input_letter');
+            var $input_search_main = $('#input_search_main');
+            var letter = false;
+            $artist_letter.on('click', function (e) {
+                var target = e.target;
+                if (target.nodeName === 'A') {
+                    var $target = $(target);
+                    var type = $target.attr('data-type');
+                    $input_letter.val(type);
+                    $input_search_main.val('');
+                    letter = true;
+                    $form_search_main.submit();
+                }
+            });
+            var $form_search_main = $('#form_search_main');
+            $form_search_main.on('submit', function(){
+                if(!letter) {
+                    $input_letter.val('');
+                }
+            });
+        })();

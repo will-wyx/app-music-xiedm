@@ -9,11 +9,11 @@ block content
             ul#news_list
 
             div#pagination
-    script(src='/javascripts/jquery-3.1.1.min.js')
+block footer
     script(src='/wPaginate/wPaginate.js')
     script(src='/javascripts/hashchange.js')
     script.
-        $(function () {
+        (function () {
             var index = 1;
             if (location.hash) {
                 index = location.hash.substr(1);
@@ -58,4 +58,4 @@ block content
                 },
                 ajax: true
             });
-        });
+        })();

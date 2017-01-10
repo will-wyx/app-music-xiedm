@@ -1,182 +1,179 @@
-doctype html
-html
-    head
-        link(rel='stylesheet', href='/stylesheets/artist.css')
-        link(rel='stylesheet', href='/jplayer/jplayer.blue.monday.css')
-        link(rel='stylesheet', href='/stylesheets/header.css')
-    body
-        include ./header/header.jade
-        .main
-            .mod_data
-                span.data__cover
-                    a(href='#')
-                        img.data__photo(src= artist.icon, alt= artist.name)
-                .data__cont
-                    .data__name
-                        h1.data__name_txt
-                            a(title=artist.name, href='#')= artist.name
-                    #singer_desc.data__desc
-                        #short_desc.data__desc_txt= artist.infos.join(' ')
-                        a.js_desc(href='javascript:;', data-left='0', data-stat='y_new.singer.header.more_info', data-top='0', data-target='popup_data_detail', style='') [更多]
-                    ul.mod_data_statistic
-                        li.data_statistic__item
-                            a(href='#')
-                                span.data_statistic__tit 单曲
-                                strong.data_statistic__number= artist.audios.length
-                        li.data_statistic__item
-                            a(href='#')
-                                span.data_statistic__tit 专辑
-                                strong.data_statistic__number 0
-                        li.data_statistic__item.data_statistic__item--last
-                            a(href='#')
-                                span.data_statistic__tit MV
-                                strong.data_statistic__number= artist.videos.length
-                    .data__actions(role='toolbar')
-                        a.mod_btn_green.js_singer_radio(href='#')
-                            i.mod_btn_green__icon_play
-                            | 播放歌手热门歌曲
-                        a.mod_btn
-                            i.mod_btn__icon_share
-                            | 分享
-            // 首页 begin
-            #index_tab.js_tab
-                .mod_part
-                    .part__hd
-                        h2.part__tit 热门歌曲
-                    .mod_songlist
-                        ul.songlist__header
-                            li.songlist__header_name 歌曲
-                            li.songlist__header_album 专辑
-                            li.songlist__header_time 时长
-                        ul.songlist__list#song_list
-                            -
-                                var index = 1;
-                            each item in artist.audios
-                                li(data-id= '' + item.id)
-                                    .songlist__item
-                                        .songlist__number= index++
-                                        .songlist__songname
-                                            span.songlist__songname_txt= item.title
-                                            i.songlist__icon.songlist__icon_exclusive
-                                            .mod_list_menu
-                                                a.list_menu__item.list_menu__play.js_play(href='javascript:;', title='播放')
-                                                    i.list_menu__icon_play
-                                                    span.icon_txt 播放
-                                                a.list_menu__item.list_menu__share.js_share(href='javascript:;', title='分享', aria-haspopup='true', data-aria='menu_share')
-                                                    i.list_menu__icon_share
-                                                    span.icon_txt 分享
-                                        .songlist__album 未知
-                                        .songlist__time= item.timeLength
-                .mod_part
-                    .part__hd
-                        h2.part__tit MV
-                    .mod_mv
-                        ul#mvlist.mv_list__list
-                            each item in artist.videos
-                                li.mv_list__item(data-vid='X0090t4LYWd', data-id='66991')
-                                    .mv_list__item_box
-                                        a.mv_list__cover.mod_cover.js_mv(href= item.path)
-                                            img.mv_list__pic(src= item.pic)
-                                            i.mod_cover__icon_play
-                                        h3.mv_list__title
-                                            a.js_mv(href= item.path)= item.title
-                .mod_part
-                    .part__hd
-                        h2.part__tit 档期
-                    .mod_songlist
-                        ul.songlist__header
-                            li.songlist__header_addr 时间
-                            li.songlist__header_name 主题
-                            li.songlist__header_name 地点
-                        ul.songlist__list
-                            each item in artist.schedule
-                                li
-                                    .songlist__item
-                                        .songlist__addr= item.time
-                                        .songlist__songname= item.name
-                                        .songlist__songname= item.addr
-            // 专辑简介
-            #popup_data_detail.popup_data_detail(data-aria='popup', style='display:none;z-index:10000000000;')
-                .popup_data_detail__cont
-                    h3.popup_data_detail__tit 歌手简介
-                    each item in artist.infos
-                        p= item
-                i.popup_data_detail__arrow
+extends layout
+block head
+    link(rel='stylesheet', href='/stylesheets/artist.css')
+    link(rel='stylesheet', href='/jplayer/jplayer.blue.monday.css')
+block content
+    .main
+        .mod_data
+            span.data__cover
+                a(href='#')
+                    img.data__photo(src= artist.icon, alt= artist.name)
+            .data__cont
+                .data__name
+                    h1.data__name_txt
+                        a(title=artist.name, href='#')= artist.name
+                #singer_desc.data__desc
+                    #short_desc.data__desc_txt= artist.infos.join(' ')
+                    a.js_desc(href='javascript:;', data-left='0', data-stat='y_new.singer.header.more_info', data-top='0', data-target='popup_data_detail', style='') [更多]
+                ul.mod_data_statistic
+                    li.data_statistic__item
+                        a(href='#')
+                            span.data_statistic__tit 单曲
+                            strong.data_statistic__number= artist.audios.length
+                    li.data_statistic__item
+                        a(href='#')
+                            span.data_statistic__tit 专辑
+                            strong.data_statistic__number 0
+                    li.data_statistic__item.data_statistic__item--last
+                        a(href='#')
+                            span.data_statistic__tit MV
+                            strong.data_statistic__number= artist.videos.length
+                .data__actions(role='toolbar')
+                    a.mod_btn_green.js_singer_radio(href='#')
+                        i.mod_btn_green__icon_play
+                        | 播放歌手热门歌曲
+                    a.mod_btn
+                        i.mod_btn__icon_share
+                        | 分享
+        // 首页 begin
+        #index_tab.js_tab
+            .mod_part
+                .part__hd
+                    h2.part__tit 热门歌曲
+                .mod_songlist
+                    ul.songlist__header
+                        li.songlist__header_name 歌曲
+                        li.songlist__header_album 专辑
+                        li.songlist__header_time 时长
+                    ul.songlist__list#song_list
+                        -
+                            var index = 1;
+                        each item in artist.audios
+                            li(data-id= '' + item.id)
+                                .songlist__item
+                                    .songlist__number= index++
+                                    .songlist__songname
+                                        span.songlist__songname_txt= item.title
+                                        i.songlist__icon.songlist__icon_exclusive
+                                        .mod_list_menu
+                                            a.list_menu__item.list_menu__play.js_play(href='javascript:;', title='播放')
+                                                i.list_menu__icon_play
+                                                span.icon_txt 播放
+                                            a.list_menu__item.list_menu__share.js_share(href='javascript:;', title='分享', aria-haspopup='true', data-aria='menu_share')
+                                                i.list_menu__icon_share
+                                                span.icon_txt 分享
+                                    .songlist__album 未知
+                                    .songlist__time= item.timeLength
+            .mod_part
+                .part__hd
+                    h2.part__tit MV
+                .mod_mv
+                    ul#mvlist.mv_list__list
+                        each item in artist.videos
+                            li.mv_list__item(data-vid='X0090t4LYWd', data-id='66991')
+                                .mv_list__item_box
+                                    a.mv_list__cover.mod_cover.js_mv(href= item.path)
+                                        img.mv_list__pic(src= item.pic)
+                                        i.mod_cover__icon_play
+                                    h3.mv_list__title
+                                        a.js_mv(href= item.path)= item.title
+            .mod_part
+                .part__hd
+                    h2.part__tit 档期
+                .mod_songlist
+                    ul.songlist__header
+                        li.songlist__header_addr 时间
+                        li.songlist__header_name 主题
+                        li.songlist__header_name 地点
+                    ul.songlist__list
+                        each item in artist.schedule
+                            li
+                                .songlist__item
+                                    .songlist__addr= item.time
+                                    .songlist__songname= item.name
+                                    .songlist__songname= item.addr
+        // 专辑简介
+        #popup_data_detail.popup_data_detail(data-aria='popup', style='display:none;z-index:10000000000;')
+            .popup_data_detail__cont
+                h3.popup_data_detail__tit 歌手简介
+                each item in artist.infos
+                    p= item
+            i.popup_data_detail__arrow
 
-            div.media-player
-                div#jp_jplayer.jp-jplayer
-                div#jp_container_1.jp-audio(role='application', aria-label='media player')
-                    div.jp-type-single
-                        div.jp-gui.jp-interface
-                            div.jp-controls
-                                button.jp-play play
-                                button.jp-stop stop
-                            div.jp-progress
-                                div.jp-seek-bar
-                                    div.jp-play-bar
-                            div.jp-volume-controls
-                                button.jp-mute mute
-                                button.jp-volume-max max volume
-                                div.jp-volume-bar
-                                    div.jp-volume-bar-value
-                            div.jp-time-holder
-                                div.jp-current-time(aria-label='time')
-                                div.jp-duration(aria-label='duration')
-        script(src='/javascripts/jquery-3.1.1.min.js')
-        script(src='/jplayer/jquery.jplayer.min.js')
-        script.
-            $(function () {
-                var $popup = $('[data-aria="popup"]');
-                $(document).on('click', function (e) {
-                    var $this = $(e.target);
-                    var target = $this.attr('data-target');
-                    if (target) {
-                        $('#' + target).show();
+        div.media-player
+            div#jp_jplayer.jp-jplayer
+            div#jp_container_1.jp-audio(role='application', aria-label='media player')
+                div.jp-type-single
+                    div.jp-gui.jp-interface
+                        div.jp-controls
+                            button.jp-play play
+                            button.jp-stop stop
+                        div.jp-progress
+                            div.jp-seek-bar
+                                div.jp-play-bar
+                        div.jp-volume-controls
+                            button.jp-mute mute
+                            button.jp-volume-max max volume
+                            div.jp-volume-bar
+                                div.jp-volume-bar-value
+                        div.jp-time-holder
+                            div.jp-current-time(aria-label='time')
+                            div.jp-duration(aria-label='duration')
+block footer
+    script(src='/jplayer/jquery.jplayer.min.js')
+    script.
+        (function () {
+            var $popup = $('[data-aria="popup"]');
+            $(document).on('click', function (e) {
+                var $this = $(e.target);
+                var target = $this.attr('data-target');
+                if (target) {
+                    $('#' + target).show();
+                } else {
+                    $popup.hide();
+                }
+            });
+            var $jplayer = $('#jp_jplayer');
+            $jplayer.jPlayer({
+                swfPath: "/jplayer",
+                supplied: "mp3",
+                wmode: "window",
+                useStateClassSkin: true,
+                autoBlur: false,
+                smoothPlayBar: true,
+                keyEnabled: true,
+                remainingDuration: true,
+                toggleDuration: true
+            });
+
+            var $song_list = $('#song_list');
+            $song_list.on('click', function(e) {
+                var $target = $(e.target);
+                var $play = $target.parents('a.js_play');
+                if($play.length) {
+                    var $li = $play.parents('li[data-id]');
+                    if($li.hasClass('active')) {
+                        //$jplayer.jPlayer('pause');
+                        //$li.removeClass('active');
                     } else {
-                        $popup.hide();
-                    }
-                });
-                var $jplayer = $('#jp_jplayer');
-                $jplayer.jPlayer({
-                    swfPath: "/jplayer",
-                    supplied: "mp3",
-                    wmode: "window",
-                    useStateClassSkin: true,
-                    autoBlur: false,
-                    smoothPlayBar: true,
-                    keyEnabled: true,
-                    remainingDuration: true,
-                    toggleDuration: true
-                });
-
-                var $song_list = $('#song_list');
-                $song_list.on('click', function(e) {
-                    var $target = $(e.target);
-                    var $play = $target.parents('a.js_play');
-                    if($play.length) {
-                        var $li = $play.parents('li[data-id]');
-                        if($li.hasClass('active')) {
-                            //$jplayer.jPlayer('pause');
-                            //$li.removeClass('active');
-                        } else {
-                            var id = $li.attr('data-id');
-                            $.ajax({
-                                url: '/api/audio/' + id,
-                                success: function(r) {
-                                    if(r) {
-                                        $jplayer.jPlayer('setMedia', {title: r.title, mp3: r.path}).jPlayer('play');
-                                        $li.addClass('active').siblings().removeClass('active')
-                                    }
+                        var id = $li.attr('data-id');
+                        $.ajax({
+                            url: '/api/audio/' + id,
+                            success: function(r) {
+                                if(r) {
+                                    $jplayer.jPlayer('setMedia', {title: r.title, mp3: r.path}).jPlayer('play');
+                                    $li.addClass('active').siblings().removeClass('active')
                                 }
-                            })
-                        }
+                            }
+                        })
                     }
-                });
+                }
+            });
 
-                $('.js_singer_radio').on('click', function() {
+            $('.js_singer_radio').on('click', function() {
 
-                    if(!$song_list.find('.active')) {
+                if(!$song_list.find('.active')) {
 
-                    }
-                });
-            })
+                }
+            });
+        })();

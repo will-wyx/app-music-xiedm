@@ -50,7 +50,7 @@ block content
                                 button.btn.btn-default(type='button', data-dismiss='modal') 取消
 block footer
     script.
-        $(function () {
+        (function () {
             var $pagination_item = $('.pagination .item');
             if (location.hash) {
                 var index = location.hash.substr(1);
@@ -130,4 +130,4 @@ block footer
                 });
                 $myModal.modal('hide');
             });
-        })
+        })();

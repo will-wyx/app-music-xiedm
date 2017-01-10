@@ -62,7 +62,7 @@ block footer
     script(src='/bootstrap-fileinput/js/fileinput.js')
     script(src='/bootstrap-fileinput/js/locales/zh.js')
     script.
-        $(function () {
+        (function () {
             var $photoModal = $('#photoModal');
             var $myModal = $('#myModal');
             var $container = $('#container');
@@ -74,4 +74,4 @@ block footer
                     $myModal.modal('show');
                 }
             });
-        });
+        })();

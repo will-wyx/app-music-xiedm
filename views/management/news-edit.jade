@@ -83,7 +83,7 @@ block footer
     script(src='/bootstrap-wysiwyg/jquery.hotkeys.js')
     script(src='/bootstrap-wysiwyg/bootstrap-wysiwyg.js')
     script.
-        $(function () {
+        (function () {
             function initToolbarBootstrapBindings() {
                 $('a[title]').tooltip({container: 'body'});
                 $('.dropdown-menu input').click(function () {
@@ -137,4 +137,4 @@ block footer
                     }
                 });
             });
-        });
+        })();

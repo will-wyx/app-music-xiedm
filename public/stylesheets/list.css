@@ -9,30 +9,30 @@
     margin: 0 auto;
 }
 
-.container ul {
+.container ul.artist {
     display: flex;
     flex-wrap: wrap;
     margin-left: -60px;
 }
 
-.container ul::after {
+.container ul.artist::after {
     content: "";
     display: block;
     clear: both;
     float: none;
 }
 
-.container ul li {
+.container ul.artist li {
     display: block;
     float: left;
     margin: 0 0 40px 60px;
 }
 
-.container ul li a {
+.container ul.artist li a {
     color: #000;
 }
 
-.container ul li dl dt {
+.container ul.artist li dl dt {
     display: block;
     height: 192px;
     width: 192px;
@@ -46,7 +46,7 @@ dl dt img {
     border: 1px solid #eee;
 }
 
-.container ul li dl dd {
+.container ul.artist li dl dd {
     display: block;
     width: 192px;
     height: 77px;
@@ -64,4 +64,31 @@ dl dd p {
     text-align: center;
     word-break: break-all;
     color: #888;
+}
+
+.container .search-wrapper {
+    padding: 0;
+}
+
+.container .search-input-wrapper {
+    background-color: #fff;
+    width: 30%;
+}
+
+.search-tab-wrapper {
+    margin: 22px 0;
+}
+
+.search-tab-wrapper ul.letter li {
+    display: inline-block;
+    padding: 0 8px;
+    margin: 0 12px 14px 0;
+}
+
+.search-tab-wrapper ul.letter li a {
+    color: #005aa0
+}
+
+.search-tab-wrapper ul.letter li a:hover {
+    color: #31c27c
 }

@@ -90,7 +90,7 @@ block footer
     script(src='/bootstrap-fileinput-4.3.6/js/fileinput.js')
     script(src='/bootstrap-fileinput-4.3.6/js/locales/zh.js')
     script.
-        $(function () {
+        (function () {
             var $photoModal = $('#photoModal');
             var $myModal = $('#myModal');
             var $container = $('#container');
@@ -132,4 +132,4 @@ block footer
                 $inputPhoto.fileinput('upload');
                 return false;
             });
-        });
+        })();

@@ -10,7 +10,6 @@ body, button, input, select, textarea, th {
     background-color: #fff;
     font-size: 14px;
     line-height: 1.5;
-    font-family: poppin, 'PingFang SC', Tahoma, Arial, \5FAE\8F6F\96C5\9ED1, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -56,36 +55,6 @@ a:focus, button:focus, input:focus {
 
 .icon_txt {
     font: 0/0 a
-}
-
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px
-}
-
-::-webkit-scrollbar-track {
-    background: 0 0
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 5px
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color: #666
-}
-
-::-webkit-scrollbar-corner {
-    background-color: #535353
-}
-
-body ::-webkit-scrollbar {
-    width: 8px
-}
-
-body ::-webkit-scrollbar-thumb {
-    background-color: #ddd
 }
 
 .mod_btn, .mod_btn_green {
@@ -682,7 +651,6 @@ body ::-webkit-scrollbar-thumb {
 
 body {
     min-width: 1240px;
-    overflow-y: scroll
 }
 
 .main, .section_inner {

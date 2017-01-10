@@ -119,6 +119,14 @@ const dbserver = {
             });
         });
     },
+    artistQuery: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('artist');
+            collection.find(options).toArray((err, docs) => {
+                callback(docs);
+            });
+        });
+    },
     artistPaging: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('artist');

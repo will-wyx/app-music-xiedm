@@ -19,13 +19,13 @@ block content
                 div.content-item
                     a(href= item.href)
                         img.item-img.full(src= item.src)
+block footer
     <!--[if lt IE 9]>
     script(src="/javascripts/css3-mediaqueries.js")
     <![endif]-->
-    script(src='/javascripts/jquery-3.1.1.min.js')
     script(src='/unslider/js/unslider-min.js')
     script.
-        $(function () {
+        (function () {
             $('.banner').unslider({
                 autoplay: true,
                 speed: 500,
@@ -46,4 +46,4 @@ block content
             $btn_main.on('click', function () {
                 $mfp.show();
             });
-        });
+        })();

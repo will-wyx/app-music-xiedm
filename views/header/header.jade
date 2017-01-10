@@ -42,5 +42,6 @@ div.top-bar
                         span 联系我们
         div.search-wrapper
             div.search-input-wrapper
-                i.icon-search
-                input.search(type='text', placeholder='厂牌/艺人')
+                form(action='/search')
+                    i.icon-search
+                    input#input_search.search(type='text', placeholder='厂牌/艺人', name='query')

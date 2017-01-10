@@ -98,7 +98,7 @@ html
         script(src='/javascripts/jquery-3.1.1.min.js')
         script(src='/jplayer/jquery.jplayer.min.js')
         script.
-            $(function () {
+            (function () {
                 $('#jp_jplayer').jPlayer({
                     ready: function(event) {
                         $(this).jPlayer('setMedia', {
@@ -116,4 +116,4 @@ html
                     remainingDuration: true,
                     toggleDuration: true
                 });
-            });
+            })();
