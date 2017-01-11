@@ -4,7 +4,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
 // const url = 'mongodb://xirecord:71906312@ds145178.mlab.com:45178/xirecord';
-const url = 'mongodb://localhost:27017/xirecord';
+const url = 'mongodb://192.168.8.119:27017/xirecord';
 const dbserver = {
     ObjectId,
     newsPaging: (options, callback) => {
@@ -16,7 +16,6 @@ const dbserver = {
                     callback(docs, count);
                 });
             });
-
         });
     },
     news: (condition, callback) => {

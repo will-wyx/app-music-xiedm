@@ -5,6 +5,11 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../dbserver');
 
+
+
+const multer = require('multer');
+const mediaupload = multer({dest:"public/upload/medias"});
+
 router.get('/news', (req, res) => {
     const {index, pagesize} = req.query;
     db.newsPaging({index: +index, pagesize: +pagesize}, (news) => {
@@ -45,8 +50,11 @@ router.delete('/artist', (req, res) => {
     });
 });
 
-router.post('/file', (req, res) => {
-    res.json({res: 'ok'});
+router.post('/media-upload', mediaupload.single('file'), (req, res) => {
+    req.body.path = req.file.path.substr(6);
+    db.mediaAdd(req.body, (r) => {
+        res.location('/management/media');
+    });
 });
 
 module.exports = router;

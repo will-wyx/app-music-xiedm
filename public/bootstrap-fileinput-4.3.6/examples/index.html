@@ -5,11 +5,8 @@
         <meta charset="UTF-8"/>
         <title>Krajee JQuery Plugins - &copy; Kartik</title>
         <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
-        <script src="/javascripts/jquery-3.1.1.min.js"></script>
-        <script src="../js/fileinput.js" type="text/javascript"></script>
-        <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="../js/locales/fr.js" type="text/javascript"></script>
+        <link href="/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+
     </head>
     <body>
         <div class="container kv-main">
@@ -80,9 +77,13 @@
             <br>
         </div>
     </body>
+    <script src="/javascripts/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
+    <script src="/bootstrap-fileinput/js/locales/zh.js" type="text/javascript"></script>
 	<script>
     $('#file-fr').fileinput({
-        language: 'fr',
+        language: 'zh',
         uploadUrl: '#',
         allowedFileExtensions : ['jpg', 'png','gif'],
     });
