@@ -8,7 +8,7 @@ const db = require('../../dbserver');
 
 
 const multer = require('multer');
-const mediaupload = multer({dest:"public/upload/medias"});
+const layoutupload = multer({dest:"public/upload/layout"});
 
 router.get('/news', (req, res) => {
     const {index, pagesize} = req.query;
@@ -50,11 +50,11 @@ router.delete('/artist', (req, res) => {
     });
 });
 
-router.post('/media-upload', mediaupload.single('file'), (req, res) => {
+
+
+router.post('/layout-upload', layoutupload.single('file'), (req, res) => {
     req.body.path = req.file.path.substr(6);
-    db.mediaAdd(req.body, (r) => {
-        res.location('/management/media');
-    });
+    res.json({path: req.body.path});
 });
 
 module.exports = router;

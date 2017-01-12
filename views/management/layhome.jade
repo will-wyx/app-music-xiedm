@@ -12,7 +12,7 @@ block content
                     h4.modal-title 上传
                 .modal-body
                     form#formPhoto(enctype='multipart/form-data')
-                        input#inputPhoto.file(type='file')
+                        input#inputPhoto.file(type='file', name='file', data-allowed-file-extensions='["png", "jpg"]')
     #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
         .modal-dialog.modal-sm
             .modal-content
@@ -96,10 +96,22 @@ block footer
             var $container = $('#container');
             var $slider = $('#slider');
             var $banner = $('#banner');
+            var $inputPhoto = $('#inputPhoto');
+            $inputPhoto.fileinput({
+                language: 'zh',
+                uploadUrl: '/api/management/layout-upload'
+            });
+            $inputPhoto.on('fileuploaded', function(e, r, t) {
+                $inputPhoto.target.src = r.response.path;
+                $photoModal.modal('hide');
+            });
+
             $container.on('click', function (e) {
                 var $target = $(e.target);
                 if ($target.parents('.js-img').length) {
                     $photoModal.modal('show');
+                    var img = $target.parents('.js-img').children('img');
+                    $inputPhoto.target = img[0];
                 } else if ($target.filter('.js-operation').length) {
                     $myModal.modal('show');
                 } else if ($target.filter('.js-slider-new').length) {
@@ -108,7 +120,6 @@ block footer
                     $banner.append(tr);
                 }
             });
-
             var row = [], col1 = [], col2 = [], col3 = [], col4 = [];
             col1.push('<a class="btn btn-link btn-lg" href="javascript:;"><span class="glyphicon glyphicon-circle-arrow-up"></span></a>');
             col1.push('<a class="btn btn-link btn-lg" href="javascript:;"><span class="glyphicon glyphicon-circle-arrow-down"></span></a>');
@@ -119,13 +130,8 @@ block footer
             row.push('<td>' + col2.join('') + '</td>');
             row.push('<td>' + col3.join('') + '</td>');
             row.push('<td>' + col4.join('') + '</td>');
-            var tr = '<tr>' + row.join('') + '</tr>';
 
-            var $inputPhoto = $('#inputPhoto');
-            $inputPhoto.fileinput({
-                uploadUrl: '/api/management/file',
-                showPreview: false
-            });
+            var tr = '<tr>' + row.join('') + '</tr>';
 
             var $formPhoto = $('#formPhoto');
             $formPhoto.on('submit', function(){

@@ -5,6 +5,10 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../dbserver');
 
+const multer = require('multer');
+const mediaupload = multer({dest:"public/upload/medias"});
+
+
 router.get('/', (req, res) => {
     res.render('management/index');
 });
@@ -85,6 +89,15 @@ router.get('/layout/:path', (req, res) => {
         generic = generic || {};
         generic.banners = generic.banners || [];
         res.render('management/laygeneric', {path: '/layout', generic});
+    });
+});
+
+
+
+router.post('/media-upload', mediaupload.single('file'), (req, res) => {
+    req.body.path = req.file.path.substr(6);
+    db.mediaAdd(req.body, (r) => {
+        res.location('/management/media');
     });
 });
 module.exports = router;
