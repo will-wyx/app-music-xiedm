@@ -18,7 +18,7 @@
 .top-bar a.logo {
     float: left;
     /*padding: 22px 0 26px;*/
-    width: 168px;
+    width: 118px;
     height: 84px;
 }
 
@@ -35,7 +35,7 @@
 .top-bar nav li {
     display: inline-block;
     padding: 22px 0;
-    margin-left: 56px;
+    margin-left: 50px;
 }
 
 .top-bar nav a {
