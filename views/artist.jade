@@ -24,10 +24,14 @@ block content
                         a(href='#')
                             span.data_statistic__tit 专辑
                             strong.data_statistic__number 0
-                    li.data_statistic__item.data_statistic__item--last
+                    li.data_statistic__item
                         a(href='#')
                             span.data_statistic__tit MV
                             strong.data_statistic__number= artist.videos.length
+                    li.data_statistic__item.data_statistic__item--last
+                        a(href='#')
+                            span.data_statistic__tit 档期
+                            strong.data_statistic__number= artist.schedule.length
                 .data__actions(role='toolbar')
                     a.mod_btn_green.js_singer_radio(href='#')
                         i.mod_btn_green__icon_play
@@ -83,15 +87,18 @@ block content
                 .mod_songlist
                     ul.songlist__header
                         li.songlist__header_addr 时间
-                        li.songlist__header_name 主题
-                        li.songlist__header_name 地点
+                        li.songlist__header_addr 场地
+                        li.songlist__header_addr 地点
+                        li.songlist__header_addr 购票
                     ul.songlist__list
                         each item in artist.schedule
                             li
                                 .songlist__item
                                     .songlist__addr= item.time
-                                    .songlist__songname= item.name
-                                    .songlist__songname= item.addr
+                                    .songlist__addr= item.venue
+                                    .songlist__addr= item.addr
+                                    .songlist__addr
+                                        a(href='javascript:;') 购票
         // 专辑简介
         #popup_data_detail.popup_data_detail(data-aria='popup', style='display:none;z-index:10000000000;')
             .popup_data_detail__cont
