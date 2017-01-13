@@ -35,6 +35,7 @@ app.use('/labels', labels);
 app.use('/service', generic);
 app.use('/reserve', generic);
 app.use('/contact', generic);
+app.use('/cooperate', generic);
 app.use('/search', search);
 
 app.use('/management', management);
