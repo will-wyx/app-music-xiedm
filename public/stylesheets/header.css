@@ -1,6 +1,5 @@
 .top-bar {
-    background-color: #2c323b;
-    /*background-color: #0F0F0F;*/
+    background-color: #181818;
     box-sizing: border-box;
     height: 88px;
     width: 100%;
@@ -48,7 +47,7 @@
 
 .top-bar nav a.current, .top-bar nav a:hover {
     text-decoration: none;
-    color: #00b9f2;
+    color: #feca2e;
 }
 
 .top-bar nav span {
