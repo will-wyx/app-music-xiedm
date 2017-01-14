@@ -5,10 +5,31 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../dbserver');
 
-
-
 const multer = require('multer');
 const layoutupload = multer({dest:"public/upload/layout"});
+
+router.all('/*', (req, res, next) => {
+    console.log('api.management');
+    return next();
+});
+function authority(roles) {
+    let role = {};
+    if(roles)
+        for (let i of roles) {
+            role[i] = true
+        }
+    return role;
+}
+router.post('/login', (req, res) => {
+    db.checkauth(req.body, (result) => {
+        if(result){
+            let roles = result && result.role;
+            result.role = authority(roles);
+            res.cookie('auth', result);
+            res.json(true);
+        }
+    });
+});
 
 router.get('/news', (req, res) => {
     const {index, pagesize} = req.query;

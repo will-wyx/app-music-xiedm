@@ -188,6 +188,14 @@ const dbserver = {
                 callback(docs);
             });
         });
+    },
+    checkauth: (data, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('manager');
+            collection.findOne({name: data.name, pass: data.pass}, {name: true, role: true}, (err, docs) => {
+                callback(docs);
+            });
+        })
     }
 };
 

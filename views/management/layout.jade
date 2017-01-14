@@ -22,25 +22,29 @@ html
                 // Collect the nav links, forms, and other content for toggling
                 #bs-example-navbar-collapse-1.collapse.navbar-collapse
                     ul.nav.navbar-nav
-                        li(class="#{path=='/news'?'active':''}")
-                            a(href='/management/news') 新闻
-                        li(class="#{path=='/artist'?'active':''}")
-                            a(href='/management/artist') 艺人/厂牌
-                        li(class="#{path=='/media'?'active':''}")
-                            a(href='/management/media') 音乐/视频
-                        li(class="dropdown #{path=='/layout'?'active':''}")
-                            a.dropdown-toggle(href='#', data-toggle='dropdown')
-                                | 版面管理
-                                span.caret
-                            ul.dropdown-menu(role='menu')
-                                li
-                                    a(href='/management/layout/index') 首页
-                                li
-                                    a(href='/management/layout/service') 专业服务
-                                li
-                                    a(href='/management/layout/reserve') 推广/合作
-                                li
-                                    a(href='/management/layout/contact') 联系我们
+                        if role.news
+                            li(class="#{path=='/news'?'active':''}")
+                                a(href='/management/news') 新闻
+                        if role.artist
+                            li(class="#{path=='/artist'?'active':''}")
+                                a(href='/management/artist') 艺人/厂牌
+                        if role.media
+                            li(class="#{path=='/media'?'active':''}")
+                                a(href='/management/media') 音乐/视频
+                        if role.layout
+                            li(class="dropdown #{path=='/layout'?'active':''}")
+                                a.dropdown-toggle(href='#', data-toggle='dropdown')
+                                    | 版面管理
+                                    span.caret
+                                ul.dropdown-menu(role='menu')
+                                    li
+                                        a(href='/management/layout/index') 首页
+                                    li
+                                        a(href='/management/layout/service') 专业服务
+                                    li
+                                        a(href='/management/layout/reserve') 推广/合作
+                                    li
+                                        a(href='/management/layout/contact') 联系我们
         block content
         script(src='/javascripts/jquery-3.1.1.min.js')
         script(src='/bootstrap/js/bootstrap.min.js')

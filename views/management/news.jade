@@ -1,53 +1,53 @@
 extends layout
 block head
 block content
+    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog.modal-sm
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4#myModalLabel.modal-title 提示
+                .modal-body
+                    p 确定删除
+                        span#modal_id
+                        | 吗
+                .modal-footer
+                    button#btn_ok.btn.btn-primary(type='button') 确定
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
     div.container
         .panel.panel-default
             .panel-heading 新闻管理
-            .panel-body
-                .col-sm-offset-11.col-sm-1
-                    a.btn.btn-default(href='/management/news/add') 新增
-                table.table.table-striped
-                    thead
+                a.pull-right.btn.btn-link.btn-xs(href='/management/news/add') 新增
+            table.table.table-striped
+                thead
+                    tr
+                        th.col-md-2 #
+                        th.col-md-5 新闻标题
+                        th.col-md-4 发布时间
+                        th.col-md-1 操作
+                tbody#news_list
+                    each item in news
+                        -
+                            item.date = item.date ? new Date(item.date) : new Date()
+                            var tmp = '' + item._id
+                            tmp = tmp.substring(16)
                         tr
-                            th.col-md-2 #
-                            th.col-md-5 新闻标题
-                            th.col-md-4 发布时间
-                            th.col-md-1 操作
-                    tbody#news_list
-                        each item in news
-                            -
-                                item.date = item.date ? new Date(item.date) : new Date()
-                                var tmp = '' + item._id
-                                tmp = tmp.substring(16)
-                            tr
-                                td= tmp
-                                td
-                                    a(href='/management/news/' + item._id)= item.title
-                                td= item.date.toLocaleDateString() + ' ' + item.date.toLocaleTimeString()
-                                td
-                                    a(href='javascript:;', data-id= '' + item._id, data-operation='remove') 删除
+                            td= tmp
+                            td
+                                a(href='/management/news/' + item._id)= item.title
+                            td= item.date.toLocaleDateString() + ' ' + item.date.toLocaleTimeString()
+                            td
+                                a(href='javascript:;', data-id= '' + item._id, data-operation='remove') 删除
+            .panel-footer
                 nav
                     ul.pagination
                         - for(var i = 0; i < pagecount; ++i)
                             li.item
                                 a(href='#' + (i + 1))= (i + 1)
 
-                #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
-                    .modal-dialog.modal-sm
-                        .modal-content
-                            .modal-header
-                                button.close(type='button', data-dismiss='modal')
-                                    span(aria-hidden='true') ×
-                                    span.sr-only Close
-                                h4#myModalLabel.modal-title 提示
-                            .modal-body
-                                p 确定删除
-                                    span#modal_id
-                                    | 吗
-                            .modal-footer
-                                button#btn_ok.btn.btn-primary(type='button') 确定
-                                button.btn.btn-default(type='button', data-dismiss='modal') 取消
+
 block footer
     script.
         (function () {

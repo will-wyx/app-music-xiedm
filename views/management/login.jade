@@ -8,14 +8,31 @@ html
         link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
         link(rel='stylesheet', href='/stylesheets/header.css')
         link(rel='stylesheet', href='/stylesheets/management/login.css')
-        block head
     body
         .container
-            form.form-signin(role='form')
+            form#frm_main.form-signin(role='form')
                 h2.form-signin-heading 系统管理员登录
-                input.form-control(type='email', placeholder='Email address', required='', autofocus='')
-                input.form-control(type='password', placeholder='Password', required='')
+                input.form-control(type='text', name='name', placeholder='登录名', required='', autofocus='')
+                input.form-control(type='password', name='pass', placeholder='密码', required='')
                 button.btn.btn-lg.btn-primary.btn-block(type='submit') 登录
         script(src='/javascripts/jquery-3.1.1.min.js')
         script(src='/bootstrap/js/bootstrap.min.js')
-        block footer
+        script.
+            (function(){
+                var $frm_main = $('#frm_main');
+                $frm_main.on('submit', function() {
+                    var data = {
+                        name: this.name.value,
+                        pass: this.pass.value
+                    };
+                    $.ajax({
+                        url: '/api/management/login',
+                        data: data,
+                        type: 'post',
+                        success: function(result) {
+                            console.log(result);
+                        }
+                    })
+                    return false;
+                });
+            })();
