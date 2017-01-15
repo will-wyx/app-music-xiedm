@@ -18,7 +18,6 @@ block content
                     .form-group
                         label.col-sm-2.control-label(for='inputDescription') 简介
                         .col-sm-10
-                            - artist.infos = artist.infos ? artist.infos.join('\n') : []
                             textarea#inputDescription.form-control(rows='5')= artist.infos
                     .form-group
                         label.col-sm-2.control-label(for='inputIcon') 肖像
@@ -29,56 +28,90 @@ block content
                         label.col-sm-2.control-label 音乐
                         .col-sm-10
                             .panel.panel-default
+                                .panel-heading 音乐列表
+                                    a.pull-right.btn.btn-link.btn-xs(href='javascript:;') 新增
                                 table.table.table-striped
                                     thead
                                         tr
-                                            th #
-                                            th A
-                                            th B
-                                            th C
+                                            th.col-md-2 #
+                                            th.col-md-4 名称
+                                            th.col-md-4 时长
+                                            th.col-md-2 操作
                                     tbody
+                                        each item in artist.audios
+                                            -
+                                                var tmp = '' + item.id
+                                                tmp = tmp.substring(16)
+                                            tr
+                                                td= tmp
+                                                td= item.title
+                                                td= item.timeLength
+                                                td 删除
+                    .form-group
+                        label.col-sm-2.control-label 专辑
+                        .col-sm-10
+                            .panel.panel-default
+                                .panel-heading 专辑列表
+                                    a.pull-right.btn.btn-link.btn-xs(href='javascript:;') 新增
+                                table.table.table-striped
+                                    thead
                                         tr
-                                            td 0
-                                            td 1
-                                            td 2
-                                            td 3
-                                        tr
-                                            td 0
-                                            td 1
-                                            td 2
-                                            td 3
-                                        tr
-                                            td 0
-                                            td 1
-                                            td 2
-                                            td 3
+                                            th.col-md-2 #
+                                            th.col-md-8 名称
+                                            th.col-md-2 操作
+                                    tbody
+                                        each item in artist.albums
+                                            -
+                                                var tmp = '' + item._id
+                                                tmp = tmp.substring(16)
+                                            tr
+                                                td= tmp
+                                                td= item.name
+                                                td 删除
                     .form-group
                         label.col-sm-2.control-label 视频
                         .col-sm-10
                             .panel.panel-default
+                                .panel-heading 视频列表
+                                    a.pull-right.btn.btn-link.btn-xs(href='javascript:;') 新增
                                 table.table.table-striped
                                     thead
                                         tr
-                                            th #
-                                            th A
-                                            th B
-                                            th C
+                                            th.col-md-2 封面
+                                            th.col-md-2 名称
+                                            th.col-md-6 路径
+                                            th.col-md-2 操作
                                     tbody
+                                        each item in artist.videos
+                                            tr
+                                                td
+                                                    .row
+                                                        .col-md-12
+                                                            a.thumbnail(href='javascript:;')
+                                                                img(style='width: 100%; display: block;', src=item.pic, data-holder-rendered='true')
+                                                td= item.title
+                                                td= item.path
+                                                td 删除
+                    .form-group
+                        label.col-sm-2.control-label 档期
+                        .col-sm-10
+                            .panel.panel-default
+                                .panel-heading 档期列表
+                                    a.pull-right.btn.btn-link.btn-xs(href='javascript:;') 新增
+                                table.table.table-striped
+                                    thead
                                         tr
-                                            td 0
-                                            td 1
-                                            td 2
-                                            td 3
-                                        tr
-                                            td 0
-                                            td 1
-                                            td 2
-                                            td 3
-                                        tr
-                                            td 0
-                                            td 1
-                                            td 2
-                                            td 3
+                                            th.col-md-3 时间
+                                            th.col-md-4 场地
+                                            th.col-md-3 位置
+                                            td.col-md-2 操作
+                                    tbody
+                                        each item in artist.schedule
+                                            tr
+                                                td= item.time
+                                                td= item.venue
+                                                td= item.addr
+                                                td 删除
                     .form-group
                         .col-sm-offset-10.col-sm-2
                             button#btn_submit.btn.btn-default(type='button').btn-block 提交

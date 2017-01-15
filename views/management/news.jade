@@ -119,7 +119,6 @@ block footer
             var $btn_ok = $('#btn_ok');
             $btn_ok.on('click', function () {
                 var _id = $myModal._id;
-                console.log(_id);
                 $.ajax({
                     url: '/api/management/news',
                     type: 'DELETE',

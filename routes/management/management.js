@@ -95,6 +95,11 @@ router.get('/artist/add', (req, res) => {
 router.get('/artist/:id', (req, res) => {
     const _id = db.ObjectId(req.params.id);
     db.artistOne(_id, (artist) => {
+        artist.infos = artist.infos || [];
+        artist.audios = artist.audios || [];
+        artist.videos = artist.videos || [];
+        artist.schedule = artist.schedule || [];
+        artist.albums = artist.albums || [];
         res.render('management/artist-edit', {path: '/artist', artist, role: req.locals.role});
     });
 });
@@ -106,7 +111,12 @@ router.get('/media/add', (req, res) => {
 router.get('/media/:id', (req, res) => {
     const _id = db.ObjectId(req.params.id);
     db.mediaOne(_id, (media) => {
-        res.render('management/media-edit', {path: '/media', media, role: req.locals.role});
+        // 查询专辑
+        const album_id = media.album;
+        db.albumOne(album_id, (album) => {
+            media.album = album || {};
+            res.render('management/media-edit', {path: '/media', media, role: req.locals.role});
+        });
     });
 });
 

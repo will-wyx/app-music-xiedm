@@ -9,7 +9,6 @@ const multer = require('multer');
 const layoutupload = multer({dest: "public/upload/layout"});
 
 router.all('/*', (req, res, next) => {
-    console.log('api.management');
     return next();
 });
 function authority(roles) {
