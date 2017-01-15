@@ -1,6 +1,21 @@
 extends layout
 block head
 block content
+    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog.modal-sm
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4#myModalLabel.modal-title 提示
+                .modal-body
+                    p 确定删除
+                        span#modal_id
+                        | 吗
+                .modal-footer
+                    button#btn_ok.btn.btn-primary(type='button') 确定
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
     .container
         .panel.panel-default
             .panel-heading 专辑管理
@@ -13,7 +28,7 @@ block content
                         th.col-md-2 艺人
                         th.col-md-3 厂牌
                         th.col-md-1 操作
-                tbody
+                tbody#album_list
                     each item in albums
                         -
                             var tmp = '' + item._id
@@ -30,6 +45,92 @@ block content
                 nav
                     ul.pagination
                         - for(var i = 0; i < pagecount; ++i)
-                        li.item
-                            a(href='#' + (i + 1))= (i + 1)
+                            li.item
+                                a(href='#' + (i + 1))= (i + 1)
 block footer
+    script.
+        (function(){
+            var $pagination_item = $('.pagination .item');
+            if (location.hash) {
+                var index = location.hash.substr(1);
+                loadAlbum(index);
+            } else {
+                $($pagination_item[0]).addClass('active');
+            }
+            window.addEventListener('hashchange', function () {
+                var index = location.hash.substr(1);
+                loadAlbum(index);
+            });
+            var $album_list = $('#album_list');
+
+            function loadAlbum(index) {
+                index = +index;
+                $.ajax({
+                    url: '/api/management/album',
+                    data: {index: index, pagesize: 15},
+                    success: function (res) {
+                        $pagination_item.removeClass('active');
+                        $($pagination_item[index - 1]).addClass('active');
+                        var list = [];
+                        for (var i in res) {
+                            var item = res[i];
+                            var listItem = [];
+                            listItem.push('<tr>');
+                            listItem.push('<td>');
+                            listItem.push(item._id.substring(16));
+                            listItem.push('</td>');
+
+                            listItem.push('<td>');
+                            listItem.push('<a href="/management/album/' + item._id + '">');
+                            listItem.push(item.name);
+                            listItem.push('</a>')
+                            listItem.push('</td>');
+
+                            listItem.push('<td>');
+                            listItem.push(item.artist);
+                            listItem.push('</td>');
+
+                            listItem.push('<td>');
+                            listItem.push(item.label);
+                            listItem.push('</td>');
+                            listItem.push('<td>');
+                            listItem.push('<a href="javascript:;" data-id="' + item._id + '" data-operation="remove">');
+                            listItem.push('删除');
+                            listItem.push('</a>')
+                            listItem.push('</td>');
+                            listItem.push('</tr>');
+                            list.push(listItem.join(''));
+                        }
+                        $album_list.html(list.join(''));
+                    }
+                })
+            }
+
+            var $myModal = $('#myModal');
+            var $modal_id = $('#modal_id');
+
+            $album_list.on('click', function (e, r, t) {
+                var $target = $(e.target);
+                var operation = $target.attr('data-operation');
+                if (operation === 'remove') {
+                    var _id = $target.attr('data-id');
+                    $modal_id.text(_id.substring(16));
+                    $myModal._id = _id;
+                    $myModal.modal('show');
+                }
+            });
+
+            var $btn_ok = $('#btn_ok');
+            $btn_ok.on('click', function () {
+                var _id = $myModal._id;
+                $.ajax({
+                    url: '/api/management/album',
+                    type: 'DELETE',
+                    data: {id: _id},
+                    success: function (res) {
+                        location.reload();
+                    }
+                });
+                $myModal.modal('hide');
+            });
+        })();

@@ -12,6 +12,11 @@ block content
                         .col-sm-10
                             input#inputName.form-control(type='text', placeholder='名称', name='title', value= media.title)
                     .form-group
+                        label.col-sm-2.control-label 专辑
+                        .col-sm-10
+                            span
+                                a(href='javascript:;') 专辑名称
+                    .form-group
                         label.col-sm-2.control-label(for='inputInfo') 时长
                         .col-sm-10
                             input#inputInfo.form-control(type='text', value= media.timeLength, name='timeLength')
