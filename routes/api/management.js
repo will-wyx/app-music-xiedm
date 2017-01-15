@@ -25,7 +25,7 @@ router.post('/login', (req, res) => {
         if(result){
             let roles = result && result.role;
             result.role = authority(roles);
-            res.cookie('auth', result);
+            res.cookie('auth', result, {expires: new Date(Date.now() + 900000)});
             res.json(true);
         }
     });

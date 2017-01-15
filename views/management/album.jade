@@ -1,0 +1,35 @@
+extends layout
+block head
+block content
+    .container
+        .panel.panel-default
+            .panel-heading 专辑管理
+                a.pull-right.btn.btn-link.btn-xs(href='/management/album/add') 新增
+            table.table.table-striped
+                thead
+                    tr
+                        th.col-md-1 #
+                        th.col-md-2 名称
+                        th.col-md-2 艺人
+                        th.col-md-3 厂牌
+                        th.col-md-1 操作
+                tbody
+                    each item in albums
+                        -
+                            var tmp = '' + item._id
+                            tmp = tmp.substring(16)
+                        tr
+                            td= tmp
+                            td
+                                a(href='/management/album/' + item._id)= item.name
+                            td= item.artist
+                            td= item.label
+                            td
+                                a(href='javascript:;', data-id= '' + item._id, data-operation='remove') 删除
+            .panel-footer
+                nav
+                    ul.pagination
+                        - for(var i = 0; i < pagecount; ++i)
+                        li.item
+                            a(href='#' + (i + 1))= (i + 1)
+block footer

@@ -1,0 +1,26 @@
+extends layout
+block content
+    .container
+        .panel.panel-default
+            .panel-heading 用户管理
+                a.pull-right.btn.btn-link.btn-xs(href='/management/manager/add') 新增
+            table.table.table-striped
+                thead
+                    tr
+                        th.col-md-2 #
+                        th.col-md-5 用户名
+                        th.col-md-4 用户权限
+                        th.col-md-1 操作
+                tbody
+                    //each item in news
+                    //    -
+                    //        item.date = item.date ? new Date(item.date) : new Date()
+                    //        var tmp = '' + item._id
+                    //        tmp = tmp.substring(16)
+                    //    tr
+                    //        td= tmp
+                    //        td
+                    //            a(href='/management/news/' + item._id)= item.title
+                    //        td= item.date.toLocaleDateString() + ' ' + item.date.toLocaleTimeString()
+                    //        td
+                    //            a(href='javascript:;', data-id= '' + item._id, data-operation='remove') 删除

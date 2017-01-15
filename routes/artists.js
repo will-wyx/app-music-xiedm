@@ -8,6 +8,11 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/play', (req, res) => {
+    const src = req.query.src;
+    res.render('play', {src});
+});
+
 router.get('/:id', (req, res) => {
     const _id = db.ObjectId(req.params.id);
     db.artistOne(_id, (artist) => {
@@ -15,6 +20,7 @@ router.get('/:id', (req, res) => {
         artist.audios = artist.audios || [];
         artist.videos = artist.videos || [];
         artist.schedule = artist.schedule || [];
+        artist.albums = artist.albums || [];
         res.render('artist', {path: 'artists', artist});
     });
 });

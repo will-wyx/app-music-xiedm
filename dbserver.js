@@ -38,9 +38,14 @@ const dbserver = {
     },
     artistOne: (_id, callback) => {
         MongoClient.connect(url, (err, db) => {
-            const collection = db.collection('artist');
-            collection.findOne({_id}, (err, docs) => {
-                callback(docs);
+            const coll_artist = db.collection('artist');
+            coll_artist.findOne({_id}, (err, docs_artist) => {
+                const coll_album = db.collection('album');
+                const albums = docs_artist.albums || [];
+                coll_album.find({_id: {'$in': albums}}, {name: true, cover: true}).toArray((err, docs_album) => {
+                    docs_artist.albums = docs_album;
+                    callback(docs_artist);
+                });
             });
         });
     },
@@ -52,7 +57,14 @@ const dbserver = {
             });
         });
     },
-
+    albumOne: (_id, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('album');
+            collection.findOne({_id}, (err, docs) => {
+                callback(docs);
+            });
+        })
+    },
     newsAdd: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('news');
@@ -68,6 +80,15 @@ const dbserver = {
             const collection = db.collection('artist');
             delete options.id;
             options.date = new Date();
+            collection.insertOne(options, (err, r) => {
+                callback(r);
+            });
+        });
+    },
+    albumAdd: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('album');
+            delete options.id;
             collection.insertOne(options, (err, r) => {
                 callback(r);
             });
@@ -162,6 +183,17 @@ const dbserver = {
                 });
             });
 
+        });
+    },
+    albumPaging: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('album');
+            const {index, pagesize} = options;
+            collection.count((countErr, count) => {
+                collection.find({}).skip((index - 1) * pagesize).limit(pagesize).toArray((err, docs) => {
+                    callback(docs, count);
+                })
+            })
         });
     },
     audioOne: (_id, callback) => {

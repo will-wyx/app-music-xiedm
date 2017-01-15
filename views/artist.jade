@@ -6,30 +6,30 @@ block content
     .main
         .mod_data
             span.data__cover
-                a(href='#')
+                a(href='javascript:;')
                     img.data__photo(src= artist.icon, alt= artist.name)
             .data__cont
                 .data__name
                     h1.data__name_txt
-                        a(title=artist.name, href='#')= artist.name
+                        a(title=artist.name, href='javascript:;')= artist.name
                 #singer_desc.data__desc
                     #short_desc.data__desc_txt= artist.infos.join(' ')
                     a.js_desc(href='javascript:;', data-left='0', data-stat='y_new.singer.header.more_info', data-top='0', data-target='popup_data_detail', style='') [更多]
                 ul.mod_data_statistic
                     li.data_statistic__item
-                        a(href='#')
+                        a(href='#t_song')
                             span.data_statistic__tit 单曲
                             strong.data_statistic__number= artist.audios.length
                     li.data_statistic__item
-                        a(href='#')
+                        a(href='#t_album')
                             span.data_statistic__tit 专辑
-                            strong.data_statistic__number 0
+                            strong.data_statistic__number= artist.albums.length
                     li.data_statistic__item
-                        a(href='#')
+                        a(href='#t_mv')
                             span.data_statistic__tit MV
                             strong.data_statistic__number= artist.videos.length
                     li.data_statistic__item
-                        a(href='#')
+                        a(href='#t_schedule')
                             span.data_statistic__tit 档期
                             strong.data_statistic__number= artist.schedule.length
                     li.data_statistic__item
@@ -45,14 +45,11 @@ block content
                     a.mod_btn_green.js_singer_radio(href='#')
                         i.mod_btn_green__icon_play
                         | 播放歌手热门歌曲
-                    a.mod_btn
-                        i.mod_btn__icon_share
-                        | 分享
         // 首页 begin
         #index_tab.js_tab
             .mod_part
                 .part__hd
-                    h2.part__tit 热门歌曲
+                    h2#t_song.part__tit 单曲
                 .mod_songlist
                     ul.songlist__header
                         li.songlist__header_name 歌曲
@@ -79,20 +76,33 @@ block content
                                     .songlist__time= item.timeLength
             .mod_part
                 .part__hd
-                    h2.part__tit MV
+                    h2#t_album.part__tit 专辑
+                .mod_mv
+                    ul.mv_list__list
+                        each item in artist.albums
+                            li.mv_list__item
+                                .mv_list__item_box
+                                    a.mv_list__cover.mod_cover.js_mv(href='javascript:;')
+                                        img.mv_list__pic(src= item.cover)
+                                        i.mod_cover__icon_play
+                                    h3.mv_list__title
+                                        a.js_mv(href='javascript:;')= item.name
+            .mod_part
+                .part__hd
+                    h2#t_mv.part__tit MV
                 .mod_mv
                     ul#mvlist.mv_list__list
                         each item in artist.videos
-                            li.mv_list__item(data-vid='X0090t4LYWd', data-id='66991')
+                            li.mv_list__item
                                 .mv_list__item_box
-                                    a.mv_list__cover.mod_cover.js_mv(href= item.path)
+                                    a.mv_list__cover.mod_cover.js_mv(href= '/artists/play?src=' + item.path)
                                         img.mv_list__pic(src= item.pic)
                                         i.mod_cover__icon_play
                                     h3.mv_list__title
                                         a.js_mv(href= item.path)= item.title
             .mod_part
                 .part__hd
-                    h2.part__tit 档期
+                    h2#t_schedule.part__tit 档期
                 .mod_songlist
                     ul.songlist__header
                         li.songlist__header_addr 时间

@@ -31,6 +31,9 @@ html
                         if role.media
                             li(class="#{path=='/media'?'active':''}")
                                 a(href='/management/media') 音乐/视频
+                        if role.album
+                            li(class="#{path=='/album'?'active':''}")
+                                a(href='/management/album') 专辑
                         if role.layout
                             li(class="dropdown #{path=='/layout'?'active':''}")
                                 a.dropdown-toggle(href='#', data-toggle='dropdown')
@@ -45,6 +48,11 @@ html
                                         a(href='/management/layout/reserve') 推广/合作
                                     li
                                         a(href='/management/layout/contact') 联系我们
+                        if role.manager
+                            li(class="#{path == '/manager' ? 'active' : ''}")
+                                a(href='/management/manager') 用户管理
+                    p.navbar-text.navbar-right
+                        a.navbar-link(href='/management/logout') 注销
         block content
         script(src='/javascripts/jquery-3.1.1.min.js')
         script(src='/bootstrap/js/bootstrap.min.js')

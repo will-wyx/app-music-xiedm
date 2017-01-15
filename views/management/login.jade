@@ -30,7 +30,10 @@ html
                         data: data,
                         type: 'post',
                         success: function(result) {
-                            console.log(result);
+                            if(result)
+                                location.href = '/management/home/';
+                            else
+                                alert('用户名或密码错误');
                         }
                     })
                     return false;
