@@ -73,6 +73,13 @@ router.put('/news', (req, res) => {
         res.send('ok');
     });
 });
+
+router.put('/album', (req, res) => {
+    db.albumModify(req.body, (r) => {
+        res.redirect('/management/album');
+    });
+});
+
 router.delete('/news', (req, res) => {
     db.newsDelete(req.body.id, (r) => {
         res.send(r);

@@ -115,6 +115,17 @@ const dbserver = {
             });
         });
     },
+    albumModify:(options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('album');
+            const _id = ObjectId(options.id);
+            delete options.id;
+            collection.updateOne({_id}, {$set: options}, (err, r) => {
+                callback(r);
+            });
+        });
+    },
+
     newsDelete: (id, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('news');

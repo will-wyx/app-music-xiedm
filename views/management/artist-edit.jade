@@ -36,7 +36,7 @@ block content
                                             th.col-md-2 #
                                             th.col-md-4 名称
                                             th.col-md-4 时长
-                                            th.col-md-2 操作
+                                            th.col-md-2(col) 操作
                                     tbody
                                         each item in artist.audios
                                             -
@@ -46,7 +46,10 @@ block content
                                                 td= tmp
                                                 td= item.title
                                                 td= item.timeLength
-                                                td 删除
+                                                td
+                                                    a(href='javascript:;') 编辑
+                                                td
+                                                    a(href='javascript:;') 删除
                     .form-group
                         label.col-sm-2.control-label 专辑
                         .col-sm-10
@@ -67,7 +70,9 @@ block content
                                             tr
                                                 td= tmp
                                                 td= item.name
-                                                td 删除
+                                                td
+                                                    a(href='javascript:;') 删除
+
                     .form-group
                         label.col-sm-2.control-label 视频
                         .col-sm-10
@@ -91,7 +96,9 @@ block content
                                                                 img(style='width: 100%; display: block;', src=item.pic, data-holder-rendered='true')
                                                 td= item.title
                                                 td= item.path
-                                                td 删除
+                                                td
+                                                    a(href='javascript:;') 删除
+
                     .form-group
                         label.col-sm-2.control-label 档期
                         .col-sm-10
@@ -111,7 +118,9 @@ block content
                                                 td= item.time
                                                 td= item.venue
                                                 td= item.addr
-                                                td 删除
+                                                td
+                                                    a(href='javascript:;') 删除
+
                     .form-group
                         .col-sm-offset-10.col-sm-2
                             button#btn_submit.btn.btn-default(type='button').btn-block 提交

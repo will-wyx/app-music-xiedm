@@ -4,7 +4,9 @@ block content
         .panel.panel-default
             .panel-heading 编辑专辑
             .panel-body
-                form.form-horizontal(role='form', method='post', action='/api/management/album')
+                form.form-horizontal#frm_album
+                    - if (album._id)
+                        input#inputId(type='hidden', value=album._id, name='id')
                     .form-group
                         label.col-sm-2.control-label(for='inputName') 名称
                         .col-sm-10
@@ -18,5 +20,23 @@ block content
                         .col-sm-10
                             input#inputLabel.form-control(type='text', value= album.label, name='label')
                     .form-group
+                        label.col-sm-2.control-label(for='inputDatetime') 发布时间
+                        .col-sm-10
+                            input#inputDatetime.form-control(type='text', value= album.datetime, name='datetime')
+                    .form-group
+                        label.col-sm-2.control-label(for='inputStyle') 流派
+                        .col-sm-10
+                            input#inputStyle.form-control(type='text', value= album.style, name='style')
+                    .form-group
                         .col-sm-offset-10.col-sm-2
                             button#btn_submit.btn.btn-default(type='submit').btn-block 提交
+block footer
+    script.
+        (function(){
+            var $frm_album = $('#frm_album');
+            $frm_album.on('submit', function() {
+                var album = {};
+                debugger;
+                return false;
+            });
+        })();
