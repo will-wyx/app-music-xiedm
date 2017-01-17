@@ -36,7 +36,22 @@ block footer
             var $frm_album = $('#frm_album');
             $frm_album.on('submit', function() {
                 var album = {};
-                debugger;
+                var fields = $frm_album.serializeArray();
+                for(var i in fields) {
+                    var item = fields[i];
+                    album[item.name] = item.value;
+                }
+                var type = album.id ? 'put': 'post';
+                $.ajax({
+                    url: '/api/management/album',
+                    type: type,
+                    data: album,
+                    success: function(r) {
+                        if(r === 'ok'){
+                            location.href = '/management/album'
+                        }
+                    }
+                })
                 return false;
             });
         })();

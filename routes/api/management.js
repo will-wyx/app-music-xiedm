@@ -64,7 +64,7 @@ router.post('/artist', (req, res) => {
 
 router.post('/album', (req, res) => {
     db.albumAdd(req.body, (r) => {
-        res.redirect('/management/album');
+        res.send('ok');
     });
 });
 
@@ -76,7 +76,7 @@ router.put('/news', (req, res) => {
 
 router.put('/album', (req, res) => {
     db.albumModify(req.body, (r) => {
-        res.redirect('/management/album');
+        res.send('ok');
     });
 });
 
