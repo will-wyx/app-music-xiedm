@@ -25,7 +25,7 @@ block content
                         a(title=artist.name, href='javascript:;')= artist.name
                 #singer_desc.data__desc
                     #short_desc.data__desc_txt= artist.infos.join(' ')
-                    a.js_desc(href='javascript:;', data-left='0', data-stat='y_new.singer.header.more_info', data-top='0', data-target='popup_data_detail', style='') [更多]
+                    // a.js_desc(href='javascript:;', data-left='0', data-stat='y_new.singer.header.more_info', data-top='0', data-target='popup_data_detail', style='') [更多]
                 ul.mod_data_statistic
                     li.data_statistic__item
                         a(href='#t_song')
@@ -50,7 +50,7 @@ block content
                         a(href='#')
                             span.data_statistic__tit 分享
                     li.data_statistic__item.data_statistic__item--last
-                        a(href='#')
+                        a(href='javascript:;', data-target='popup_data_detail')
                             span.data_statistic__tit 歌手介绍
                 .data__actions(role='toolbar')
                     a.mod_btn_green.js_singer_radio(href='#')
@@ -117,15 +117,17 @@ block content
                 .mod_songlist
                     ul.songlist__header
                         li.songlist__header_addr 时间
-                        li.songlist__header_name 场地
+                        li.songlist__header_addr 场地
                         li.songlist__header_addr 地点
+                        li.songlist__header_addr 订票
                     ul.songlist__list
                         each item in artist.schedule
                             li
                                 .songlist__item
                                     .songlist__addr= item.time
-                                    .songlist__songname= item.venue
+                                    .songlist__addr= item.venue
                                     .songlist__addr= item.addr
+                                    .songlist__addr 订票
         // 专辑简介
         #popup_data_detail.popup_data_detail(data-aria='popup', style='display:none;z-index:10000000000;')
             .popup_data_detail__cont
@@ -161,7 +163,7 @@ block footer
             var $popup = $('[data-aria="popup"]');
             $(document).on('click', function (e) {
                 var $this = $(e.target);
-                var target = $this.attr('data-target');
+                var target = $this.parent(['data-target']).attr('data-target');
                 if (target) {
                     $('#' + target).show();
                 } else {

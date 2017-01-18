@@ -304,14 +304,14 @@ a:focus, button:focus, input:focus {
 }
 
 .mod_btn_green {
-    border: 1px solid #31c27c;
-    background-color: #31c27c;
+    border: 1px solid #58bfef;
+    background-color: #58bfef;
     color: #fff
 }
 
 .mod_btn_green:hover {
-    background-color: #2caf6f;
-    border-color: #2caf6f;
+    background-color: #48a4ce;
+    border-color: #48a4ce;
     color: #fff
 }
 
@@ -2810,14 +2810,14 @@ body {
 }
 
 .popup_data_detail {
-    top: 128px;
+    top: 170px;
     right: 85px
 }
 
 .popup_data_detail__arrow {
     position: absolute;
     top: -11px;
-    left: 500px;
+    left: 350px;
     width: 17px;
     height: 11px;
     background: url(/images/popup_arrow.png) -11px -17px no-repeat
