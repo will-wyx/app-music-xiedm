@@ -1,8 +1,19 @@
 extends layout
 block head
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/artist.css')
     link(rel='stylesheet', href='/jplayer/jplayer.blue.monday.css')
 block content
+    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4#myModalLabel.modal-title 视频
+                .modal-body
+                    embed#mv_player(allowfullscreen='true', quality='high', width='570', height='475', align='middle', allowscriptaccess='always', type='application/x-shockwave-flash')
     .main
         .mod_data
             span.data__cover
@@ -95,11 +106,11 @@ block content
                         each item in artist.videos
                             li.mv_list__item
                                 .mv_list__item_box
-                                    a.mv_list__cover.mod_cover.js_mv(href= '/artists/play?src=' + item.path)
+                                    a.mv_list__cover.mod_cover.js_mv(href='javascript:;', data-path=item.path)
                                         img.mv_list__pic(src= item.pic)
                                         i.mod_cover__icon_play
                                     h3.mv_list__title
-                                        a.js_mv(href= item.path)= item.title
+                                        a.js_mv(href='javascript:;', data-path=item.path)= item.title
             .mod_part
                 .part__hd
                     h2#t_schedule.part__tit 档期
@@ -143,6 +154,7 @@ block content
                             div.jp-current-time(aria-label='time')
                             div.jp-duration(aria-label='duration')
 block footer
+    script(src='/bootstrap/js/bootstrap.min.js')
     script(src='/jplayer/jquery.jplayer.min.js')
     script.
         (function () {
@@ -191,6 +203,16 @@ block footer
                         })
                     }
                 }
+            });
+
+            var $mvItem = $('.mv_list__item');
+            var $myModal = $('#myModal');
+            var $mv_player = $('#mv_player');
+            $mvItem.find('.js_mv') .on('click', function(){
+                var $this = $(this);
+                var path = $this.attr('data-path');
+                $mv_player[0].src = path;
+                $myModal.modal('show');
             });
 
             $('.js_singer_radio').on('click', function() {
