@@ -299,5 +299,16 @@
 	clear: both;
 }
 
+#amazingaudioplayer-1 {
+	display: block;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: auto;
+	margin: 0 auto 0;
+}
+
 
 

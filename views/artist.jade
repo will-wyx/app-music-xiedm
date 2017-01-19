@@ -2,7 +2,7 @@ extends layout
 block head
     link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/artist.css')
-    link(rel='stylesheet', href='/jplayer/jplayer.blue.monday.css')
+    link(rel='stylesheet', href='/player/audioplayerengine/initaudioplayer-1.css')
 block content
     #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
         .modal-dialog
@@ -135,29 +135,13 @@ block content
                 each item in artist.infos
                     p= item
             i.popup_data_detail__arrow
-
-        div.media-player
-            div#jp_jplayer.jp-jplayer
-            div#jp_container_1.jp-audio(role='application', aria-label='media player')
-                div.jp-type-single
-                    div.jp-gui.jp-interface
-                        div.jp-controls
-                            button.jp-play play
-                            button.jp-stop stop
-                        div.jp-progress
-                            div.jp-seek-bar
-                                div.jp-play-bar
-                        div.jp-volume-controls
-                            button.jp-mute mute
-                            button.jp-volume-max max volume
-                            div.jp-volume-bar
-                                div.jp-volume-bar-value
-                        div.jp-time-holder
-                            div.jp-current-time(aria-label='time')
-                            div.jp-duration(aria-label='duration')
+        #amazingaudioplayer-1
+            ul.amazingaudioplayer-audios(style='display:none;')
+                li(data-title='01_Anthem888')
+                    .amazingaudioplayer-source(data-src='/upload/medias/01_Anthem128.mp3',data-type='audio/mpeg')
 block footer
     script(src='/bootstrap/js/bootstrap.min.js')
-    script(src='/jplayer/jquery.jplayer.min.js')
+    script(src='/player/audioplayerengine/amazingaudioplayer.js')
     script.
         (function () {
             var $popup = $('[data-aria="popup"]');
@@ -170,42 +154,7 @@ block footer
                     $popup.hide();
                 }
             });
-            var $jplayer = $('#jp_jplayer');
-            $jplayer.jPlayer({
-                swfPath: "/jplayer",
-                supplied: "mp3",
-                wmode: "window",
-                useStateClassSkin: true,
-                autoBlur: false,
-                smoothPlayBar: true,
-                keyEnabled: true,
-                remainingDuration: true,
-                toggleDuration: true
-            });
 
-            var $song_list = $('#song_list');
-            $song_list.on('click', function(e) {
-                var $target = $(e.target);
-                var $play = $target.parents('a.js_play');
-                if($play.length) {
-                    var $li = $play.parents('li[data-id]');
-                    if($li.hasClass('active')) {
-                        //$jplayer.jPlayer('pause');
-                        //$li.removeClass('active');
-                    } else {
-                        var id = $li.attr('data-id');
-                        $.ajax({
-                            url: '/api/audio/' + id,
-                            success: function(r) {
-                                if(r) {
-                                    $jplayer.jPlayer('setMedia', {title: r.title, mp3: r.path}).jPlayer('play');
-                                    $li.addClass('active').siblings().removeClass('active')
-                                }
-                            }
-                        })
-                    }
-                }
-            });
 
             var $mvItem = $('.mv_list__item');
             var $myModal = $('#myModal');
@@ -217,10 +166,87 @@ block footer
                 $myModal.modal('show');
             });
 
-            $('.js_singer_radio').on('click', function() {
 
-                if(!$song_list.find('.active')) {
+            var $player = $("#amazingaudioplayer-1");
 
-                }
+            var $btn_slct = $('#btn_slct');
+            $btn_slct.on('click', function () {
+                var aap = $player.data('object');
+                aap.audioRun(2, true);
+            });
+
+            var scripts = document.getElementsByTagName("script");
+            var jsFolder = "";
+            for (var i = 0; i < scripts.length; i++) {
+                if (scripts[i].src && scripts[i].src.match(/initaudioplayer-1\.js/i))
+                    jsFolder = scripts[i].src.substr(0, scripts[i].src.lastIndexOf("/") + 1);
+            }
+            $player.amazingaudioplayer({
+                jsfolder: jsFolder,
+                skinsfoldername: "",
+                titleinbarwidthmode: "fixed",
+                timeformatlive: "%CURRENT% / LIVE",
+                volumeimagewidth: 36,
+                barbackgroundimage: "",
+                showtime: true,
+                titleinbarwidth: 120,
+                showprogress: true,
+                random: false,
+                titleformat: "%TITLE%",
+                height: 50,
+                loadingformat: "Loading...",
+                showinfo: false,
+                imageheight: 100,
+                skin: "BarTitle",
+                loopimagewidth: 36,
+                showstop: false,
+                prevnextimageheight: 36,
+                infoformat: "By %ARTIST% %ALBUM%<br />%INFO%",
+                stopotherplayers: true,
+                showloading: false,
+                forcefirefoxflash: false,
+                showvolumebar: true,
+                imagefullwidth: false,
+                width: 420,
+                showtitleinbar: true,
+                showloop: true,
+                playpauseimagewidth: 36,
+                loopimageheight: 36,
+                tracklistitem: 10,
+                tracklistitemformat: "%ID%. %TITLE% <span style='position:absolute;top:0;right:0;'>%DURATION%</span>",
+                prevnextimagewidth: 36,
+                tracklistarrowimage: "tracklistarrow-48-16-0.png",
+                forceflash: false,
+                playpauseimageheight: 36,
+                showbackgroundimage: false,
+                imagewidth: 100,
+                forcehtml5: false,
+                showprevnext: true,
+                backgroundimage: "",
+                autoplay: false,
+                volumebarpadding: 8,
+                progressheight: 8,
+                showtracklistbackgroundimage: false,
+                titleinbarscroll: false,
+                showtitle: false,
+                defaultvolume: 100,
+                tracklistarrowimageheight: 16,
+                heightmode: "auto",
+                titleinbarformat: "%TITLE%",
+                showtracklist: false,
+                stopimageheight: 24,
+                volumeimageheight: 36,
+                stopimagewidth: 24,
+                volumebarheight: 80,
+                noncontinous: false,
+                tracklistbackgroundimage: "",
+                showbarbackgroundimage: false,
+                showimage: false,
+                tracklistarrowimagewidth: 48,
+                timeformat: "%CURRENT% / %DURATION%",
+                showvolume: true,
+                fullwidth: true,
+                loop: 1,
+                preloadaudio: true
             });
         })();
