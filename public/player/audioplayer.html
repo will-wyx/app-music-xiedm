@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+    <title>Amazing HTML5 Audio Player, powered by http://amazingaudioplayer.com</title>
+    <link rel="stylesheet" type="text/css" href="audioplayerengine/initaudioplayer-1.css">
+    <style>
+        #amazingaudioplayer-1 {
+            display: block;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: auto;
+            margin: 0 auto 0;
+        }
+    </style>
+</head>
+<body>
+<button id="btn_slct">select</button>
+<div id="amazingaudioplayer-1">
+    <ul class="amazingaudioplayer-audios" style="display:none;">
+        <li data-artist="" data-title="01_Anthem888" data-album="" data-info="" data-image="" data-duration="0">
+            <div class="amazingaudioplayer-source" data-src="audios/01_Anthem888.mp3" data-type="audio/mpeg"></div>
+        </li>
+        <li data-artist="" data-title="02_Anthem888" data-album="" data-info="" data-image="" data-duration="0">
+            <div class="amazingaudioplayer-source" data-src="audios/01_Anthem888.mp3" data-type="audio/mpeg"></div>
+        </li>
+        <li data-artist="" data-title="03_Anthem888" data-album="" data-info="" data-image="" data-duration="0">
+            <div class="amazingaudioplayer-source" data-src="audios/01_Anthem888.mp3" data-type="audio/mpeg"></div>
+        </li>
+    </ul>
+</div>
+<script src="audioplayerengine/jquery.js"></script>
+<script src="audioplayerengine/amazingaudioplayer.js"></script>
+<script>
+    (function(){
+        var $player = $("#amazingaudioplayer-1");
+
+        var $btn_slct = $('#btn_slct');
+        $btn_slct.on('click', function() {
+            var aap = $player.data('object');
+            aap.audioRun(2, true);
+        });
+
+        var scripts = document.getElementsByTagName("script");
+        var jsFolder = "";
+        for (var i = 0; i < scripts.length; i++) {
+            if (scripts[i].src && scripts[i].src.match(/initaudioplayer-1\.js/i))
+                jsFolder = scripts[i].src.substr(0, scripts[i].src.lastIndexOf("/") + 1);
+        }
+        $player.amazingaudioplayer({
+            jsfolder: jsFolder,
+            skinsfoldername: "",
+            titleinbarwidthmode: "fixed",
+            timeformatlive: "%CURRENT% / LIVE",
+            volumeimagewidth: 36,
+            barbackgroundimage: "",
+            showtime: true,
+            titleinbarwidth: 120,
+            showprogress: true,
+            random: false,
+            titleformat: "%TITLE%",
+            height: 50,
+            loadingformat: "Loading...",
+            showinfo: false,
+            imageheight: 100,
+            skin: "BarTitle",
+            loopimagewidth: 36,
+            showstop: false,
+            prevnextimageheight: 36,
+            infoformat: "By %ARTIST% %ALBUM%<br />%INFO%",
+            stopotherplayers: true,
+            showloading: false,
+            forcefirefoxflash: false,
+            showvolumebar: true,
+            imagefullwidth: false,
+            width: 420,
+            showtitleinbar: true,
+            showloop: true,
+            playpauseimagewidth: 36,
+            loopimageheight: 36,
+            tracklistitem: 10,
+            tracklistitemformat: "%ID%. %TITLE% <span style='position:absolute;top:0;right:0;'>%DURATION%</span>",
+            prevnextimagewidth: 36,
+            tracklistarrowimage: "tracklistarrow-48-16-0.png",
+            forceflash: false,
+            playpauseimageheight: 36,
+            showbackgroundimage: false,
+            imagewidth: 100,
+            forcehtml5: false,
+            showprevnext: true,
+            backgroundimage: "",
+            autoplay: false,
+            volumebarpadding: 8,
+            progressheight: 8,
+            showtracklistbackgroundimage: false,
+            titleinbarscroll: false,
+            showtitle: false,
+            defaultvolume: 100,
+            tracklistarrowimageheight: 16,
+            heightmode: "auto",
+            titleinbarformat: "%TITLE%",
+            showtracklist: false,
+            stopimageheight: 24,
+            volumeimageheight: 36,
+            stopimagewidth: 24,
+            volumebarheight: 80,
+            noncontinous: false,
+            tracklistbackgroundimage: "",
+            showbarbackgroundimage: false,
+            showimage: false,
+            tracklistarrowimagewidth: 48,
+            timeformat: "%CURRENT% / %DURATION%",
+            showvolume: true,
+            fullwidth: true,
+            loop: 1,
+            preloadaudio: true
+        });
+    })();
+</script>
+</body>
+</html>
