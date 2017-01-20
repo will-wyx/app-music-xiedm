@@ -174,7 +174,25 @@ const dbserver = {
             const collection = db.collection('artist');
             const {index, pagesize} = options;
             collection.count((countErr, count) => {
-                collection.find({}, {
+                collection.find({type: 'artist'}, {
+                    _id: true,
+                    name: true,
+                    date: true,
+                    description: true,
+                    icon: true
+                }).sort({date: -1}).skip((index - 1) * pagesize).limit(pagesize).toArray((err, docs) => {
+                    callback(docs, count);
+                });
+            });
+
+        });
+    },
+    labelPaging: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('artist');
+            const {index, pagesize} = options;
+            collection.count((countErr, count) => {
+                collection.find({type: 'label'}, {
                     _id: true,
                     name: true,
                     date: true,

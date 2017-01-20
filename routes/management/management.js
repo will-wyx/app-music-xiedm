@@ -53,6 +53,14 @@ router.get('/news', (req, res) => {
     });
 });
 
+router.get('/label', (req, res) => {
+    const pagesize = 15;
+    db.labelPaging({index: 1, pagesize}, (artists, count) => {
+        const pagecount = Math.ceil(count / pagesize);
+        res.render('management/artist', {path: req.url, artists, pagecount, role: req.locals.role});
+    });
+});
+
 router.get('/artist', (req, res) => {
     const pagesize = 15;
     db.artistPaging({index: 1, pagesize}, (artists, count) => {
@@ -89,7 +97,25 @@ router.get('/news/:id', (req, res) => {
 });
 
 router.get('/artist/add', (req, res) => {
-    res.render('management/artist-edit', {path: '/artist', artist: {}, role: req.locals.role});
+    const artist = {
+        infos: [],
+        audios: [],
+        videos: [],
+        schedule: [],
+        albums: []
+    };
+    res.render('management/artist-edit', {path: '/artist', artist, role: req.locals.role});
+});
+
+router.get('/label/add', (req, res) => {
+    const artist = {
+        infos: [],
+        audios: [],
+        videos: [],
+        schedule: [],
+        albums: []
+    };
+    res.render('management/artist-edit', {path: '/label', artist, role: req.locals.role});
 });
 
 router.get('/artist/:id', (req, res) => {
@@ -104,8 +130,23 @@ router.get('/artist/:id', (req, res) => {
     });
 });
 
+router.get('/label/:id', (req, res) => {
+    const _id = db.ObjectId(req.params.id);
+    db.artistOne(_id, (artist) => {
+        artist.infos = artist.infos || [];
+        artist.audios = artist.audios || [];
+        artist.videos = artist.videos || [];
+        artist.schedule = artist.schedule || [];
+        artist.albums = artist.albums || [];
+        res.render('management/artist-edit', {path: '/label', artist, role: req.locals.role});
+    });
+});
+
 router.get('/media/add', (req, res) => {
-    res.render('management/media-edit', {path: '/media', media: {}, role: req.locals.role});
+    const media = {
+        album: {}
+    };
+    res.render('management/media-edit', {path: '/media', media, role: req.locals.role});
 });
 
 router.get('/media/:id', (req, res) => {
