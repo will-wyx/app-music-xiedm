@@ -234,10 +234,27 @@ const dbserver = {
             })
         });
     },
+    albums: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('album');
+            collection.find(options).toArray((err, docs) => {
+                callback(docs);
+            });
+        })
+    },
     audioOne: (_id, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('media');
             collection.findOne({_id, type: 'audio'}, (err, docs) => {
+                callback(docs);
+            });
+        });
+    },
+    audios: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('media');
+            options.type = 'audio';
+            collection.find({options}).toArray((err, docs) => {
                 callback(docs);
             });
         });

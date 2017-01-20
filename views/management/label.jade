@@ -1,14 +1,14 @@
 extends layout
 block head
 block content
-    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+    #modal_delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='modal_deleteLabel', aria-hidden='true')
         .modal-dialog.modal-sm
             .modal-content
                 .modal-header
                     button.close(type='button', data-dismiss='modal')
                         span(aria-hidden='true') ×
                         span.sr-only Close
-                    h4#myModalLabel.modal-title 提示
+                    h4#modal_deleteLabel.modal-title 提示
                 .modal-body
                     p 确定删除
                         span#modal_id
@@ -46,8 +46,8 @@ block content
                 nav
                     ul.pagination
                         - for(var i = 0; i < pagecount; ++i)
-                        li.item
-                            a(href='#' + (i + 1))= (i + 1)
+                            li.item
+                                a(href='#' + (i + 1))= (i + 1)
 
 
 block footer
@@ -69,7 +69,7 @@ block footer
             function loadNews(index) {
                 index = +index;
                 $.ajax({
-                    url: '/api/management/artist',
+                    url: '/api/management/label',
                     data: {index: index, pagesize: 15},
                     success: function (res) {
                         $pagination_item.removeClass('active');
@@ -110,7 +110,7 @@ block footer
                 })
             }
 
-            var $myModal = $('#myModal');
+            var $modal_delete = $('#modal_delete');
             var $modal_id = $('#modal_id');
 
             $artist_list.on('click', function (e, r, t) {
@@ -119,22 +119,22 @@ block footer
                 if (operation === 'remove') {
                     var _id = $target.attr('data-id');
                     $modal_id.text(_id.substring(16));
-                    $myModal._id = _id;
-                    $myModal.modal('show');
+                    $modal_delete._id = _id;
+                    $modal_delete.modal('show');
                 }
             });
 
             var $btn_ok = $('#btn_ok');
             $btn_ok.on('click', function () {
-                var _id = $myModal._id;
+                var _id = $modal_delete._id;
                 $.ajax({
-                    url: '/api/management/artist',
+                    url: '/api/management/label',
                     type: 'DELETE',
                     data: {id: _id},
                     success: function (res) {
                         location.reload();
                     }
                 });
-                $myModal.modal('hide');
+                $modal_delete.modal('hide');
             });
         })();

@@ -51,6 +51,21 @@ router.get('/album', (req, res) => {
     });
 });
 
+router.get('/albums', (req, res) => {
+    const options = req.query;
+    db.albums(options, (albums) => {
+        res.json(albums);
+    })
+});
+
+
+router.get('/audios', (req, res) => {
+    const options = req.query;
+    db.audios(options, (audios) => {
+        res.json(audios);
+    });
+});
+
 router.post('/news', (req, res) => {
     db.newsAdd(req.body, (r) => {
         res.send('ok');

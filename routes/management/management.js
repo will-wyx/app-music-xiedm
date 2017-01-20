@@ -57,7 +57,7 @@ router.get('/label', (req, res) => {
     const pagesize = 15;
     db.labelPaging({index: 1, pagesize}, (artists, count) => {
         const pagecount = Math.ceil(count / pagesize);
-        res.render('management/artist', {path: req.url, artists, pagecount, role: req.locals.role});
+        res.render('management/label', {path: req.url, artists, pagecount, role: req.locals.role});
     });
 });
 

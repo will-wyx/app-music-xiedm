@@ -2,6 +2,47 @@ extends layout
 block head
     link(rel='stylesheet', href='/bootstrap-fileinput/css/fileinput.min.css')
 block content
+    .modal.fade(tabindex='-1', role='dialog', aria-hidden='true', data-id='album')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4.modal-title 专辑
+                .modal-body
+                    table.table.table-striped
+                        thead
+                            tr
+                                th.col-md-1 #
+                                th.col-md-3 名称
+                                th.col-md-2 艺人
+                                th.col-md-3 厂牌
+                        tbody
+
+                .modal-footer
+                    button.btn.btn-primary(type='button') 确定
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
+    .modal.fade(tabindex='-1', role='dialog', aria-hidden='true', data-id='audio')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4.modal-title 音乐
+                .modal-body
+                    table.table.table-striped
+                        thead
+                            tr
+                                th.col-md-1 #
+                                th.col-md-3 名称
+                                th.col-md-2 时长
+                                th.col-md-3 路径
+                        tbody
+                .modal-footer
+                    button.btn.btn-primary(type='button') 确定
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
     .container
         .panel.panel-default
             .panel-heading 编辑艺人/厂牌
@@ -29,7 +70,7 @@ block content
                         .col-sm-10
                             .panel.panel-default
                                 .panel-heading 音乐列表
-                                    a.pull-right.btn.btn-link.btn-xs(href='javascript:;') 新增
+                                    a.pull-right.btn.btn-link.btn-xs.btn__add(href='javascript:;', data-target='audio') 新增
                                 table.table.table-striped
                                     thead
                                         tr
@@ -55,7 +96,7 @@ block content
                         .col-sm-10
                             .panel.panel-default
                                 .panel-heading 专辑列表
-                                    a.pull-right.btn.btn-link.btn-xs(href='javascript:;') 新增
+                                    a.pull-right.btn.btn-link.btn-xs.btn__add(href='javascript:;', data-target='album') 新增
                                 table.table.table-striped
                                     thead
                                         tr
@@ -133,4 +174,71 @@ block footer
     script.
         (function () {
             $('#inputIcon').fileinput({language: 'zh'});
+
+            var $btn__add = $('a.btn__add');
+            $btn__add.on('click', function(){
+                var id = $(this).attr('data-target');
+                var $target = $('.modal[data-id="' + id + '"]');
+                $target.modal('show');
+                switch(id) {
+                    case 'album':
+                        $.getJSON('/api/management/albums', function (res) {
+                            var list = [];
+                            for (var i in res) {
+                                var item = res[i];
+                                var listItem = [];
+                                listItem.push('<tr>');
+                                listItem.push('<td>');
+                                listItem.push('<input type="checkbox">');
+                                listItem.push('</td>');
+
+                                listItem.push('<td>');
+                                listItem.push(item.name);
+                                listItem.push('</td>');
+
+                                listItem.push('<td>');
+                                listItem.push(item.artist);
+                                listItem.push('</td>');
+
+                                listItem.push('<td>');
+                                listItem.push(item.label);
+                                listItem.push('</td>');
+                                listItem.push('</tr>');
+                                list.push(listItem.join(''));
+                            }
+                            $target.find('tbody').html(list.join(''));
+                            console.log(list);
+                        });
+                        break;
+                    case 'audio':
+                        $.getJSON('/api/management/audios', function (res) {
+                            var list = [];
+                            for (var i in res) {
+                                var item = res[i];
+                                var listItem = [];
+                                listItem.push('<tr>');
+                                listItem.push('<td>');
+                                listItem.push('<input type="checkbox">');
+                                listItem.push('</td>');
+
+                                listItem.push('<td>');
+                                listItem.push(item.title);
+                                listItem.push('</td>');
+
+                                listItem.push('<td>');
+                                listItem.push(item.timeLength);
+                                listItem.push('</td>');
+
+                                listItem.push('<td>');
+                                listItem.push(item.path);
+                                listItem.push('</td>');
+                                listItem.push('</tr>');
+                                list.push(listItem.join(''));
+                            }
+                            $target.find('tbody').html(list.join(''));
+                            console.log(list);
+                        });
+                        break;
+                }
+            });
         })();
