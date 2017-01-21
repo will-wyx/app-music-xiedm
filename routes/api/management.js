@@ -24,6 +24,7 @@ router.post('/login', (req, res) => {
         if (result) {
             let roles = result && result.role;
             result.role = authority(roles);
+            // res.cookie('auth', result, {expires: new Date(Date.now() + 900000)});
             res.cookie('auth', result, {expires: new Date(Date.now() + 900000)});
             res.json(true);
         }
@@ -58,6 +59,20 @@ router.get('/albums', (req, res) => {
     })
 });
 
+router.get('/album-by-id', (req, res) => {
+    const _id = db.ObjectId(req.query.id);
+    db.albumOne(_id, (album) => {
+        res.json(album);
+    })
+});
+
+router.get('/albums-by-ids', (req, res) => {
+    const data = req.query;
+    db.albums_by_ids(data.chks, (albums) => {
+        res.json(albums);
+    });
+    //{_id: {'$in': albums}
+});
 
 router.get('/audios', (req, res) => {
     const options = req.query;

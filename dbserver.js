@@ -242,6 +242,18 @@ const dbserver = {
             });
         })
     },
+    albums_by_ids:(chks, callback) => {
+        let albums = [];
+        for(let item of chks) {
+            albums.push(ObjectId(item));
+        }
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('album');
+            collection.find({_id: {'$in': albums}}).toArray((err, docs) => {
+                callback(docs);
+            });
+        })
+    },
     audioOne: (_id, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('media');

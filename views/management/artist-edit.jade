@@ -18,10 +18,9 @@ block content
                                 th.col-md-3 名称
                                 th.col-md-2 艺人
                                 th.col-md-3 厂牌
-                        tbody
-
+                        tbody#body_album
                 .modal-footer
-                    button.btn.btn-primary(type='button') 确定
+                    button#btn_album.btn.btn-primary(type='button') 确定
                     button.btn.btn-default(type='button', data-dismiss='modal') 取消
     .modal.fade(tabindex='-1', role='dialog', aria-hidden='true', data-id='audio')
         .modal-dialog
@@ -70,7 +69,7 @@ block content
                         .col-sm-10
                             .panel.panel-default
                                 .panel-heading 音乐列表
-                                    a.pull-right.btn.btn-link.btn-xs.btn__add(href='javascript:;', data-target='audio') 新增
+                                    a.pull-right.btn.btn-link.btn-xs.btn__add(href='javascript:;', data-target='audio') 选择
                                 table.table.table-striped
                                     thead
                                         tr
@@ -96,14 +95,15 @@ block content
                         .col-sm-10
                             .panel.panel-default
                                 .panel-heading 专辑列表
-                                    a.pull-right.btn.btn-link.btn-xs.btn__add(href='javascript:;', data-target='album') 新增
+                                    a.pull-right.btn.btn-link.btn-xs.btn__add(href='javascript:;', data-target='album') 选择
                                 table.table.table-striped
                                     thead
                                         tr
                                             th.col-md-2 #
-                                            th.col-md-8 名称
-                                            th.col-md-2 操作
-                                    tbody
+                                            th.col-md-4 名称
+                                            th.col-md-4 厂牌
+                                            th.col-md-2 发行时间
+                                    tbody#main_albums
                                         each item in artist.albums
                                             -
                                                 var tmp = '' + item._id
@@ -111,8 +111,8 @@ block content
                                             tr
                                                 td= tmp
                                                 td= item.name
-                                                td
-                                                    a(href='javascript:;') 删除
+                                                td= item.label
+                                                td= item.datetime
 
                     .form-group
                         label.col-sm-2.control-label 视频
@@ -188,18 +188,13 @@ block footer
                                 var item = res[i];
                                 var listItem = [];
                                 listItem.push('<tr>');
-                                listItem.push('<td>');
-                                listItem.push('<input type="checkbox">');
-                                listItem.push('</td>');
-
+                                listItem.push('<td><input data-id="' + item._id + '" type="checkbox"></td>');
                                 listItem.push('<td>');
                                 listItem.push(item.name);
                                 listItem.push('</td>');
-
                                 listItem.push('<td>');
                                 listItem.push(item.artist);
                                 listItem.push('</td>');
-
                                 listItem.push('<td>');
                                 listItem.push(item.label);
                                 listItem.push('</td>');
@@ -207,7 +202,6 @@ block footer
                                 list.push(listItem.join(''));
                             }
                             $target.find('tbody').html(list.join(''));
-                            console.log(list);
                         });
                         break;
                     case 'audio':
@@ -217,18 +211,13 @@ block footer
                                 var item = res[i];
                                 var listItem = [];
                                 listItem.push('<tr>');
-                                listItem.push('<td>');
-                                listItem.push('<input type="checkbox">');
-                                listItem.push('</td>');
-
+                                listItem.push('<td><input type="checkbox"></td>');
                                 listItem.push('<td>');
                                 listItem.push(item.title);
                                 listItem.push('</td>');
-
                                 listItem.push('<td>');
                                 listItem.push(item.timeLength);
                                 listItem.push('</td>');
-
                                 listItem.push('<td>');
                                 listItem.push(item.path);
                                 listItem.push('</td>');
@@ -236,9 +225,52 @@ block footer
                                 list.push(listItem.join(''));
                             }
                             $target.find('tbody').html(list.join(''));
-                            console.log(list);
                         });
                         break;
                 }
             });
+
+            var $body_album = $('#body_album');
+            var $btn_album = $('#btn_album');
+
+            var $main_albums = $('#main_albums');
+
+            $btn_album.on('click', function() {
+                var $chks = $body_album.find('input:checked');
+                var data = {
+                    chks: []
+                }
+                for(var i = 0, len = $chks.length; i < len; ++i) {
+                    var item = $chks[i];
+                    var $item = $(item);
+                    var id = $item.attr('data-id');
+                    data.chks.push(id);
+                }
+                $.getJSON('/api/management/albums-by-ids', data, function(res) {
+                    var list = [];
+                    for (var i in res) {
+                        var item = res[i];
+                        var tmp = '' + item._id
+                        tmp = tmp.substring(16)
+                        var listItem = [];
+                        listItem.push('<tr>');
+                        listItem.push('<td>');
+                        listItem.push(tmp);
+                        listItem.push('</td>');
+                        listItem.push('<td>');
+                        listItem.push(item.name);
+                        listItem.push('</td>');
+                        listItem.push('<td>');
+                        listItem.push(item.label);
+                        listItem.push('</td>');
+                        listItem.push('<td>');
+                        listItem.push(item.datetime);
+                        listItem.push('</td>');
+                        listItem.push('</tr>');
+                        list.push(listItem.join(''));
+                    }
+                    $main_albums.html(list.join(''));
+                    $('.modal[data-id="album"]').modal('hide');
+                });
+            })
         })();

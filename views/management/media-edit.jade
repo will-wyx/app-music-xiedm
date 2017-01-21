@@ -2,6 +2,26 @@ extends layout
 block head
     link(rel='stylesheet', href='/bootstrap-fileinput/css/fileinput.min.css')
 block content
+    .modal.fade(tabindex='-1', role='dialog', aria-hidden='true', data-id='album')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4.modal-title 专辑
+                .modal-body
+                    table.table.table-striped
+                        thead
+                            tr
+                                th.col-md-1 #
+                                th.col-md-3 名称
+                                th.col-md-2 艺人
+                                th.col-md-3 厂牌
+                        tbody#body_album
+                .modal-footer
+                    button#btn_album.btn.btn-primary(type='button') 确定
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
     .container
         .panel.panel-default
             .panel-heading 编辑媒体文件
@@ -15,7 +35,7 @@ block content
                         label.col-sm-2.control-label 专辑
                         .col-sm-10
                             p.form-control-static
-                                a(href='javascript:;')= media.album.name
+                                a#link_album(href='javascript:;')= media.album.name ? media.album.name : '选择'
                     .form-group
                         label.col-sm-2.control-label(for='inputInfo') 时长
                         .col-sm-10
@@ -40,5 +60,47 @@ block footer
             $('#inputIcon').fileinput({
                 language: 'zh',
                 showUpload: false
+            });
+
+            var $modal_album = $('.modal[data-id="album"]');
+            var $link_album = $('#link_album');
+            var $body_album = $('#body_album');
+
+            $link_album.on('click', function() {
+                $.getJSON('/api/management/albums', function (res) {
+                    var list = [];
+                    for (var i in res) {
+                        var item = res[i];
+                        var listItem = [];
+                        listItem.push('<tr>');
+                        listItem.push('<td><input value="' + item._id + '" type="radio" name="album"></td>');
+                        listItem.push('<td>');
+                        listItem.push(item.name);
+                        listItem.push('</td>');
+                        listItem.push('<td>');
+                        listItem.push(item.artist);
+                        listItem.push('</td>');
+                        listItem.push('<td>');
+                        listItem.push(item.label);
+                        listItem.push('</td>');
+                        listItem.push('</tr>');
+                        list.push(listItem.join(''));
+                    }
+                    $body_album.html(list.join(''));
+                    $modal_album.modal('show');
+                });
+            });
+
+            var $btn_album = $('#btn_album');
+            $btn_album.on('click', function() {
+                var $chks = $body_album.find('input:checked');
+                var data = {}
+                data.id = $chks[0].value;
+                $.getJSON('/api/management/album-by-id', data, function(res) {
+                    if(res) {
+                        $link_album.text(res.name);
+                        $modal_album.modal('hide');
+                    }
+                });
             });
         })();
