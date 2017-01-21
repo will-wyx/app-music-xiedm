@@ -195,7 +195,7 @@ router.get('/layout/:path', (req, res) => {
 router.post('/media-upload', mediaupload.single('file'), (req, res) => {
     req.body.path = req.file.path.substr(6);
     db.mediaAdd(req.body, (r) => {
-        res.location('/management/media');
+        res.redirect('/management/media');
     });
 });
 

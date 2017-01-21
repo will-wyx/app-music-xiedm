@@ -254,10 +254,23 @@ const dbserver = {
             });
         })
     },
+    audios_by_ids:(chks, callback) => {
+        let audios = [];
+        for(let item of chks) {
+            audios.push(ObjectId(item));
+        }
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('media');
+            collection.find({_id: {'$in': audios}}).toArray((err, docs) => {
+                callback(docs);
+            });
+        })
+    },
+
     audioOne: (_id, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('media');
-            collection.findOne({_id, type: 'audio'}, (err, docs) => {
+            collection.findOne({_id}, (err, docs) => {
                 callback(docs);
             });
         });
@@ -265,8 +278,7 @@ const dbserver = {
     audios: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('media');
-            options.type = 'audio';
-            collection.find({options}).toArray((err, docs) => {
+            collection.find(options).toArray((err, docs) => {
                 callback(docs);
             });
         });

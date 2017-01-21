@@ -38,9 +38,9 @@ block content
                                 th.col-md-3 名称
                                 th.col-md-2 时长
                                 th.col-md-3 路径
-                        tbody
+                        tbody#body_audio
                 .modal-footer
-                    button.btn.btn-primary(type='button') 确定
+                    button#btn_audio.btn.btn-primary(type='button') 确定
                     button.btn.btn-default(type='button', data-dismiss='modal') 取消
     .container
         .panel.panel-default
@@ -74,10 +74,10 @@ block content
                                     thead
                                         tr
                                             th.col-md-2 #
-                                            th.col-md-4 名称
-                                            th.col-md-4 时长
-                                            th.col-md-2(col) 操作
-                                    tbody
+                                            th.col-md-3 名称
+                                            th.col-md-3 时长
+                                            th.col-md-4 路径
+                                    tbody#main_audios
                                         each item in artist.audios
                                             -
                                                 var tmp = '' + item.id
@@ -86,10 +86,7 @@ block content
                                                 td= tmp
                                                 td= item.title
                                                 td= item.timeLength
-                                                td
-                                                    a(href='javascript:;') 编辑
-                                                td
-                                                    a(href='javascript:;') 删除
+                                                td= item.path
                     .form-group
                         label.col-sm-2.control-label 专辑
                         .col-sm-10
@@ -211,7 +208,7 @@ block footer
                                 var item = res[i];
                                 var listItem = [];
                                 listItem.push('<tr>');
-                                listItem.push('<td><input type="checkbox"></td>');
+                                listItem.push('<td><input data-id="' + item._id + '" type="checkbox"></td>');
                                 listItem.push('<td>');
                                 listItem.push(item.title);
                                 listItem.push('</td>');
@@ -231,10 +228,11 @@ block footer
             });
 
             var $body_album = $('#body_album');
+            var $body_audio = $('#body_audio');
             var $btn_album = $('#btn_album');
-
+            var $btn_audio = $('#btn_audio');
             var $main_albums = $('#main_albums');
-
+            var $main_audios = $('#main_audios');
             $btn_album.on('click', function() {
                 var $chks = $body_album.find('input:checked');
                 var data = {
@@ -271,6 +269,45 @@ block footer
                     }
                     $main_albums.html(list.join(''));
                     $('.modal[data-id="album"]').modal('hide');
+                });
+            });
+
+            $btn_audio.on('click', function() {
+                var $chks = $body_audio.find('input:checked');
+                var data = {
+                    chks: []
+                }
+                for (var i = 0, len = $chks.length; i < len; ++i) {
+                    var item = $chks[i];
+                    var $item = $(item);
+                    var id = $item.attr('data-id');
+                    data.chks.push(id);
+                }
+                $.getJSON('/api/management/audios-by-ids', data, function (res) {
+                    var list = [];
+                    for (var i in res) {
+                        var item = res[i];
+                        var tmp = '' + item._id
+                        tmp = tmp.substring(16)
+                        var listItem = [];
+                        listItem.push('<tr>');
+                        listItem.push('<td>');
+                        listItem.push(tmp);
+                        listItem.push('</td>');
+                        listItem.push('<td>');
+                        listItem.push(item.title);
+                        listItem.push('</td>');
+                        listItem.push('<td>');
+                        listItem.push(item.timeLength);
+                        listItem.push('</td>');
+                        listItem.push('<td>');
+                        listItem.push(item.path);
+                        listItem.push('</td>');
+                        listItem.push('</tr>');
+                        list.push(listItem.join(''));
+                    }
+                    $main_audios.html(list.join(''));
+                    $('.modal[data-id="audio"]').modal('hide');
                 });
             })
         })();

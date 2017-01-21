@@ -74,6 +74,13 @@ router.get('/albums-by-ids', (req, res) => {
     //{_id: {'$in': albums}
 });
 
+router.get('/audios-by-ids', (req, res) => {
+    const data = req.query;
+    db.audios_by_ids(data.chks, (audios) => {
+        res.json(audios);
+    })
+});
+
 router.get('/audios', (req, res) => {
     const options = req.query;
     db.audios(options, (audios) => {
