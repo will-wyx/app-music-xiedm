@@ -17,6 +17,8 @@ const management = require('./routes/management/management');
 const managementapi = require('./routes/api/management');
 const audio = require('./routes/api/audio');
 
+const form = require('./routes/form');
+
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -41,6 +43,8 @@ app.use('/search', search);
 app.use('/management', management);
 app.use('/api/management', managementapi);
 app.use('/api/audio', audio);
+
+app.use('/form', form);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

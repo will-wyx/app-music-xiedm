@@ -1,0 +1,40 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/form.css')
+block content
+    .container
+        .panel.panel-default
+            .panel-heading 联系我们
+            .panel-body
+                form.form-horizontal(role='form')
+                    .form-group
+                        label.col-sm-3.control-label 联系人姓名 Contact Name
+                        .col-sm-3
+                            input.form-control(type='text')
+                        label.col-sm-3.control-label 手机 Cell/Mobile Phone
+                        .col-sm-3
+                            input.form-control(type='text')
+                    .form-group
+                        label.col-sm-3.control-label 电子邮件 E-mail
+                        .col-sm-3
+                            input.form-control(type='text')
+                        label.col-sm-3.control-label 国家 Country
+                        .col-sm-3
+                            input.form-control(type='text')
+                    .form-group
+                        label.col-sm-3.control-label 城市 City
+                        .col-sm-3
+                            input.form-control(type='text')
+                        label.col-sm-3.control-label 公司名称 Company Name
+                        .col-sm-3
+                            input.form-control(type='text')
+                    .form-group
+                        label.col-sm-3.control-label 地址 Address
+                        .col-sm-9
+                            input.form-control(type='text')
+                    .form-group
+                        label.col-sm-3.control-label 留言 Message
+                        .col-sm-9
+                            textarea.form-control(rows='3')
+                    button.btn.btn-primary.pull-right 提交 Submit
