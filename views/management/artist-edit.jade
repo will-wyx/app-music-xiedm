@@ -62,7 +62,11 @@ block content
                     .form-group
                         label.col-sm-2.control-label(for='inputIcon') 肖像
                         .col-sm-10
-                            img(src= artist.icon)
+                            .row
+                                .col-md-3
+                                    a.thumbnail(href='javascript:;')
+                                        img(style='width: 100%; display: block;', src=artist.icon, data-holder-rendered='true')
+                            //img(src= artist.icon)
                             input#inputIcon.file(type='file', data-preview-file-type='text', data-allowed-file-extensions='["jpg", "png"]')
                     .form-group
                         label.col-sm-2.control-label 音乐
@@ -80,7 +84,7 @@ block content
                                     tbody#main_audios
                                         each item in artist.audios
                                             -
-                                                var tmp = '' + item.id
+                                                var tmp = '' + item._id
                                                 tmp = tmp.substring(16)
                                             tr
                                                 td= tmp

@@ -42,9 +42,14 @@ const dbserver = {
             coll_artist.findOne({_id}, (err, docs_artist) => {
                 const coll_album = db.collection('album');
                 const albums = docs_artist.albums || [];
-                coll_album.find({_id: {'$in': albums}}, {name: true, cover: true}).toArray((err, docs_album) => {
+                coll_album.find({_id: {'$in': albums}}).toArray((err, docs_album) => {
                     docs_artist.albums = docs_album;
-                    callback(docs_artist);
+                    const coll_audio = db.collection('media');
+                    const audios = docs_artist.audios || [];
+                    coll_audio.find({_id: {'$in': audios}}).toArray((err, docs_audio) => {
+                        docs_artist.audios = docs_audio;
+                        callback(docs_artist);
+                    })
                 });
             });
         });
