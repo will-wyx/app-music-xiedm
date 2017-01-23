@@ -7,34 +7,70 @@ block content
         .panel.panel-default
             .panel-heading 音乐发行
             .panel-body
-                form.form-horizontal(role='form')
-                    .form-group
-                        label.col-sm-3.control-label 联系人姓名 Contact Name
-                        .col-sm-3
-                            input.form-control(type='text')
-                        label.col-sm-3.control-label 手机 Cell/Mobile Phone
-                        .col-sm-3
-                            input.form-control(type='text')
-                    .form-group
-                        label.col-sm-3.control-label 电子邮件 E-mail
-                        .col-sm-3
-                            input.form-control(type='text')
-                        label.col-sm-3.control-label 国家 Country
-                        .col-sm-3
-                            input.form-control(type='text')
-                    .form-group
-                        label.col-sm-3.control-label 城市 City
-                        .col-sm-3
-                            input.form-control(type='text')
-                        label.col-sm-3.control-label 公司名称 Company Name
-                        .col-sm-3
-                            input.form-control(type='text')
-                    .form-group
-                        label.col-sm-3.control-label 地址 Address
+                form#frm_main.form-horizontal(role='form', method='post', action='/form/business')
+                    .form-group#grp_contact
+                        label.control-label.col-sm-3(for='input_contact')
+                            span *&nbsp
+                            | 联系人姓名 Contact Name
                         .col-sm-9
-                            input.form-control(type='text')
-                    .form-group
-                        label.col-sm-3.control-label 留言 Message
+                            input.form-control(type='text', required='required', name='contact', id='input_contact')
+                    .form-group#grp_mobile
+                        label.control-label.col-sm-3(for='input_mobile')
+                            span *&nbsp
+                            | 手机 Cell/Mobile Phone
                         .col-sm-9
-                            textarea.form-control(rows='3')
-                    button.btn.btn-primary.pull-right 提交 Submit
+                            input.form-control(type='text', required='required', name='mobile', id='input_mobile')
+                    .form-group#grp_email
+                        label.control-label.col-sm-3(for='input_email')
+                            span *&nbsp
+                            | 电子邮件 E-mail
+                        .col-sm-9
+                            input.form-control(type='text', required='required', name='email', id='input_email')
+                    .form-group#grp_country
+                        label.control-label.col-sm-3(for='input_country')
+                            span *&nbsp
+                            | 国家 Country
+                        .col-sm-9
+                            input.form-control(type='text', required='required', name='country', id='input_country')
+                    .form-group#grp_city
+                        label.control-label.col-sm-3(for='input_city')
+                            span *&nbsp
+                            | 城市 City
+                        .col-sm-9
+                            input.form-control(type='text', required='required', name='city', id='input_city')
+                    .form-group#grp_company
+                        label.control-label.col-sm-3(for='input_company')
+                            span *&nbsp
+                            | 公司名称 Company Name
+                        .col-sm-9
+                            input.form-control(type='text', required='required', name='company', id='input_company')
+                    .form-group#grp_address
+                        label.control-label.col-sm-3(for='input_address') 地址 Address
+                        .col-sm-9
+                            input.form-control(type='text', name='address', id='input_address')
+                    .form-group#grp_message
+                        label.control-label.col-sm-3(for='input_message') 留言 Message
+                        .col-sm-9
+                            textarea.form-control(rows='3', name='message', id='input_message')
+                    button.btn.btn-primary.pull-right(type='submit') 提交 Submit
+block footer
+    script.
+        (function(){
+            var $frm_main = $('#frm_main');
+            var $frm_control = $('.form-control');
+            $frm_main.on('submit', function() {
+                for(var i = 0, len = $frm_control.length; i < len; ++i) {
+                    var item = $frm_control[i];
+                    var $item = $(item)
+                    var required = $item.attr('required');
+                    var field = $item.attr('name');
+                    var value = $item.val();
+                    if(required && !value) {
+                        var $grp = $('#grp_' + field);
+                        $grp.addClass('has-error');
+                        return false;
+                    }
+                }
+                return true;
+            });
+        })()

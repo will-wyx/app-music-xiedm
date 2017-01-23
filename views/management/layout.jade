@@ -37,6 +37,18 @@ html
                         if role.media
                             li(class="#{path=='/media'?'active':''}")
                                 a(href='/management/media') 音乐
+                        if role.form
+                            li(class="dropdown #{path == '/form' ? 'active' : ''}")
+                                a.dropdown-toggle(href='#', data-toggle='dropdown')
+                                    | 用户表单
+                                    span.caret
+                                ul.dropdown-menu(role='menu')
+                                    li
+                                        a(href='/management/form/business') 专业服务
+                                    li
+                                        a(href='/management/form/booking') 音乐发行
+                                    li
+                                        a(href='/management/form/contact') 联系我们
                         if role.layout
                             li(class="dropdown #{path=='/layout'?'active':''}")
                                 a.dropdown-toggle(href='#', data-toggle='dropdown')

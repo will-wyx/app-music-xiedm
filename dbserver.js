@@ -312,6 +312,30 @@ const dbserver = {
                 callback(docs);
             });
         })
+    },
+    businessAdd: (data, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('business');
+            collection.insertOne(data, (err, r) => {
+                callback(r);
+            })
+        });
+    },
+    contactAdd: (data, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('contact');
+            collection.insertOne(data, (err, r) => {
+                callback(r);
+            })
+        });
+    },
+    bookingAdd: (data, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('booking');
+            collection.insertOne(data, (err, r) => {
+                callback(r);
+            })
+        });
     }
 };
 
