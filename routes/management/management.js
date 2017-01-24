@@ -203,4 +203,28 @@ router.get('/logout', (req, res) => {
     res.clearCookie('auth');
     res.render('management/login')
 });
+
+router.get('/form/business', (req, res) => {
+    const pagesize = 15;
+    db.businessPaging({index: 1, pagesize}, (business, count) => {
+        const pagecount = Math.ceil(count / pagesize);
+        res.render('management/form/business', {path: '/form', business, pagecount, role: req.locals.role});
+    })
+});
+
+router.get('/form/contact', (req, res) => {
+    const pagesize = 15;
+    db.contactPaging({index: 1, pagesize}, (contact, count) => {
+        const pagecount = Math.ceil(count / pagesize);
+        res.render('management/form/contact', {path: '/form', contact, pagecount, role: req.locals.role});
+    })
+});
+router.get('/form/booking', (req, res) => {
+    const pagesize = 15;
+    db.bookingPaging({index: 1, pagesize}, (booking, count) => {
+        const pagecount = Math.ceil(count / pagesize);
+        res.render('management/form/booking', {path: '/form', booking, pagecount, role: req.locals.role});
+    })
+});
+
 module.exports = router;

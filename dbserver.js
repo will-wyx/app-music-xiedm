@@ -239,6 +239,39 @@ const dbserver = {
             })
         });
     },
+    businessPaging: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('business');
+            const {index, pagesize} = options;
+            collection.count((countErr, count) => {
+                collection.find().skip((index - 1) * pagesize).limit(pagesize).toArray((err, docs) => {
+                    callback(docs, count);
+                })
+            })
+        })
+    },
+    contactPaging: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('content');
+            const {index, pagesize} = options;
+            collection.count((countErr, count) => {
+                collection.find().skip((index - 1) * pagesize).limit(pagesize).toArray((err, docs) => {
+                    callback(docs, count);
+                })
+            })
+        })
+    },
+    bookingPaging: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('content');
+            const {index, pagesize} = options;
+            collection.count((countErr, count) => {
+                collection.find().skip((index - 1) * pagesize).limit(pagesize).toArray((err, docs) => {
+                    callback(docs, count);
+                })
+            })
+        })
+    },
     albums: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('album');

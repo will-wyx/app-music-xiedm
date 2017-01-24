@@ -25,7 +25,7 @@ router.post('/login', (req, res) => {
             let roles = result && result.role;
             result.role = authority(roles);
             // res.cookie('auth', result, {expires: new Date(Date.now() + 900000)});
-            res.cookie('auth', result, {expires: new Date(Date.now() + 900000)});
+            res.cookie('auth', result);
             res.json(true);
         }
     });
@@ -50,6 +50,27 @@ router.get('/album', (req, res) => {
     db.albumPaging({index: +index, pagesize: +pagesize}, (albums) => {
         res.json(albums);
     });
+});
+
+router.get('/form/business', (req, res) => {
+    const {index, pagesize} = req.query;
+    db.businessPaging({index: +index, pagesize: +pagesize}, (business) => {
+        res.json(business);
+    })
+});
+
+router.get('/form/contact', (req, res) => {
+    const {index, pagesize} = req.query;
+    db.contactPaging({index: +index, pagesize: +pagesize}, (business) => {
+        res.json(business);
+    })
+});
+
+router.get('/form/booking', (req, res) => {
+    const {index, pagesize} = req.query;
+    db.bookingPaging({index: +index, pagesize: +pagesize}, (business) => {
+        res.json(business);
+    })
 });
 
 router.get('/albums', (req, res) => {
