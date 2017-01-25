@@ -158,6 +158,15 @@ const dbserver = {
             });
         });
     },
+    mediaDelete: (id, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('media');
+            const _id = ObjectId(id);
+            collection.deleteOne({_id}, (err, r) => {
+                callback(r);
+            })
+        })
+    },
     artist: (callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('artist');

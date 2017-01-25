@@ -60,3 +60,8 @@
 .top-bar .search-wrapper {
     float: right;
 }
+
+.faq {
+    padding: 0 0 0 12px;
+    color: #bbb;
+}

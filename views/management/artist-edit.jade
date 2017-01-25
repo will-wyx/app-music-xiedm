@@ -2,6 +2,57 @@ extends layout
 block head
     link(rel='stylesheet', href='/bootstrap-fileinput/css/fileinput.min.css')
 block content
+    .modal.fade(tabindex='-1', role='dialog', aria-hidden='true', data-id='video')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4.modal-title 视频
+                .modal-body
+                    form#frm_video.form-horizontal(role='form')
+                        .form-group
+                            label.col-sm-2.control-label 封面
+                            .col-sm-10
+                                input.form-control(type='url')
+                        .form-group
+                            label.col-sm-2.control-label 名称
+                            .col-sm-10
+                                input.form-control(type='text')
+                        .form-group
+                            label.col-sm-2.control-label 路径
+                            .col-sm-10
+                                input.form-control(type='text')
+
+                .modal-footer
+                    button#btn_video.btn.btn-primary(type='button') 确定
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
+    .modal.fade(tabindex='-1', role='dialog', aria-hidden='true', data-id='schedule')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4.modal-title 档期
+                .modal-body
+                    form#frm_schedule.form-horizontal(role='form')
+                        .form-group
+                            label.col-sm-2.control-label 时间
+                            .col-sm-10
+                                input.form-control(type='text')
+                        .form-group
+                            label.col-sm-2.control-label 场地
+                            .col-sm-10
+                                input.form-control(type='text')
+                        .form-group
+                            label.col-sm-2.control-label 位置
+                            .col-sm-10
+                                input.form-control(type='text')
+                .modal-footer
+                    button#btn_schedule.btn.btn-primary(type='button') 确定
+                    button.btn.btn-default(type='button', data-dismiss='modal') 取消
     .modal.fade(tabindex='-1', role='dialog', aria-hidden='true', data-id='album')
         .modal-dialog
             .modal-content
@@ -55,6 +106,10 @@ block content
                         label.col-sm-2.control-label(for='inputInfo') 基本信息
                         .col-sm-10
                             textarea#inputInfo.form-control(rows='3')= artist.description
+                    .form-group
+                        label.col-sm-2.control-label(for='inputStyle') 流派
+                        .col-sm-10
+                            input#inputStyle.form-control(type='text', placeholder='流派', value= artist.style)
                     .form-group
                         label.col-sm-2.control-label(for='inputDescription') 简介
                         .col-sm-10
@@ -120,7 +175,7 @@ block content
                         .col-sm-10
                             .panel.panel-default
                                 .panel-heading 视频列表
-                                    a.pull-right.btn.btn-link.btn-xs(href='javascript:;') 新增
+                                    a.pull-right.btn.btn-link.btn-xs.btn__add(href='javascript:;', data-target='video') 新增
                                 table.table.table-striped
                                     thead
                                         tr
@@ -146,7 +201,7 @@ block content
                         .col-sm-10
                             .panel.panel-default
                                 .panel-heading 档期列表
-                                    a.pull-right.btn.btn-link.btn-xs(href='javascript:;') 新增
+                                    a.pull-right.btn.btn-link.btn-xs.btn__add(href='javascript:;', data-target='schedule') 新增
                                 table.table.table-striped
                                     thead
                                         tr

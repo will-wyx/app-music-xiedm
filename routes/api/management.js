@@ -52,6 +52,13 @@ router.get('/album', (req, res) => {
     });
 });
 
+router.get('/media', (req, res) => {
+    const {index, pagesize} = req.query;
+    db.mediaPaging({index: +index, pagesize: +pagesize}, (medias) => {
+        res.json(medias);
+    })
+});
+
 router.get('/form/business', (req, res) => {
     const {index, pagesize} = req.query;
     db.businessPaging({index: +index, pagesize: +pagesize}, (business) => {
@@ -153,6 +160,11 @@ router.delete('/album', (req, res) => {
     db.albumDelete(req.body.id, (r) => {
         res.send(r);
     });
+});
+router.delete('/media', (req, res) => {
+    db.mediaDelete(req.body.id, (r) => {
+        res.send(r);
+    })
 });
 
 
