@@ -15,16 +15,15 @@ block content
                         .form-group
                             label.col-sm-2.control-label 封面
                             .col-sm-10
-                                input.form-control(type='url')
+                                input.form-control(type='url', name='pic')
                         .form-group
                             label.col-sm-2.control-label 名称
                             .col-sm-10
-                                input.form-control(type='text')
+                                input.form-control(type='text', name='title')
                         .form-group
                             label.col-sm-2.control-label 路径
                             .col-sm-10
-                                input.form-control(type='text')
-
+                                input.form-control(type='text', name='path')
                 .modal-footer
                     button#btn_video.btn.btn-primary(type='button') 确定
                     button.btn.btn-default(type='button', data-dismiss='modal') 取消
@@ -41,15 +40,15 @@ block content
                         .form-group
                             label.col-sm-2.control-label 时间
                             .col-sm-10
-                                input.form-control(type='text')
+                                input.form-control(type='text', name='time')
                         .form-group
                             label.col-sm-2.control-label 场地
                             .col-sm-10
-                                input.form-control(type='text')
+                                input.form-control(type='text', name='venue')
                         .form-group
                             label.col-sm-2.control-label 位置
                             .col-sm-10
-                                input.form-control(type='text')
+                                input.form-control(type='text', name='addr')
                 .modal-footer
                     button#btn_schedule.btn.btn-primary(type='button') 确定
                     button.btn.btn-default(type='button', data-dismiss='modal') 取消
@@ -183,7 +182,7 @@ block content
                                             th.col-md-2 名称
                                             th.col-md-6 路径
                                             th.col-md-2 操作
-                                    tbody
+                                    tbody#main_videos
                                         each item in artist.videos
                                             tr
                                                 td
@@ -194,7 +193,7 @@ block content
                                                 td= item.title
                                                 td= item.path
                                                 td
-                                                    a(href='javascript:;') 删除
+                                                    a.link_delete(href='javascript:;') 删除
 
                     .form-group
                         label.col-sm-2.control-label 档期
@@ -209,14 +208,14 @@ block content
                                             th.col-md-4 场地
                                             th.col-md-3 位置
                                             td.col-md-2 操作
-                                    tbody
+                                    tbody#main_schedule
                                         each item in artist.schedule
                                             tr
                                                 td= item.time
                                                 td= item.venue
                                                 td= item.addr
                                                 td
-                                                    a(href='javascript:;') 删除
+                                                    a.link_delete(href='javascript:;') 删除
 
                     .form-group
                         .col-sm-offset-10.col-sm-2
@@ -230,7 +229,6 @@ block footer
     script.
         (function () {
             $('#inputIcon').fileinput({language: 'zh'});
-
             var $btn__add = $('a.btn__add');
             $btn__add.on('click', function(){
                 var id = $(this).attr('data-target');
@@ -368,5 +366,67 @@ block footer
                     $main_audios.html(list.join(''));
                     $('.modal[data-id="audio"]').modal('hide');
                 });
+            });
+            var $btn_video = $('#btn_video');
+            var $btn_schedule = $('#btn_schedule');
+            var $frm_video = $('#frm_video');
+            var $frm_schedule = $('#frm_schedule');
+            $btn_video.on('click', function() {
+                var inputs = $frm_video.find('input');
+                var data = {};
+                for(var i = 0, len = inputs.length; i < len; ++i) {
+                    var item = inputs[i];
+                    data[item.name] = item.value;
+                    item.value = '';
+                }
+                var tds = [];
+                tds.push('<tr>');
+                tds.push('<td><div class="row"><div class="col-md-12"><a class="thumbnail" href="javascript:;">');
+                tds.push('<img style="width: 100%; display: block;" src="' + data.pic + '" data-holder-rendered="true">')
+                tds.push('</a></div></div></td>');
+                tds.push('<td>');
+                tds.push(data.title);
+                tds.push('</td>');
+                tds.push('<td>');
+                tds.push(data.path);
+                tds.push('</td>');
+                tds.push('<td>');
+                tds.push('<a class="link_delete" href="javascript:;">删除</a>');
+                tds.push('</td>');
+                tds.push('</tr>');
+                var tr = tds.join('');
+                $('#main_videos').append(tr);
+                $('.modal[data-id="video"]').modal('hide');
+            });
+            $btn_schedule.on('click', function() {
+                var inputs = $frm_schedule.find('input');
+                var data = {};
+                for(var i = 0, len = inputs.length; i < len; ++i) {
+                    var item = inputs[i];
+                    data[item.name] = item.value;
+                    item.value = '';
+                }
+                var tds = [];
+                tds.push('<tr>');
+                tds.push('<td>');
+                tds.push(data.time);
+                tds.push('</td>');
+                tds.push('<td>');
+                tds.push(data.venue);
+                tds.push('</td>');
+                tds.push('<td>');
+                tds.push(data.addr);
+                tds.push('</td>');
+                tds.push('<td>');
+                tds.push('<a class="link_delete" href="javascript:;">删除</a>');
+                tds.push('</td>');
+                tds.push('</tr>');
+                var tr = tds.join('');
+                $('#main_schedule').append(tr);
+                $('.modal[data-id="schedule"]').modal('hide');
+            });
+            $(document).on('click', '.link_delete', function() {
+                var $tr = $(this).parents('tr');
+                $tr.remove();
             })
         })();

@@ -4,6 +4,15 @@ block head
     link(rel='stylesheet', href='/stylesheets/artist.css')
     link(rel='stylesheet', href='/player/audioplayerengine/initaudioplayer-1.css')
 block content
+    #share_main.bdsharebuttonbox(data-tag='share_1')
+        a.bds_weixin(data-cmd='weixin')
+        a.bds_qzone(data-cmd='qzone', href='#')
+        a.bds_tsina(data-cmd='tsina')
+        a.bds_baidu(data-cmd='baidu')
+        a.bds_renren(data-cmd='renren')
+        a.bds_douban(data-cmd='douban')
+    script.
+        with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
     #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
         .modal-dialog
             .modal-content
@@ -47,7 +56,7 @@ block content
                         a(href='#')
                             span.data_statistic__tit 预订
                     li.data_statistic__item
-                        a(href='#')
+                        a.link-share(href='javascript:;')
                             span.data_statistic__tit 分享
                     li.data_statistic__item.data_statistic__item--last
                         a(href='javascript:;', data-target='popup_data_detail')
@@ -79,7 +88,7 @@ block content
                                             a.list_menu__item.list_menu__play.js_play(data-index= index, href='javascript:;', title='播放')
                                                 i.list_menu__icon_play
                                                 span.icon_txt 播放
-                                            a.list_menu__item.list_menu__share.js_share(href='javascript:;', title='分享', aria-haspopup='true', data-aria='menu_share')
+                                            a.list_menu__item.list_menu__share.link-share.js_share(href='javascript:;', title='分享', aria-haspopup='true', data-aria='menu_share')
                                                 i.list_menu__icon_share
                                                 span.icon_txt 分享
                                     .songlist__album 未知
@@ -153,6 +162,7 @@ block footer
                 } else {
                     $popup.hide();
                 }
+                $share_main.hide();
             });
 
 
@@ -261,5 +271,13 @@ block footer
             $js_singer_radio.on('click', function() {
                 var instance = $player.data('object');
                 instance.audioRun(0, true)
-            })
+            });
+            var $link_share = $('.link-share');
+            var $share_main = $('#share_main');
+            $link_share.on('click', function() {
+                var $this = $(this);
+                $share_main.css({'left': $this.offset().left, 'top': $this.offset().top + 3});
+                $share_main.show();
+                return false;
+            });
         })();

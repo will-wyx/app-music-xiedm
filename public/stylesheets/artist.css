@@ -2862,3 +2862,13 @@ body:last-child .popup_data_detail__arrow {
     right: 0;
     left: auto;
 }
+
+#share_main {
+    display: none;
+    border: 1px solid #ccc;
+    width: auto;
+    position: absolute;
+    z-index: 999;
+    padding-left: 6px;
+    background: #fff;
+}

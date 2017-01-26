@@ -43,8 +43,8 @@
 		});
         $(document).on("click",".msb_main",function(){
 			if ($(this).hasClass("disabled")) return;
-            var e = 500;//动画时间
-            var t = 250;//延迟时间
+            var e = 100;//动画时间
+            var t = 50;//延迟时间
             var r = $(this).parent().find(".msb_network_button").length;  //分享组件的个数
             var i = 60;
             var s = e + (r - 1) * t;
