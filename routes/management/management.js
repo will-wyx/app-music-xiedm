@@ -7,6 +7,7 @@ const db = require('../../dbserver');
 
 const multer = require('multer');
 const mediaupload = multer({dest: "public/upload/medias"});
+const imgupload = multer({dest: "public/upload/imgs"});
 
 router.all('/*', (req, res, next) => {
     const role = req.cookies.auth && req.cookies.auth.role;
@@ -182,6 +183,33 @@ router.post('/media-upload', mediaupload.single('file'), (req, res) => {
     req.body.path = req.file.path.substr(6);
     db.mediaAdd(req.body, (r) => {
         res.redirect('/management/media');
+    });
+});
+
+router.post('/artist-upload', imgupload.single('file'), (req, res) => {
+    req.body.icon = req.file.path.substr(6);
+    if(req.body.infos)
+        req.body.infos = req.body.infos.split('\r\n');
+    req.body.audios = JSON.parse(req.body.audios);
+    req.body.albums = JSON.parse(req.body.albums);
+    req.body.videos = JSON.parse(req.body.videos);
+    req.body.schedule = JSON.parse(req.body.schedule);
+
+    db.artistAdd(req.body, (r) => {
+        res.redirect('/management/artist');
+    });
+});
+router.post('/label-upload', imgupload.single('file'), (req, res) => {
+    req.body.icon = req.file.path.substr(6);
+    if(req.body.infos)
+        req.body.infos = req.body.infos.split('\r\n');
+    req.body.audios = JSON.parse(req.body.audios);
+    req.body.albums = JSON.parse(req.body.albums);
+    req.body.videos = JSON.parse(req.body.videos);
+    req.body.schedule = JSON.parse(req.body.schedule);
+
+    db.labelAdd(req.body, (r) => {
+        res.redirect('/management/label');
     });
 });
 

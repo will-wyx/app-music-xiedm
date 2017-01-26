@@ -49,10 +49,6 @@ block content
                             span.data_statistic__tit MV
                             strong.data_statistic__number= artist.videos.length
                     li.data_statistic__item
-                        a(href='#t_schedule')
-                            span.data_statistic__tit 档期
-                            strong.data_statistic__number= artist.schedule.length
-                    li.data_statistic__item
                         a(href='#')
                             span.data_statistic__tit 预订
                     li.data_statistic__item
@@ -60,11 +56,11 @@ block content
                             span.data_statistic__tit 分享
                     li.data_statistic__item.data_statistic__item--last
                         a(href='javascript:;', data-target='popup_data_detail')
-                            span.data_statistic__tit 歌手介绍
+                            span.data_statistic__tit 厂牌介绍
                 .data__actions(role='toolbar')
                     a.mod_btn_green.js_singer_radio(href='javascript:;')
                         i.mod_btn_green__icon_play
-                        | 播放歌手热门歌曲
+                        | 播放厂牌热门歌曲
         // 首页 begin
         #index_tab.js_tab
             .mod_part
@@ -119,27 +115,10 @@ block content
                                         i.mod_cover__icon_play
                                     h3.mv_list__title
                                         a.js_mv(href='javascript:;', data-path=item.path)= item.title
-            .mod_part
-                .part__hd
-                    h2#t_schedule.part__tit 档期
-                .mod_songlist
-                    ul.songlist__header
-                        li.songlist__header_addr 时间
-                        li.songlist__header_addr 场地
-                        li.songlist__header_addr 地点
-                        li.songlist__header_addr 订票
-                    ul.songlist__list
-                        each item in artist.schedule
-                            li
-                                .songlist__item
-                                    .songlist__addr= item.time
-                                    .songlist__addr= item.venue
-                                    .songlist__addr= item.addr
-                                    .songlist__addr 订票
         // 专辑简介
         #popup_data_detail.popup_data_detail(data-aria='popup', style='display:none;z-index:10000000000;')
             .popup_data_detail__cont
-                h3.popup_data_detail__tit 歌手简介
+                h3.popup_data_detail__tit 厂牌简介
                 each item in artist.infos
                     p= item
             i.popup_data_detail__arrow

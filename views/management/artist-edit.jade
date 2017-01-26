@@ -96,23 +96,23 @@ block content
         .panel.panel-default
             .panel-heading 编辑艺人
             .panel-body
-                form.form-horizontal(role='form')
+                form#frm_main.form-horizontal(role='form', method='post', action='/management/artist-upload', enctype='multipart/form-data')
                     .form-group
                         label.col-sm-2.control-label(for='inputName') 名称
                         .col-sm-10
-                            input#inputName.form-control(type='text', placeholder='名称', value= artist.name)
+                            input#inputName.form-control(type='text', placeholder='名称', name='name', value= artist.name)
                     .form-group
                         label.col-sm-2.control-label(for='inputInfo') 基本信息
                         .col-sm-10
-                            textarea#inputInfo.form-control(rows='3')= artist.description
+                            textarea#inputInfo.form-control(rows='3', name='description')= artist.description
                     .form-group
                         label.col-sm-2.control-label(for='inputStyle') 流派
                         .col-sm-10
-                            input#inputStyle.form-control(type='text', placeholder='流派', value= artist.style)
+                            input#inputStyle.form-control(type='text', placeholder='流派', name='style', value= artist.style)
                     .form-group
                         label.col-sm-2.control-label(for='inputDescription') 简介
                         .col-sm-10
-                            textarea#inputDescription.form-control(rows='5')= artist.infos
+                            textarea#inputDescription.form-control(rows='5', name='infos')= artist.infos
                     .form-group
                         label.col-sm-2.control-label(for='inputIcon') 肖像
                         .col-sm-10
@@ -121,10 +121,11 @@ block content
                                     a.thumbnail(href='javascript:;')
                                         img(style='width: 100%; display: block;', src=artist.icon, data-holder-rendered='true')
                             //img(src= artist.icon)
-                            input#inputIcon.file(type='file', data-preview-file-type='text', data-allowed-file-extensions='["jpg", "png"]')
+                            input#inputIcon.file(type='file', name='file', data-preview-file-type='text', data-allowed-file-extensions='["jpg", "png"]')
                     .form-group
                         label.col-sm-2.control-label 音乐
                         .col-sm-10
+                            input#inputAudios(type='hidden', name='audios')
                             .panel.panel-default
                                 .panel-heading 音乐列表
                                     a.pull-right.btn.btn-link.btn-xs.btn__add(href='javascript:;', data-target='audio') 选择
@@ -140,7 +141,7 @@ block content
                                             -
                                                 var tmp = '' + item._id
                                                 tmp = tmp.substring(16)
-                                            tr
+                                            tr(data-id= item._id)
                                                 td= tmp
                                                 td= item.title
                                                 td= item.timeLength
@@ -148,6 +149,7 @@ block content
                     .form-group
                         label.col-sm-2.control-label 专辑
                         .col-sm-10
+                            input#inputAlbums(type='hidden', name='albums')
                             .panel.panel-default
                                 .panel-heading 专辑列表
                                     a.pull-right.btn.btn-link.btn-xs.btn__add(href='javascript:;', data-target='album') 选择
@@ -163,7 +165,7 @@ block content
                                             -
                                                 var tmp = '' + item._id
                                                 tmp = tmp.substring(16)
-                                            tr
+                                            tr(data-id= item._id)
                                                 td= tmp
                                                 td= item.name
                                                 td= item.label
@@ -172,6 +174,7 @@ block content
                     .form-group
                         label.col-sm-2.control-label 视频
                         .col-sm-10
+                            input#inputVideos(type='hidden', name='videos')
                             .panel.panel-default
                                 .panel-heading 视频列表
                                     a.pull-right.btn.btn-link.btn-xs.btn__add(href='javascript:;', data-target='video') 新增
@@ -185,19 +188,20 @@ block content
                                     tbody#main_videos
                                         each item in artist.videos
                                             tr
-                                                td
+                                                td(data-field='pic', data-value= item.pic)
                                                     .row
                                                         .col-md-12
                                                             a.thumbnail(href='javascript:;')
                                                                 img(style='width: 100%; display: block;', src=item.pic, data-holder-rendered='true')
-                                                td= item.title
-                                                td= item.path
+                                                td(data-field='title', data-value= item.title)= item.title
+                                                td(data-field='path', data-value= item.path)= item.path
                                                 td
                                                     a.link_delete(href='javascript:;') 删除
 
                     .form-group
                         label.col-sm-2.control-label 档期
                         .col-sm-10
+                            input#inputSchedules(type='hidden', name='schedule')
                             .panel.panel-default
                                 .panel-heading 档期列表
                                     a.pull-right.btn.btn-link.btn-xs.btn__add(href='javascript:;', data-target='schedule') 新增
@@ -211,15 +215,15 @@ block content
                                     tbody#main_schedule
                                         each item in artist.schedule
                                             tr
-                                                td= item.time
-                                                td= item.venue
-                                                td= item.addr
+                                                td(data-field='time', data-value=item.time)= item.time
+                                                td(data-field='venue', data-value=item.venue)= item.venue
+                                                td(data-field='addr', data-value=item.addr)= item.addr
                                                 td
                                                     a.link_delete(href='javascript:;') 删除
 
                     .form-group
                         .col-sm-offset-10.col-sm-2
-                            button#btn_submit.btn.btn-default(type='button').btn-block 提交
+                            button#btn_submit.btn.btn-default(type='submit').btn-block 提交
 block footer
     script(src='/bootstrap-fileinput/js/plugins/canvas-to-blob.js')
     script(src='/bootstrap-fileinput/js/plugins/sortable.js')
@@ -308,7 +312,7 @@ block footer
                         var tmp = '' + item._id
                         tmp = tmp.substring(16)
                         var listItem = [];
-                        listItem.push('<tr>');
+                        listItem.push('<tr data-id="' + item._id + '">');
                         listItem.push('<td>');
                         listItem.push(tmp);
                         listItem.push('</td>');
@@ -347,7 +351,7 @@ block footer
                         var tmp = '' + item._id
                         tmp = tmp.substring(16)
                         var listItem = [];
-                        listItem.push('<tr>');
+                        listItem.push('<tr data-id="' + item._id + '">');
                         listItem.push('<td>');
                         listItem.push(tmp);
                         listItem.push('</td>');
@@ -371,6 +375,7 @@ block footer
             var $btn_schedule = $('#btn_schedule');
             var $frm_video = $('#frm_video');
             var $frm_schedule = $('#frm_schedule');
+            var $main_videos = $('#main_videos');
             $btn_video.on('click', function() {
                 var inputs = $frm_video.find('input');
                 var data = {};
@@ -381,13 +386,13 @@ block footer
                 }
                 var tds = [];
                 tds.push('<tr>');
-                tds.push('<td><div class="row"><div class="col-md-12"><a class="thumbnail" href="javascript:;">');
+                tds.push('<td data-field="pic" data-value="' + data.pic + '"><div class="row"><div class="col-md-12"><a class="thumbnail" href="javascript:;">');
                 tds.push('<img style="width: 100%; display: block;" src="' + data.pic + '" data-holder-rendered="true">')
                 tds.push('</a></div></div></td>');
-                tds.push('<td>');
+                tds.push('<td data-field="title" data-value="' + data.title + '">');
                 tds.push(data.title);
                 tds.push('</td>');
-                tds.push('<td>');
+                tds.push('<td data-field="path" data-value="' + data.path + '">');
                 tds.push(data.path);
                 tds.push('</td>');
                 tds.push('<td>');
@@ -395,9 +400,10 @@ block footer
                 tds.push('</td>');
                 tds.push('</tr>');
                 var tr = tds.join('');
-                $('#main_videos').append(tr);
+                $main_videos.append(tr);
                 $('.modal[data-id="video"]').modal('hide');
             });
+            var $main_schedule = $('#main_schedule');
             $btn_schedule.on('click', function() {
                 var inputs = $frm_schedule.find('input');
                 var data = {};
@@ -408,13 +414,13 @@ block footer
                 }
                 var tds = [];
                 tds.push('<tr>');
-                tds.push('<td>');
+                tds.push('<td data-field="time" data-value="' + data.time + '">');
                 tds.push(data.time);
                 tds.push('</td>');
-                tds.push('<td>');
+                tds.push('<td data-field="venue" data-value="' + data.venue + '">');
                 tds.push(data.venue);
                 tds.push('</td>');
-                tds.push('<td>');
+                tds.push('<td data-field="addr" data-value="' + data.addr + '">');
                 tds.push(data.addr);
                 tds.push('</td>');
                 tds.push('<td>');
@@ -422,11 +428,67 @@ block footer
                 tds.push('</td>');
                 tds.push('</tr>');
                 var tr = tds.join('');
-                $('#main_schedule').append(tr);
+                $main_schedule.append(tr);
                 $('.modal[data-id="schedule"]').modal('hide');
             });
             $(document).on('click', '.link_delete', function() {
                 var $tr = $(this).parents('tr');
                 $tr.remove();
-            })
+            });
+            var $frm_main = $('#frm_main');
+            $frm_main.on('submit', function() {
+                var $audios = $main_audios.children('tr');
+                var audios = [];
+                var i, len, item = {}, $item = {};
+                for(i = 0, len = $audios.length; i < len; ++i) {
+                    item = $audios[i];
+                    $item = $(item);
+                    var id = $item.attr('data-id');
+                    audios.push(id);
+                }
+                $('#inputAudios').val(JSON.stringify(audios));
+                var $albums = $main_albums.children('tr');
+                var albums = [];
+                for(i = 0, len = $albums.length; i < len; ++i) {
+                    item = $albums[i];
+                    $item = $(item);
+                    var id = $item.attr('data-id');
+                    albums.push(id);
+                }
+                $('#inputAlbums').val(JSON.stringify(albums));
+                var $videos = $main_videos.children('tr');
+                var videos = [];
+                for(i = 0, len = $videos.length; i < len; ++i) {
+                    item = $videos[i];
+                    $item = $(item);
+                    var tds = $item.children('[data-field]');
+                    var data = {};
+                    for(var j = 0, jlen = tds.length; j < jlen; ++j) {
+                        var jtem = tds[j];
+                        var $jtem = $(jtem);
+                        var field = $jtem.attr('data-field');
+                        var value = $jtem.attr('data-value');
+                        data[field] = value;
+                    }
+                    videos.push(data);
+                }
+                $('#inputVideos').val(JSON.stringify(videos));
+                var $schedule = $main_schedule.children('tr');
+                var schedules = [];
+                for(i = 0, len = $schedule.length; i < len; ++i) {
+                    item = $schedule[i];
+                    $item = $(item);
+                    var tds = $item.children('[data-field]');
+                    var data = {};
+                    for(var j = 0, jlen = tds.length; j < jlen; ++j) {
+                        var jtem = tds[j];
+                        var $jtem = $(jtem);
+                        var field = $jtem.attr('data-field');
+                        var value = $jtem.attr('data-value');
+                        data[field] = value;
+                    }
+                    schedules.push(data);
+                }
+                $('#inputSchedules').val(JSON.stringify(schedules));
+            });
         })();

@@ -155,6 +155,11 @@ router.delete('/artist', (req, res) => {
         res.send(r);
     });
 });
+router.delete('/label', (req, res) => {
+    db.labelDelete(req.body.id, (r) => {
+        res.send(r);
+    })
+});
 
 router.delete('/album', (req, res) => {
     db.albumDelete(req.body.id, (r) => {

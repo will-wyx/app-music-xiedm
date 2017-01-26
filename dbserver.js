@@ -101,6 +101,38 @@ const dbserver = {
     artistAdd: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('artist');
+
+            if(options.audios && options.audios.length) {
+                options.audios = options.audios.map(e => {
+                    return ObjectId(e);
+                });
+            }
+            if(options.albums && options.albums.length) {
+                options.albums = options.albums.map(e => {
+                    return ObjectId(e);
+                });
+            }
+            delete options.id;
+            options.date = new Date();
+            collection.insertOne(options, (err, r) => {
+                callback(r);
+            });
+        });
+    },
+    labelAdd: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('label');
+
+            if(options.audios && options.audios.length) {
+                options.audios = options.audios.map(e => {
+                    return ObjectId(e);
+                });
+            }
+            if(options.albums && options.albums.length) {
+                options.albums = options.albums.map(e => {
+                    return ObjectId(e);
+                });
+            }
             delete options.id;
             options.date = new Date();
             collection.insertOne(options, (err, r) => {
@@ -161,6 +193,15 @@ const dbserver = {
     artistDelete: (id, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('artist');
+            const _id = ObjectId(id);
+            collection.deleteOne({_id}, (err, r) => {
+                callback(r);
+            });
+        });
+    },
+    labelDelete: (id, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('label');
             const _id = ObjectId(id);
             collection.deleteOne({_id}, (err, r) => {
                 callback(r);
