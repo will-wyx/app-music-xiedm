@@ -3,6 +3,8 @@
  */
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
+
+const tr = require('transliteration');
 // const url = 'mongodb://xirecord:71906312@ds145178.mlab.com:45178/xirecord';
 // const url = 'mongodb://192.168.8.119:27017/xirecord';
 // const url = 'mongodb://192.168.1.253:27017/xirecord';
@@ -101,7 +103,8 @@ const dbserver = {
     artistAdd: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('artist');
-
+            options.name = options.name.trim();
+            options.prefix = tr.slugify(options.name).substr(0, 1);
             if(options.audios && options.audios.length) {
                 options.audios = options.audios.map(e => {
                     return ObjectId(e);
@@ -122,7 +125,8 @@ const dbserver = {
     labelAdd: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('label');
-
+            options.name = options.name.trim();
+            options.prefix = tr.slugify(options.name).substr(0, 1);
             if(options.audios && options.audios.length) {
                 options.audios = options.audios.map(e => {
                     return ObjectId(e);
