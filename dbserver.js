@@ -54,6 +54,24 @@ const dbserver = {
             });
         });
     },
+    labelOne: (_id, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const coll_artist = db.collection('label');
+            coll_artist.findOne({_id}, (err, docs_artist) => {
+                const coll_album = db.collection('album');
+                const albums = docs_artist.albums || [];
+                coll_album.find({_id: {'$in': albums}}).toArray((err, docs_album) => {
+                    docs_artist.albums = docs_album;
+                    const coll_audio = db.collection('media');
+                    const audios = docs_artist.audios || [];
+                    coll_audio.find({_id: {'$in': audios}}).toArray((err, docs_audio) => {
+                        docs_artist.audios = docs_audio;
+                        callback(docs_artist);
+                    })
+                });
+            });
+        });
+    },
     mediaOne: (_id, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('media');
@@ -175,6 +193,14 @@ const dbserver = {
             });
         });
     },
+    label: (callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const collection = db.collection('label');
+            collection.find({}).toArray((err, docs) => {
+                callback(docs);
+            });
+        });
+    },
     artistQuery: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('artist');
@@ -188,7 +214,7 @@ const dbserver = {
             const collection = db.collection('artist');
             const {index, pagesize} = options;
             collection.count((countErr, count) => {
-                collection.find({type: 'artist'}, {
+                collection.find({}, {
                     _id: true,
                     name: true,
                     date: true,
@@ -203,10 +229,10 @@ const dbserver = {
     },
     labelPaging: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
-            const collection = db.collection('artist');
+            const collection = db.collection('label');
             const {index, pagesize} = options;
             collection.count((countErr, count) => {
-                collection.find({type: 'label'}, {
+                collection.find({}, {
                     _id: true,
                     name: true,
                     date: true,

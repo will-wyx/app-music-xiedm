@@ -8,20 +8,6 @@ const db = require('../../dbserver');
 const multer = require('multer');
 const mediaupload = multer({dest: "public/upload/medias"});
 
-
-// router.all('/news', authNews);
-// router.all('/news/*', authNews);
-//
-// function authNews(req, res, next) {
-//     const role = req.cookies.auth && req.cookies.auth.role;
-//     const flag = role && role.find((e) => e === 'admin' || e === 'news');
-//
-//     if (flag)
-//         return next();
-//     else
-//     // next(new Error('Not authorized'));
-//         res.send(401);
-// }
 router.all('/*', (req, res, next) => {
     const role = req.cookies.auth && req.cookies.auth.role;
     if (role) {
@@ -115,7 +101,7 @@ router.get('/label/add', (req, res) => {
         schedule: [],
         albums: []
     };
-    res.render('management/artist-edit', {path: '/label', artist, role: req.locals.role});
+    res.render('management/label-edit', {path: '/label', artist, role: req.locals.role});
 });
 
 router.get('/artist/:id', (req, res) => {
@@ -132,13 +118,13 @@ router.get('/artist/:id', (req, res) => {
 
 router.get('/label/:id', (req, res) => {
     const _id = db.ObjectId(req.params.id);
-    db.artistOne(_id, (artist) => {
+    db.labelOne(_id, (artist) => {
         artist.infos = artist.infos || [];
         artist.audios = artist.audios || [];
         artist.videos = artist.videos || [];
         artist.schedule = artist.schedule || [];
         artist.albums = artist.albums || [];
-        res.render('management/artist-edit', {path: '/label', artist, role: req.locals.role});
+        res.render('management/label-edit', {path: '/label', artist, role: req.locals.role});
     });
 });
 

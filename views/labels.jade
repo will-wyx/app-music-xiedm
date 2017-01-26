@@ -1,0 +1,16 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/stylesheets/list.css')
+block content
+    div.container
+        div.wrapper
+            ul.artist
+                each item in list
+                    li
+                        a(href='/labels/' + item._id)
+                            dl
+                                dt
+                                    img(src=item.icon)
+                                dd
+                                    h2= item.name
+                                    p= item.description

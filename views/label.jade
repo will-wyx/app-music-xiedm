@@ -1,0 +1,283 @@
+extends layout
+block head
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/artist.css')
+    link(rel='stylesheet', href='/player/audioplayerengine/initaudioplayer-1.css')
+block content
+    #share_main.bdsharebuttonbox(data-tag='share_1')
+        a.bds_weixin(data-cmd='weixin')
+        a.bds_qzone(data-cmd='qzone', href='#')
+        a.bds_tsina(data-cmd='tsina')
+        a.bds_baidu(data-cmd='baidu')
+        a.bds_renren(data-cmd='renren')
+        a.bds_douban(data-cmd='douban')
+    script.
+        with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
+    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                        span(aria-hidden='true') ×
+                        span.sr-only Close
+                    h4#myModalLabel.modal-title 视频
+                .modal-body
+                    embed#mv_player(allowfullscreen='true', quality='high', width='570', height='475', align='middle', allowscriptaccess='always', type='application/x-shockwave-flash')
+    .main
+        .mod_data
+            span.data__cover
+                a(href='javascript:;')
+                    img.data__photo(src= artist.icon, alt= artist.name)
+            .data__cont
+                .data__name
+                    h1.data__name_txt
+                        a(title=artist.name, href='javascript:;')= artist.name
+                #singer_desc.data__desc
+                    #short_desc.data__desc_txt= artist.infos.join(' ')
+                    // a.js_desc(href='javascript:;', data-left='0', data-stat='y_new.singer.header.more_info', data-top='0', data-target='popup_data_detail', style='') [更多]
+                ul.mod_data_statistic
+                    li.data_statistic__item
+                        a(href='#t_song')
+                            span.data_statistic__tit 单曲
+                            strong.data_statistic__number= artist.audios.length
+                    li.data_statistic__item
+                        a(href='#t_album')
+                            span.data_statistic__tit 专辑
+                            strong.data_statistic__number= artist.albums.length
+                    li.data_statistic__item
+                        a(href='#t_mv')
+                            span.data_statistic__tit MV
+                            strong.data_statistic__number= artist.videos.length
+                    li.data_statistic__item
+                        a(href='#t_schedule')
+                            span.data_statistic__tit 档期
+                            strong.data_statistic__number= artist.schedule.length
+                    li.data_statistic__item
+                        a(href='#')
+                            span.data_statistic__tit 预订
+                    li.data_statistic__item
+                        a.link-share(href='javascript:;')
+                            span.data_statistic__tit 分享
+                    li.data_statistic__item.data_statistic__item--last
+                        a(href='javascript:;', data-target='popup_data_detail')
+                            span.data_statistic__tit 歌手介绍
+                .data__actions(role='toolbar')
+                    a.mod_btn_green.js_singer_radio(href='javascript:;')
+                        i.mod_btn_green__icon_play
+                        | 播放歌手热门歌曲
+        // 首页 begin
+        #index_tab.js_tab
+            .mod_part
+                .part__hd
+                    h2#t_song.part__tit 单曲
+                .mod_songlist
+                    ul.songlist__header
+                        li.songlist__header_name 歌曲
+                        li.songlist__header_album 专辑
+                        li.songlist__header_time 时长
+                    ul.songlist__list#song_list
+                        -
+                            var index = 0;
+                        each item in artist.audios
+                            li(data-id= '' + item.id)
+                                .songlist__item
+                                    .songlist__number= ++index
+                                    .songlist__songname
+                                        span.songlist__songname_txt= item.title
+                                        .mod_list_menu
+                                            a.list_menu__item.list_menu__play.js_play(data-index= index, href='javascript:;', title='播放')
+                                                i.list_menu__icon_play
+                                                span.icon_txt 播放
+                                            a.list_menu__item.list_menu__share.link-share.js_share(href='javascript:;', title='分享', aria-haspopup='true', data-aria='menu_share')
+                                                i.list_menu__icon_share
+                                                span.icon_txt 分享
+                                    .songlist__album 未知
+                                    .songlist__time= item.timeLength
+            .mod_part
+                .part__hd
+                    h2#t_album.part__tit 专辑
+                .mod_mv
+                    ul.mv_list__list
+                        each item in artist.albums
+                            li.mv_list__item
+                                .mv_list__item_box
+                                    a.mv_list__cover.mod_cover(href='javascript:;')
+                                        img.mv_list__pic(src= item.cover)
+                                        i.mod_cover__icon_play
+                                    h3.mv_list__title
+                                        a.js_mv(href='javascript:;')= item.name
+            .mod_part
+                .part__hd
+                    h2#t_mv.part__tit MV
+                .mod_mv
+                    ul#mvlist.mv_list__list
+                        each item in artist.videos
+                            li.mv_list__item
+                                .mv_list__item_box
+                                    a.mv_list__cover.mod_cover.js_mv(href='javascript:;', data-path=item.path)
+                                        img.mv_list__pic(src= item.pic)
+                                        i.mod_cover__icon_play
+                                    h3.mv_list__title
+                                        a.js_mv(href='javascript:;', data-path=item.path)= item.title
+            .mod_part
+                .part__hd
+                    h2#t_schedule.part__tit 档期
+                .mod_songlist
+                    ul.songlist__header
+                        li.songlist__header_addr 时间
+                        li.songlist__header_addr 场地
+                        li.songlist__header_addr 地点
+                        li.songlist__header_addr 订票
+                    ul.songlist__list
+                        each item in artist.schedule
+                            li
+                                .songlist__item
+                                    .songlist__addr= item.time
+                                    .songlist__addr= item.venue
+                                    .songlist__addr= item.addr
+                                    .songlist__addr 订票
+        // 专辑简介
+        #popup_data_detail.popup_data_detail(data-aria='popup', style='display:none;z-index:10000000000;')
+            .popup_data_detail__cont
+                h3.popup_data_detail__tit 歌手简介
+                each item in artist.infos
+                    p= item
+            i.popup_data_detail__arrow
+        #amazingaudioplayer-1
+            ul.amazingaudioplayer-audios(style='display:none;')
+                each item in artist.audios
+                    li(data-title= item.title)
+                        .amazingaudioplayer-source(data-src= item.path,data-type='audio/mpeg')
+block footer
+    script(src='/bootstrap/js/bootstrap.min.js')
+    script(src='/player/audioplayerengine/amazingaudioplayer.js')
+    script.
+        (function () {
+            var $popup = $('[data-aria="popup"]');
+            $(document).on('click', function (e) {
+                var $this = $(e.target);
+                var target = $this.parent(['data-target']).attr('data-target');
+                if (target) {
+                    $('#' + target).show();
+                } else {
+                    $popup.hide();
+                }
+                $share_main.hide();
+            });
+
+
+            var $mvItem = $('.mv_list__item');
+            var $myModal = $('#myModal');
+            var $mv_player = $('#mv_player');
+            $mvItem.find('.js_mv') .on('click', function(){
+                var $this = $(this);
+                var path = $this.attr('data-path');
+                $mv_player[0].src = path;
+                $myModal.modal('show');
+            });
+
+
+            var $player = $("#amazingaudioplayer-1");
+
+            var $btn_slct = $('#btn_slct');
+            $btn_slct.on('click', function () {
+                var aap = $player.data('object');
+                aap.audioRun(2, true);
+            });
+
+            var scripts = document.getElementsByTagName("script");
+            var jsFolder = "";
+            for (var i = 0; i < scripts.length; i++) {
+                if (scripts[i].src && scripts[i].src.match(/initaudioplayer-1\.js/i))
+                    jsFolder = scripts[i].src.substr(0, scripts[i].src.lastIndexOf("/") + 1);
+            }
+            $player.amazingaudioplayer({
+                jsfolder: jsFolder,
+                skinsfoldername: "",
+                titleinbarwidthmode: "fixed",
+                timeformatlive: "%CURRENT% / LIVE",
+                volumeimagewidth: 36,
+                barbackgroundimage: "",
+                showtime: true,
+                titleinbarwidth: 120,
+                showprogress: true,
+                random: false,
+                titleformat: "%TITLE%",
+                height: 50,
+                loadingformat: "Loading...",
+                showinfo: false,
+                imageheight: 100,
+                skin: "BarTitle",
+                loopimagewidth: 36,
+                showstop: false,
+                prevnextimageheight: 36,
+                infoformat: "By %ARTIST% %ALBUM%<br />%INFO%",
+                stopotherplayers: true,
+                showloading: false,
+                forcefirefoxflash: false,
+                showvolumebar: true,
+                imagefullwidth: false,
+                width: 420,
+                showtitleinbar: true,
+                showloop: true,
+                playpauseimagewidth: 36,
+                loopimageheight: 36,
+                tracklistitem: 10,
+                tracklistitemformat: "%ID%. %TITLE% <span style='position:absolute;top:0;right:0;'>%DURATION%</span>",
+                prevnextimagewidth: 36,
+                tracklistarrowimage: "tracklistarrow-48-16-0.png",
+                forceflash: false,
+                playpauseimageheight: 36,
+                showbackgroundimage: false,
+                imagewidth: 100,
+                forcehtml5: false,
+                showprevnext: true,
+                backgroundimage: "",
+                autoplay: false,
+                volumebarpadding: 8,
+                progressheight: 8,
+                showtracklistbackgroundimage: false,
+                titleinbarscroll: false,
+                showtitle: false,
+                defaultvolume: 100,
+                tracklistarrowimageheight: 16,
+                heightmode: "auto",
+                titleinbarformat: "%TITLE%",
+                showtracklist: false,
+                stopimageheight: 24,
+                volumeimageheight: 36,
+                stopimagewidth: 24,
+                volumebarheight: 80,
+                noncontinous: false,
+                tracklistbackgroundimage: "",
+                showbarbackgroundimage: false,
+                showimage: false,
+                tracklistarrowimagewidth: 48,
+                timeformat: "%CURRENT% / %DURATION%",
+                showvolume: true,
+                fullwidth: true,
+                loop: 1,
+                preloadaudio: true
+            });
+            var $js_play = $('.js_play');
+            $js_play.on('click', function() {
+                var $this = $(this);
+                var index = $this.attr('data-index');
+                index = (+index) - 1;
+                var instance = $player.data('object');
+                instance.audioRun(index, true);
+            });
+            var $js_singer_radio = $('.js_singer_radio');
+            $js_singer_radio.on('click', function() {
+                var instance = $player.data('object');
+                instance.audioRun(0, true)
+            });
+            var $link_share = $('.link-share');
+            var $share_main = $('#share_main');
+            $link_share.on('click', function() {
+                var $this = $(this);
+                $share_main.css({'left': $this.offset().left, 'top': $this.offset().top + 3});
+                $share_main.show();
+                return false;
+            });
+        })();

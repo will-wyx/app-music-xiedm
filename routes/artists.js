@@ -4,7 +4,7 @@ const db = require('../dbserver');
 
 router.get('/', (req, res) => {
     db.artist((result) => {
-        res.render('list', {path: 'artists', list: result});
+        res.render('artists', {path: 'artists', list: result});
     });
 });
 
