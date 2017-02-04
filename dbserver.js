@@ -42,17 +42,21 @@ const dbserver = {
         MongoClient.connect(url, (err, db) => {
             const coll_artist = db.collection('artist');
             coll_artist.findOne({_id}, (err, docs_artist) => {
-                const coll_album = db.collection('album');
-                const albums = docs_artist.albums || [];
-                coll_album.find({_id: {'$in': albums}}).toArray((err, docs_album) => {
-                    docs_artist.albums = docs_album;
-                    const coll_audio = db.collection('media');
-                    const audios = docs_artist.audios || [];
-                    coll_audio.find({_id: {'$in': audios}}).toArray((err, docs_audio) => {
-                        docs_artist.audios = docs_audio;
-                        callback(docs_artist);
-                    })
-                });
+                if (docs_artist) {
+                    const coll_album = db.collection('album');
+                    const albums = docs_artist.albums || [];
+                    coll_album.find({_id: {'$in': albums}}).toArray((err, docs_album) => {
+                        docs_artist.albums = docs_album;
+                        const coll_audio = db.collection('media');
+                        const audios = docs_artist.audios || [];
+                        coll_audio.find({_id: {'$in': audios}}).toArray((err, docs_audio) => {
+                            docs_artist.audios = docs_audio;
+                            callback(docs_artist);
+                        })
+                    });
+                } else {
+                    callback({});
+                }
             });
         });
     },
@@ -105,12 +109,12 @@ const dbserver = {
             const collection = db.collection('artist');
             options.name = options.name.trim();
             options.prefix = tr.slugify(options.name).substr(0, 1);
-            if(options.audios && options.audios.length) {
+            if (options.audios && options.audios.length) {
                 options.audios = options.audios.map(e => {
                     return ObjectId(e);
                 });
             }
-            if(options.albums && options.albums.length) {
+            if (options.albums && options.albums.length) {
                 options.albums = options.albums.map(e => {
                     return ObjectId(e);
                 });
@@ -127,12 +131,12 @@ const dbserver = {
             const collection = db.collection('label');
             options.name = options.name.trim();
             options.prefix = tr.slugify(options.name).substr(0, 1);
-            if(options.audios && options.audios.length) {
+            if (options.audios && options.audios.length) {
                 options.audios = options.audios.map(e => {
                     return ObjectId(e);
                 });
             }
-            if(options.albums && options.albums.length) {
+            if (options.albums && options.albums.length) {
                 options.albums = options.albums.map(e => {
                     return ObjectId(e);
                 });
@@ -174,7 +178,7 @@ const dbserver = {
             });
         });
     },
-    albumModify:(options, callback) => {
+    albumModify: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('album');
             const _id = ObjectId(options.id);
@@ -360,9 +364,9 @@ const dbserver = {
             });
         })
     },
-    albums_by_ids:(chks, callback) => {
+    albums_by_ids: (chks, callback) => {
         let albums = [];
-        for(let item of chks) {
+        for (let item of chks) {
             albums.push(ObjectId(item));
         }
         MongoClient.connect(url, (err, db) => {
@@ -372,9 +376,9 @@ const dbserver = {
             });
         })
     },
-    audios_by_ids:(chks, callback) => {
+    audios_by_ids: (chks, callback) => {
         let audios = [];
-        for(let item of chks) {
+        for (let item of chks) {
             audios.push(ObjectId(item));
         }
         MongoClient.connect(url, (err, db) => {
