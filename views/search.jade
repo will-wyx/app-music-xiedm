@@ -22,7 +22,7 @@ block content
             ul.artist
                 each item in list
                     li
-                        a(href='/artists/' + item._id)
+                        a(href='/' + item.type + '/' + item._id)
                             dl
                                 dt
                                     img(src=item.icon)

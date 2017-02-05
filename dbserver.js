@@ -250,6 +250,27 @@ const dbserver = {
             });
         });
     },
+    search: (options, callback) => {
+        MongoClient.connect(url, (err, db) => {
+            const
+                collection_artist = db.collection('artist'),
+                collection_label = db.collection('label');
+            collection_artist.find(options).toArray((aerr, adocs) => {
+                collection_label.find(options).toArray((lerr, ldocs) => {
+                    adocs = adocs.map(e => {
+                        e.type = 'artists';
+                        return e;
+                    });
+                    ldocs = ldocs.map(e => {
+                        e.type = 'labels';
+                        return e;
+                    });
+                    const docs = [...adocs, ...ldocs];
+                    callback(docs);
+                })
+            })
+        });
+    },
     artistQuery: (options, callback) => {
         MongoClient.connect(url, (err, db) => {
             const collection = db.collection('artist');

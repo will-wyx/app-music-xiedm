@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
                 break;
         }
     }
-    db.artistQuery(options, (list) => {
+    db.search(options, (list) => {
         res.render('search', {data, list});
     });
 });
