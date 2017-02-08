@@ -39,6 +39,7 @@ app.use('/reserve', generic);
 app.use('/contact', generic);
 app.use('/faq', generic);
 app.use('/cooperate', generic);
+app.use('/agent', generic);
 app.use('/search', search);
 
 app.use('/management', management);
