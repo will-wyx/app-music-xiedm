@@ -8,7 +8,7 @@ const tr = require('transliteration');
 // const url = 'mongodb://xirecord:71906312@ds145178.mlab.com:45178/xirecord';
 // const url = 'mongodb://192.168.8.119:27017/xirecord';
 // const url = 'mongodb://192.168.1.253:27017/xirecord';
-const url = 'mongodb://210.209.70.86:27017/xirecord';
+const url = 'mongodb://210.209.70.86:27017/xirecords';
 const dbserver = {
     ObjectId,
     newsPaging: (options, callback) => {
